@@ -13,16 +13,18 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="100">
+
         <TextView
+            android:id="@+id/paragraph_view"
             android:gravity="center"
             android:layout_weight="30"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="My name is Rafik, Jeremy or Frank. Here is a sample passage for TapTapTap!"
+            android:text=""
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/input_field"
+            android:id="@+id/input_view"
             android:gravity="center"
             android:layout_weight="20"
             android:layout_width="fill_parent"
