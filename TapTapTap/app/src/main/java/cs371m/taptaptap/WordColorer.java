@@ -43,7 +43,7 @@ public class WordColorer {
 
         // Adding appropriate color to letter (red is wrong, green if right)
         int i = 0;
-        for ( ; i < userWord.length() ; ++i )
+        for ( ; i < userWord.length() && i < correctWord.length(); ++i )
             if (userWord.charAt(i) == correctWord.charAt(i))
                 toReturn.append(greenBegin + userWord.charAt(i) + endTag);
             else
@@ -59,8 +59,8 @@ public class WordColorer {
         // Otherwise userWord is incorrect
         else if (userWord.length() > correctWord.length()){
             toReturn.append(redBegin);
-            for (; i < userWord.length(); )
-                toReturn.append(correctWord.charAt(i));
+            for (; i < userWord.length(); ++i)
+                toReturn.append(userWord.charAt(i));
             toReturn.append(endTag);
         }
 
