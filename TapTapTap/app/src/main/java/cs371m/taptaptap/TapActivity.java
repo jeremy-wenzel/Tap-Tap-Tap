@@ -21,19 +21,22 @@ public class TapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tap);
 
-        int index = 4;
         userWords[0] = "My";
         userWords[1] = "name";
         userWords[2] = "is";
-        userWords[index-1] = "Rafik,";
-        userWords[index] = "Jexery";
-        numWordsTyped = 5;
+        userWords[3] = "Rafik,";
+        userWords[4] = "Jexery";
+        userWords[5] = "allibaba";
+        userWords[6] = "fRank";
+        numWordsTyped = 7;
 
         final String correctWords[] = { "My", "name", "is", "Rafik,", "Jeremy", "or", "Frank.", "Here", "is", "a", "sample", "passage", "for", "TapTapTap!" };
 
 
-        for ( int i = 0 ; i < numWordsTyped ; i++ )
-            printingWords[i] = WordColorer.colorIncompleteWord(userWords[i], correctWords[i]);
+        for ( int i = 0 ; i < numWordsTyped - 1; i++ )
+            printingWords[i] = WordColorer.colorWord(userWords[i], correctWords[i], true);
+
+        printingWords[6] = WordColorer.colorWord(userWords[6], correctWords[6], false);
 
         TextView textView = (TextView) findViewById(R.id.paragraph_view);
         textView.setText(Html.fromHtml(buildParagraph(printingWords)));

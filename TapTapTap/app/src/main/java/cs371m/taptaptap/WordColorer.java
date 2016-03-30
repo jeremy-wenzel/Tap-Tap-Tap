@@ -10,19 +10,32 @@ public class WordColorer {
 
     private static WordColorer instance = new WordColorer();
 
-    private WordColorer () {
+    private WordColorer ( ) { }
 
+
+    public static String colorWord( String userWord, String correctWord, boolean isComplete) {
+        if (userWord == null || correctWord == null)
+            throw new IllegalArgumentException("userWord or correctWord is null");
+
+        if (isComplete)
+            return colorCompleteWord(userWord, correctWord.equals(userWord));
+        else
+            return colorIncompleteWord(userWord, correctWord);
     }
 
-    /*
+    private static String colorIncompleteWord ( String userWord, String correctWord ) {
+        return colorLetters(userWord, correctWord);
+    }
 
-        Consider cases where the number of letters in the typed word != the number of letters in the correct word
-
-     */
+    private static String colorCompleteWord ( String word, boolean correct ) {
+        String toReturn = (correct) ? greenBegin : redBegin;
+        return toReturn + word + endTag;
+    }
 
     private static String colorLetters ( String userWord, String correctWord ) {
         StringBuilder toReturn = new StringBuilder();
 
+        // Adding appropriate color to letter (red is wrong, green if right)
         int i = 0;
         for ( ; i < userWord.length() ; ++i )
             if (userWord.charAt(i) == correctWord.charAt(i))
@@ -30,22 +43,21 @@ public class WordColorer {
             else
                 toReturn.append(redBegin + userWord.charAt(i) + endTag);
 
-        for ( ; i < correctWord.length() ; ++i )
-            toReturn.append(blackBegin + correctWord.charAt(i) + endTag);
+        // If the user word is less the correct word, append black to returning word
+        if (userWord.length() < correctWord.length()) {
+            toReturn.append(blackBegin);
+            for (; i < correctWord.length(); ++i)
+                toReturn.append(correctWord.charAt(i));
+            toReturn.append(endTag);
+        }
+        // Otherwise userWord is incorrect
+        else if (userWord.length() > correctWord.length()){
+            toReturn.append(redBegin);
+            for (; i < userWord.length(); )
+                toReturn.append(correctWord.charAt(i));
+            toReturn.append(endTag);
+        }
 
         return toReturn.toString();
     }
-
-    public static String colorIncompleteWord ( String userWord, String correctWord ) {
-        return colorLetters(userWord, correctWord);
-    }
-
-    public static String colorCompleteWord ( String word, boolean correct ) {
-        String toReturn;
-        toReturn = (correct) ? greenBegin : redBegin;
-        return toReturn + word + endTag;
-    }
-
-
-
 }
