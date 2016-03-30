@@ -1,5 +1,11 @@
 package cs371m.taptaptap;
 
+/**
+* Word builder class to generate a colored word for the WordBlock list structure.
+*
+* Takes in a complete or incomplete word and colors it according to a correct word.
+*/
+
 public class WordColorer {
 
     protected final int colorStartIndex = 14;
