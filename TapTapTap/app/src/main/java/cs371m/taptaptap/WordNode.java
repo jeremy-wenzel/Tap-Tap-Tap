@@ -29,7 +29,7 @@ public class WordNode {
         correctWord = word;
         userWord = null;
         coloredIWord = null;
-        coloredCWord = null;
+        coloredCWord = WordColorer.colorWordBlack(word);
     }
 
     /**

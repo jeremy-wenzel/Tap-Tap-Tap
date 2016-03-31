@@ -18,7 +18,7 @@ public class WordColorer {
 
     private WordColorer ( ) { }
 
-    public static String colorWord( String userWord, String correctWord, boolean isComplete) {
+    public static String colorWord ( String userWord, String correctWord, boolean isComplete) {
         if (userWord == null || correctWord == null)
             throw new IllegalArgumentException("userWord or correctWord is null");
 
@@ -26,6 +26,10 @@ public class WordColorer {
             return colorCompleteWord(userWord, correctWord.equals(userWord));
         else
             return colorIncompleteWord(userWord, correctWord);
+    }
+
+    public static String colorWordBlack ( String word ) {
+        return blackBegin + word + endTag;
     }
 
     private static String colorIncompleteWord ( String userWord, String correctWord ) {

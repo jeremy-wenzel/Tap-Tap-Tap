@@ -19,9 +19,9 @@ public class TapActivity extends AppCompatActivity {
     protected final String correctWords[] = {"My", "name", "is", "Rafik,", "Jeremy", "or", "Frank.", "Here", "is", "a", "sample", "passage", "for", "TapTapTap!"};
 
     //Temporary
-    protected final int numWordsTotal = correctWords.length;
+    protected static int numWordsTotal;
 
-    protected int numWordsTyped = 0;
+    protected static int numWordsTyped = 0;
 
     protected String printingWords[] = new String[numWordsTotal];
 
@@ -47,6 +47,8 @@ public class TapActivity extends AppCompatActivity {
         for (int i = 0; i < correctWords.length; i++)
             wordList.add(new WordNode(correctWords[i]));
 
+        numWordsTotal = wordList.size();
+
         // Set the first value to appear on screen
         wordList.get(0).updateUserWord("", false);
         updateParagraphText();
@@ -59,11 +61,17 @@ public class TapActivity extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 Log.d(TAG, "In afterTextChanged");
+                if (numWordsTyped >= numWordsTotal) {
+                    //inputField.setEnabled(false);
+                    //inputField.setText("Completed Paragraph!");
+                    return;
+                }
                 String str = s.toString();
                 if (str.contains(" ") || str.contains("\n")) {
                     wordList.get(numWordsTyped++).updateUserWord(str.trim(), true);
@@ -127,21 +135,30 @@ public class TapActivity extends AppCompatActivity {
         else
             return "";
 
-        for (int i = 1; i < list.size(); i++)
+        for (int i = 1; i < numWordsTotal; i++)
             if (list.get(i).isTyped())
                 toReturn.append(" " + list.get(i).getColoredIWord());
+            else
+                toReturn.append(" " + list.get(i).getColoredCWord());
 
         return toReturn.toString();
     }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
-        if (isValidDelete(e.getKeyCode())) {
+        if ( numWordsTyped > numWordsTotal && isValidDelete(e.getKeyCode()) ) {
+            numWordsTyped--;
+        }
+        else if ( numWordsTyped == numWordsTotal && isValidDelete(e.getKeyCode()) ) {
+            inputField.setText(wordList.get(--numWordsTyped).getUserWord());
+            inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
+            updateParagraphText();
+        }
+        else if (isValidDelete(e.getKeyCode())) {
             wordList.get(numWordsTyped--).resetWordNode();
             inputField.setText(wordList.get(numWordsTyped).getUserWord());
             inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
             updateParagraphText();
-            return true;
         }
 
         return super.dispatchKeyEvent(e);
@@ -154,9 +171,12 @@ public class TapActivity extends AppCompatActivity {
      * @return true if delete key and numWordsType > 0 and the length of the currentword is 0
      */
     private boolean isValidDelete (int keyCode) {
-        return keyCode == KeyEvent.KEYCODE_DEL &&
+        if ( numWordsTyped < numWordsTotal )
+            return keyCode == KeyEvent.KEYCODE_DEL &&
                 numWordsTyped > 0 &&
                 wordList.get(numWordsTyped).getUserWord().length() == 0;
+        else
+            return keyCode == KeyEvent.KEYCODE_DEL && numWordsTyped > 0;
     }
 }
 
