@@ -8,6 +8,9 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TapActivity extends AppCompatActivity {
 
     protected final String correctWords[] = {"My", "name", "is", "Rafik,", "Jeremy", "or", "Frank.", "Here", "is", "a", "sample", "passage", "for", "TapTapTap!"};
@@ -21,6 +24,8 @@ public class TapActivity extends AppCompatActivity {
 
     protected String userWords[] = new String[numWordsTotal];
 
+    List<WordNode> wordList = new ArrayList<WordNode>();
+
     protected TextView paragraphView;
     protected EditText inputField;
 
@@ -31,6 +36,9 @@ public class TapActivity extends AppCompatActivity {
 
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
+
+        for ( int i = 0 ; i < correctWords.length ; i++ )
+            wordList.add(new WordNode(correctWords[i]));
 
         inputField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -45,20 +53,16 @@ public class TapActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
-                if ( s.toString().contains(" ") ) {
-                   userWords[numWordsTyped++] = s.toString().trim();
+                String s2 = s.toString();
+                if (s.toString().contains(" ")) {
+                    wordList.get(numWordsTyped++).updateUserWord(s.toString().trim(), true);
                     s.clear();
                 }
                 else {
                     // Store and color incomplete word
-                    userWords[numWordsTyped] = s.toString();
-                    printingWords[numWordsTyped] = WordColorer.colorWord(userWords[numWordsTyped], correctWords[numWordsTyped], false);
+                    wordList.get(numWordsTyped).updateUserWord(s2, false);
                 }
-
-
-                updateParagraphText("Begin: ");
-
+                updateParagraphText();
             }
         });
     }
@@ -91,30 +95,28 @@ public class TapActivity extends AppCompatActivity {
 
     }
 
-    protected void updateParagraphText(String par) {
-        paragraphView.setText(Html.fromHtml(par + printingWords[numWordsTyped]));
+    protected void updateParagraphText() {
+        paragraphView.setText(Html.fromHtml(buildParagraph(wordList)));
     }
-}
-/*
-    protected String buildParagraph ( String words[] ) {
-        StringBuilder toReturn = new StringBuilder(words[0]);
 
-        for ( int i = 1 ; i < words.length; i++ )
-            toReturn.append(" " + Html.fromHtml(words[i]));
+    protected String buildParagraph ( List<WordNode> list ) {
+
+        StringBuilder toReturn = new StringBuilder();
+
+        if ( list.get(0).isTyped() )
+            toReturn.append(list.get(0).getColoredIWord());
+        else
+            return "";
+
+        for ( int i = 1 ; i < list.size() ; i++ )
+            if ( list.get(i).isTyped() )
+                toReturn.append(" " + list.get(i).getColoredIWord());
 
         return toReturn.toString();
     }
 
-    protected String buildParagraph ( String words[], int numWords ) {
-        StringBuilder toReturn = new StringBuilder(Html.fromHtml(words[0]));
 
-        for ( int i = 1 ; i < numWords; i++ )
-            toReturn.append(" " + Html.fromHtml(words[i]));
-
-        return toReturn.toString();
-
-}/*
-    @Override
+    /*@Override
     public boolean onKey(View view, int keyCode, KeyEvent event) {
 
         userWords[numWordsTyped] = inputField.getText().toString();
@@ -133,3 +135,4 @@ public class TapActivity extends AppCompatActivity {
 
         return true;
     }*/
+}

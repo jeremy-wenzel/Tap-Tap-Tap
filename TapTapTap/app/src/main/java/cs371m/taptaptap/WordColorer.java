@@ -18,7 +18,6 @@ public class WordColorer {
 
     private WordColorer ( ) { }
 
-
     public static String colorWord( String userWord, String correctWord, boolean isComplete) {
         if (userWord == null || correctWord == null)
             throw new IllegalArgumentException("userWord or correctWord is null");
@@ -43,7 +42,7 @@ public class WordColorer {
 
         // Adding appropriate color to letter (red is wrong, green if right)
         int i = 0;
-        for ( ; i < userWord.length() && i < correctWord.length(); ++i )
+        for ( ; i < userWord.length() && i < correctWord.length() ; ++i )
             if (userWord.charAt(i) == correctWord.charAt(i))
                 toReturn.append(greenBegin + userWord.charAt(i) + endTag);
             else

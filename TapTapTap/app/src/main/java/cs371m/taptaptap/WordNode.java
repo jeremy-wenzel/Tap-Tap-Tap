@@ -13,7 +13,8 @@ public class WordNode {
 
     private String correctWord;
     private String userWord;
-    private String coloredWord;
+    private String coloredIWord;
+    private String coloredCWord;
 
     public WordNode(String word) {
         if (word == null)
@@ -21,17 +22,22 @@ public class WordNode {
 
         correctWord = word;
         userWord = null;
-        coloredWord = null;
+        coloredIWord = null;
+        coloredCWord = null;
     }
 
     public void updateUserWord(String input, boolean isComplete) {
         if (input == null)
             return;
         userWord = input;
-        correctWord = WordColorer.colorWord(userWord, correctWord, isComplete);
+        coloredIWord = WordColorer.colorWord(userWord, correctWord, isComplete);
+        //coloredCWord
     }
 
-    public String getColoredWord() {
-        return coloredWord;
-    }
+    public String getCorrectWord() { return correctWord; }
+    public String getUserWord() { return userWord; }
+    public String getColoredIWord() { return coloredIWord; }
+    public String getColoredCWord() { return coloredCWord; }
+
+    public boolean isTyped() { return userWord != null; }
 }
