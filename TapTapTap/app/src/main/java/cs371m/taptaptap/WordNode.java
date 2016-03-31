@@ -40,4 +40,5 @@ public class WordNode {
     public String getColoredCWord() { return coloredCWord; }
 
     public boolean isTyped() { return userWord != null; }
+
 }

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,18 +38,16 @@ public class TapActivity extends AppCompatActivity {
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
 
-        for ( int i = 0 ; i < correctWords.length ; i++ )
+        for (int i = 0; i < correctWords.length; i++)
             wordList.add(new WordNode(correctWords[i]));
 
         inputField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -57,8 +56,7 @@ public class TapActivity extends AppCompatActivity {
                 if (s.toString().contains(" ")) {
                     wordList.get(numWordsTyped++).updateUserWord(s.toString().trim(), true);
                     s.clear();
-                }
-                else {
+                } else {
                     // Store and color incomplete word
                     wordList.get(numWordsTyped).updateUserWord(s2, false);
                 }
@@ -91,29 +89,46 @@ public class TapActivity extends AppCompatActivity {
 
     }
 
-    protected void updateFieldText() {
+    /*protected void updateFieldText() {
 
-    }
+    }*/
 
     protected void updateParagraphText() {
         paragraphView.setText(Html.fromHtml(buildParagraph(wordList)));
     }
 
-    protected String buildParagraph ( List<WordNode> list ) {
+    protected String buildParagraph(List<WordNode> list) {
 
         StringBuilder toReturn = new StringBuilder();
 
-        if ( list.get(0).isTyped() )
+        if (list.get(0).isTyped())
             toReturn.append(list.get(0).getColoredIWord());
         else
             return "";
 
-        for ( int i = 1 ; i < list.size() ; i++ )
-            if ( list.get(i).isTyped() )
+        for (int i = 1; i < list.size(); i++)
+            if (list.get(i).isTyped())
                 toReturn.append(" " + list.get(i).getColoredIWord());
 
         return toReturn.toString();
     }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent e) {
+
+        /*if (e.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+            paragraphView.setText("keyCode int");
+        }
+
+        if (e.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+            paragraphView.setText("Enter!!!!!");
+        }*/
+
+        return super.dispatchKeyEvent(e);
+    }
+}
+
+
 
 
     /*@Override
@@ -135,4 +150,3 @@ public class TapActivity extends AppCompatActivity {
 
         return true;
     }*/
-}
