@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public class TapActivity extends AppCompatActivity {
 
+    private static final String TAG = "TapActivity";
     protected final String correctWords[] = {"My", "name", "is", "Rafik,", "Jeremy", "or", "Frank.", "Here", "is", "a", "sample", "passage", "for", "TapTapTap!"};
 
     //Temporary
@@ -35,12 +37,21 @@ public class TapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tap);
 
+        Log.d(TAG, "In onCreate");
+
+        // Setup views
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
 
+        // Put paragraph into the wordList
         for (int i = 0; i < correctWords.length; i++)
             wordList.add(new WordNode(correctWords[i]));
 
+        // Set the first value to appear on screen
+        wordList.get(0).updateUserWord("", false);
+        updateParagraphText();
+
+        // input listener
         inputField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -52,13 +63,14 @@ public class TapActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String s2 = s.toString();
-                if (s.toString().contains(" ")) {
-                    wordList.get(numWordsTyped++).updateUserWord(s.toString().trim(), true);
+                Log.d(TAG, "In afterTextChanged");
+                String str = s.toString();
+                if (str.contains(" ") || str.contains("\n")) {
+                    wordList.get(numWordsTyped++).updateUserWord(str.trim(), true);
                     s.clear();
                 } else {
                     // Store and color incomplete word
-                    wordList.get(numWordsTyped).updateUserWord(s2, false);
+                    wordList.get(numWordsTyped).updateUserWord(str, false);
                 }
                 updateParagraphText();
             }
@@ -93,10 +105,19 @@ public class TapActivity extends AppCompatActivity {
 
     }*/
 
+    /**
+     * Updates the paragraph view with the appropriate coloring and words
+     */
     protected void updateParagraphText() {
         paragraphView.setText(Html.fromHtml(buildParagraph(wordList)));
     }
 
+    /**
+     * Builds the paragraph string which has coloring tags, that will be displayed to the user
+     *
+     * @param list The WordNode list that we are typing through
+     * @return The paragrph with the coloring tags
+     */
     protected String buildParagraph(List<WordNode> list) {
 
         StringBuilder toReturn = new StringBuilder();
@@ -115,16 +136,27 @@ public class TapActivity extends AppCompatActivity {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
-
-        /*if (e.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-            paragraphView.setText("keyCode int");
+        if (isValidDelete(e.getKeyCode())) {
+            wordList.get(numWordsTyped--).resetWordNode();
+            inputField.setText(wordList.get(numWordsTyped).getUserWord());
+            inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
+            updateParagraphText();
+            return true;
         }
 
-        if (e.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-            paragraphView.setText("Enter!!!!!");
-        }*/
-
         return super.dispatchKeyEvent(e);
+    }
+
+    /**
+     * Needed a method to validate if we can delete. Looks better than having in if statement
+     * Need delete code, numWords greater than 0 and need current word to have a length of 0.
+     * @param keyCode KeyCode given by the event
+     * @return true if delete key and numWordsType > 0 and the length of the currentword is 0
+     */
+    private boolean isValidDelete (int keyCode) {
+        return keyCode == KeyEvent.KEYCODE_DEL &&
+                numWordsTyped > 0 &&
+                wordList.get(numWordsTyped).getUserWord().length() == 0;
     }
 }
 
