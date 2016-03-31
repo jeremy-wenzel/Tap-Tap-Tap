@@ -67,6 +67,6 @@ public class WordNode {
     public void resetWordNode() {
         userWord = null;
         coloredIWord = null;
-        coloredCWord = null;
+        coloredCWord = WordColorer.colorWordBlack(correctWord);
     }
 }
