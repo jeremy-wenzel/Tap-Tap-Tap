@@ -23,7 +23,7 @@ public class WordColorer {
             throw new IllegalArgumentException("userWord or correctWord is null");
 
         if (isComplete)
-            return colorCompleteWord(userWord, correctWord.equals(userWord));
+            return colorCompleteWord(correctWord, correctWord.equals(userWord));
         else
             return colorIncompleteWord(userWord, correctWord);
     }
@@ -48,11 +48,11 @@ public class WordColorer {
         int i = 0;
         for ( ; i < userWord.length() && i < correctWord.length() ; ++i )
             if (userWord.charAt(i) == correctWord.charAt(i))
-                toReturn.append(greenBegin + userWord.charAt(i) + endTag);
+                toReturn.append(greenBegin + correctWord.charAt(i) + endTag);
             else
-                toReturn.append(redBegin + userWord.charAt(i) + endTag);
+                toReturn.append(redBegin + correctWord.charAt(i) + endTag);
 
-        // If the user word is less the correct word, append black to returning word
+        // If the user word is less than the correct word, append black to returning word
         if (userWord.length() < correctWord.length()) {
             toReturn.append(blackBegin);
             for (; i < correctWord.length(); ++i)

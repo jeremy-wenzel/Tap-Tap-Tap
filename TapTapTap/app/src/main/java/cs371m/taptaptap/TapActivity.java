@@ -73,10 +73,13 @@ public class TapActivity extends AppCompatActivity {
                     return;
                 }
                 String str = s.toString();
-                if (str.contains(" ") || str.contains("\n")) {
+                Log.d(TAG, str.length() + "");
+                Log.d(TAG, wordList.get(numWordsTyped).getCorrectWord().length() + "");
+                if ((str.contains(" ") || str.contains("\n")) && str.length() == wordList.get(numWordsTyped).getCorrectWord().length()){
                     wordList.get(numWordsTyped++).updateUserWord(str.trim(), true);
                     s.clear();
-                } else {
+                }
+                else {
                     // Store and color incomplete word
                     wordList.get(numWordsTyped).updateUserWord(str, false);
                 }
@@ -144,21 +147,31 @@ public class TapActivity extends AppCompatActivity {
         return toReturn.toString();
     }
 
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
-        if ( numWordsTyped > numWordsTotal && isValidDelete(e.getKeyCode()) ) {
-            numWordsTyped--;
-        }
-        else if ( numWordsTyped == numWordsTotal && isValidDelete(e.getKeyCode()) ) {
-            inputField.setText(wordList.get(--numWordsTyped).getUserWord());
-            inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
-            updateParagraphText();
-        }
-        else if (isValidDelete(e.getKeyCode())) {
-            wordList.get(numWordsTyped--).resetWordNode();
-            inputField.setText(wordList.get(numWordsTyped).getUserWord());
-            inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
-            updateParagraphText();
+
+        if(e.getAction() == KeyEvent.ACTION_UP ){
+            if(numWordsTyped > numWordsTotal && isValidDelete(e.getKeyCode())){
+                numWordsTyped--;
+            }else if(numWordsTyped == numWordsTotal && isValidDelete(e.getKeyCode())){
+                inputField.setText(wordList.get(--numWordsTyped).getUserWord());
+                inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
+                updateParagraphText();
+            }else if(isValidDelete(e.getKeyCode())){
+
+                wordList.get(numWordsTyped--).resetWordNode();
+                inputField.setText(wordList.get(numWordsTyped).getUserWord());
+                inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
+                updateParagraphText();
+            }
+//            if(e.getkeycode() == KeyEvent.KEYCODE_SPACE){
+//                if(wordList.get(numWordsTyped).getCorrectWord().length() == inputField.setText(wordList.get(numWordsTyped).getUserWord()).length())
+//                    next word;
+//                else if(length of our word != length correct word)
+//                    collor the current letter red;
+//
+//            }
         }
 
         return super.dispatchKeyEvent(e);
