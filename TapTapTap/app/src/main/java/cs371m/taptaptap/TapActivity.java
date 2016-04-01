@@ -73,9 +73,7 @@ public class TapActivity extends AppCompatActivity {
                     return;
                 }
                 String str = s.toString();
-                Log.d(TAG, str.length() + "");
-                Log.d(TAG, wordList.get(numWordsTyped).getCorrectWord().length() + "");
-                if ((str.contains(" ") || str.contains("\n")) && str.length() == wordList.get(numWordsTyped).getCorrectWord().length()){
+                if ((str.contains(" ") || str.contains("\n"))){
                     wordList.get(numWordsTyped++).updateUserWord(str.trim(), true);
                     s.clear();
                 }
@@ -165,13 +163,6 @@ public class TapActivity extends AppCompatActivity {
                 inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
                 updateParagraphText();
             }
-//            if(e.getkeycode() == KeyEvent.KEYCODE_SPACE){
-//                if(wordList.get(numWordsTyped).getCorrectWord().length() == inputField.setText(wordList.get(numWordsTyped).getUserWord()).length())
-//                    next word;
-//                else if(length of our word != length correct word)
-//                    collor the current letter red;
-//
-//            }
         }
 
         return super.dispatchKeyEvent(e);

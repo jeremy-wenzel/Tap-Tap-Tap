@@ -61,12 +61,10 @@ public class WordColorer {
         }
         // Otherwise userWord is incorrect
         else if (userWord.length() > correctWord.length()){
-            toReturn.append(redBegin);
-            for (; i < userWord.length(); ++i)
-                toReturn.append(userWord.charAt(i));
-            toReturn.append(endTag);
+            //cool method bro
+            return colorCompleteWord(correctWord, false);
         }
-
+        toReturn.append(endTag);
         return toReturn.toString();
     }
 }
