@@ -13,6 +13,11 @@ public class WordColorer {
     protected final static String greenBegin = "<font color='#00FF00'>";
     protected final static String blackBegin = "<font color='#000000'>";
     protected final static String endTag = "</font>";
+    protected final static String blueBegin = "<font color='#0000FF'>";
+    protected final static String big = "<big>";
+    protected final static String endBig = "</big>";
+    protected final static String bold = "<b>";
+    protected final static String endBold = "</b>";
 
     private static WordColorer instance = new WordColorer();
 
@@ -31,6 +36,8 @@ public class WordColorer {
     public static String colorWordBlack ( String word ) {
         return blackBegin + word + endTag;
     }
+
+    public static String getHighlitedSpace(){ return "<u> </u>"; }
 
     private static String colorIncompleteWord ( String userWord, String correctWord ) {
         return colorLetters(userWord, correctWord);
@@ -54,6 +61,7 @@ public class WordColorer {
 
         // If the user word is less than the correct word, append black to returning word
         if (userWord.length() < correctWord.length()) {
+            toReturn.append(blueBegin + big + bold + correctWord.charAt(i++) + endBold + endBig +  endTag);
             toReturn.append(blackBegin);
             for (; i < correctWord.length(); ++i)
                 toReturn.append(correctWord.charAt(i));

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
+import android.text.Spannable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -43,6 +44,8 @@ public class TapActivity extends AppCompatActivity {
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
 
+        TextView Highlighter = (TextView)findViewById(R.id.paragraph_view);
+
         // Put paragraph into the wordList
         for (int i = 0; i < correctWords.length; i++)
             wordList.add(new WordNode(correctWords[i]));
@@ -52,6 +55,7 @@ public class TapActivity extends AppCompatActivity {
         // Set the first value to appear on screen
         wordList.get(0).updateUserWord("", false);
         updateParagraphText();
+        Spannable spanText = Spannable.Factory.getInstance().newSpannable(wordList.get(0).getCorrectWord());
 
         // input listener
         inputField.addTextChangedListener(new TextWatcher() {
@@ -68,8 +72,6 @@ public class TapActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 Log.d(TAG, "In afterTextChanged");
                 if (numWordsTyped >= numWordsTotal) {
-                    //inputField.setEnabled(false);
-                    //inputField.setText("Completed Paragraph!");
                     return;
                 }
                 String str = s.toString();
@@ -118,7 +120,7 @@ public class TapActivity extends AppCompatActivity {
      * Updates the paragraph view with the appropriate coloring and words
      */
     protected void updateParagraphText() {
-        paragraphView.setText(Html.fromHtml(buildParagraph(wordList)));
+        paragraphView.setText(Html.fromHtml(buildParagraph(wordList)), TextView.BufferType.SPANNABLE);
     }
 
     /**
@@ -141,6 +143,7 @@ public class TapActivity extends AppCompatActivity {
                 toReturn.append(" " + list.get(i).getColoredIWord());
             else
                 toReturn.append(" " + list.get(i).getColoredCWord());
+        toReturn.append(" ");
 
         return toReturn.toString();
     }
