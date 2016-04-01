@@ -24,12 +24,15 @@ public class TapActivity extends AppCompatActivity {
 
     protected static int numWordsTyped = 0;
 
+    protected static int score = 0;
+
     protected String printingWords[] = new String[numWordsTotal];
 
     protected String userWords[] = new String[numWordsTotal];
 
     List<WordNode> wordList = new ArrayList<WordNode>();
 
+    protected TextView scoreView;
     protected TextView paragraphView;
     protected EditText inputField;
 
@@ -41,6 +44,7 @@ public class TapActivity extends AppCompatActivity {
         Log.d(TAG, "In onCreate");
 
         // Setup views
+        scoreView = (TextView) findViewById(R.id.score_view);
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
 
@@ -61,6 +65,15 @@ public class TapActivity extends AppCompatActivity {
         inputField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+/*                String str = s.toString();
+                String wrd = wordList.get(numWordsTyped).getCorrectWord();
+                if ( str.contains(" ") ) {
+                scoreView.setText("Die");
+                    return;
+                }
+                if ( str.length() <= wrd.length() && str.charAt(count - 1) == wrd.charAt(count-1) )
+                    scoreView.setText("Score: " + ++score);
+*/
             }
 
             @Override
@@ -75,15 +88,35 @@ public class TapActivity extends AppCompatActivity {
                     return;
                 }
                 String str = s.toString();
-                if ((str.contains(" ") || str.contains("\n"))){
+                if ((str.contains(" ") || str.contains("\n"))) {
                     wordList.get(numWordsTyped++).updateUserWord(str.trim(), true);
                     s.clear();
-                }
+                } /*else if (str.length() < wordList.get(numWordsTyped).getUserWord().length()) {
+                    score -= 1;
+                // Store and color incomplete word
+                wordList.get(numWordsTyped).updateUserWord(str, false);
+                }*/
                 else {
+                    if ( str.length() > 0 ) {
+                        String usrWrd = wordList.get(numWordsTyped).getUserWord();
+                        String corWrd = wordList.get(numWordsTyped).getCorrectWord();
+                        int sLen = str.length();
+                        int uLen = usrWrd.length();
+                        if ( sLen < uLen )
+                            score -= 1;
+                        else if (sLen <= corWrd.length()
+                                && str.charAt(sLen-1) == corWrd.charAt(sLen-1) ) {
+                            if ( uLen != 0 )
+                                score += 1;
+                            else if ( str.charAt(uLen) == corWrd.charAt(uLen) )
+                                    score += 1;
+                        }
+                    }
                     // Store and color incomplete word
                     wordList.get(numWordsTyped).updateUserWord(str, false);
                 }
                 updateParagraphText();
+                updateScore();
             }
         });
     }
@@ -123,6 +156,10 @@ public class TapActivity extends AppCompatActivity {
         paragraphView.setText(Html.fromHtml(buildParagraph(wordList)), TextView.BufferType.SPANNABLE);
     }
 
+    protected void updateScore() {
+        scoreView.setText("Score: " + score);
+    }
+
     /**
      * Builds the paragraph string which has coloring tags, that will be displayed to the user
      *
@@ -152,19 +189,25 @@ public class TapActivity extends AppCompatActivity {
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
 
-        if(e.getAction() == KeyEvent.ACTION_UP ){
-            if(numWordsTyped > numWordsTotal && isValidDelete(e.getKeyCode())){
-                numWordsTyped--;
-            }else if(numWordsTyped == numWordsTotal && isValidDelete(e.getKeyCode())){
-                inputField.setText(wordList.get(--numWordsTyped).getUserWord());
-                inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
-                updateParagraphText();
-            }else if(isValidDelete(e.getKeyCode())){
+        if ( e.getAction() == KeyEvent.ACTION_DOWN ) { }
 
-                wordList.get(numWordsTyped--).resetWordNode();
-                inputField.setText(wordList.get(numWordsTyped).getUserWord());
-                inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
-                updateParagraphText();
+        if ( e.getAction() == KeyEvent.ACTION_UP ){
+            if ( isValidDelete(e.getKeyCode()) ) {
+                score -= 1;
+                if ( numWordsTyped > numWordsTotal ) {
+                    numWordsTyped--;
+                }
+                else if ( numWordsTyped == numWordsTotal ) {
+                    inputField.setText(wordList.get(--numWordsTyped).getUserWord());
+                    inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
+                    updateParagraphText();
+                }
+                else {
+                    wordList.get(numWordsTyped--).resetWordNode();
+                    inputField.setText(wordList.get(numWordsTyped).getUserWord());
+                    inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
+                    updateParagraphText();
+                }
             }
         }
 
