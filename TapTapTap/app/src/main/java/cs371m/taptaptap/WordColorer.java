@@ -37,7 +37,7 @@ public class WordColorer {
         return blackBegin + word + endTag;
     }
 
-    public static String getHighlitedSpace(){ return "<u> </u>"; }
+    public static String getHighlitedSpace(){ return blueBegin + big + big + big + big + "<u> </u>"  + endBig + endBig + endBig + endBig + endTag; }
 
     private static String colorIncompleteWord ( String userWord, String correctWord ) {
         return colorLetters(userWord, correctWord);
@@ -68,10 +68,14 @@ public class WordColorer {
             toReturn.append(endTag);
         }
         // Otherwise userWord is incorrect
+        else if(userWord.length() == correctWord.length()){
+            toReturn.append(getHighlitedSpace());
+        }
         else if (userWord.length() > correctWord.length()){
             //cool method bro
-            return colorCompleteWord(correctWord, false);
+            return colorCompleteWord(correctWord, false) + getHighlitedSpace();
         }
+
         toReturn.append(endTag);
         return toReturn.toString();
     }
