@@ -65,15 +65,7 @@ public class TapActivity extends AppCompatActivity {
         inputField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-/*                String str = s.toString();
-                String wrd = wordList.get(numWordsTyped).getCorrectWord();
-                if ( str.contains(" ") ) {
-                scoreView.setText("Die");
-                    return;
-                }
-                if ( str.length() <= wrd.length() && str.charAt(count - 1) == wrd.charAt(count-1) )
-                    scoreView.setText("Score: " + ++score);
-*/
+
             }
 
             @Override
@@ -91,11 +83,7 @@ public class TapActivity extends AppCompatActivity {
                 if ((str.contains(" ") || str.contains("\n"))) {
                     wordList.get(numWordsTyped++).updateUserWord(str.trim(), true);
                     s.clear();
-                } /*else if (str.length() < wordList.get(numWordsTyped).getUserWord().length()) {
-                    score -= 1;
-                // Store and color incomplete word
-                wordList.get(numWordsTyped).updateUserWord(str, false);
-                }*/
+                }
                 else {
                     if ( str.length() > 0 ) {
                         String usrWrd = wordList.get(numWordsTyped).getUserWord();
@@ -229,26 +217,3 @@ public class TapActivity extends AppCompatActivity {
             return keyCode == KeyEvent.KEYCODE_DEL && numWordsTyped > 0;
     }
 }
-
-
-
-
-    /*@Override
-    public boolean onKey(View view, int keyCode, KeyEvent event) {
-
-        userWords[numWordsTyped] = inputField.getText().toString();
-        inputField.setText("WHAT??");
-       /* if (userWords[numWordsTyped].length() == 0)
-            return true;/
-
-        // Color completed words
-        for (int i = 0; i < numWordsTyped - 1; i++)
-            printingWords[i] = WordColorer.colorWord(userWords[i], correctWords[i], true);
-
-        // Color incomplete words
-        printingWords[numWordsTyped] = WordColorer.colorWord(userWords[numWordsTyped], correctWords[numWordsTyped], false);
-
-        updateDisplayedText();
-
-        return true;
-    }*/
