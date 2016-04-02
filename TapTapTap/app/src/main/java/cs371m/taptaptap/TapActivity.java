@@ -191,7 +191,6 @@ public class TapActivity extends AppCompatActivity {
 
         if (e.getAction() == KeyEvent.ACTION_UP) {
             if (isValidDelete(e.getKeyCode())) {
-                score -= 1;
                 if (numWordsTyped > numWordsTotal) {
                     numWordsTyped--;
                 } else if (numWordsTyped == numWordsTotal) {
