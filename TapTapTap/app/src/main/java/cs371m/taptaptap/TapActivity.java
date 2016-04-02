@@ -48,7 +48,7 @@ public class TapActivity extends AppCompatActivity {
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
 
-        TextView Highlighter = (TextView)findViewById(R.id.paragraph_view);
+        TextView Highlighter = (TextView) findViewById(R.id.paragraph_view);
 
         // Put paragraph into the wordList
         for (int i = 0; i < correctWords.length; i++)
@@ -81,24 +81,33 @@ public class TapActivity extends AppCompatActivity {
                 }
                 String str = s.toString();
                 if ((str.contains(" ") || str.contains("\n"))) {
+                    Log.d(TAG, "Found Space");
                     wordList.get(numWordsTyped++).updateUserWord(str.trim(), true);
                     s.clear();
-                }
-                else {
-                    if ( str.length() > 0 ) {
+                } else {
+                    if (str.length() > 0) {
                         String usrWrd = wordList.get(numWordsTyped).getUserWord();
                         String corWrd = wordList.get(numWordsTyped).getCorrectWord();
                         int sLen = str.length();
                         int uLen = usrWrd.length();
-                        if ( sLen < uLen )
+                        if (sLen < uLen) {
+                            Log.d(TAG, "User has deleted a letter");
                             score -= 1;
-                        else if (sLen <= corWrd.length()
-                                && str.charAt(sLen-1) == corWrd.charAt(sLen-1) ) {
-                            if ( uLen != 0 )
-                                score += 1;
-                            else if ( str.charAt(uLen) == corWrd.charAt(uLen) )
-                                    score += 1;
                         }
+                        else if (sLen <= corWrd.length()
+                                && str.charAt(sLen - 1) == corWrd.charAt(sLen - 1)
+                                && !str.equals(usrWrd)) {
+                            Log.d(TAG, "Incrementing Score");
+                            Log.d(TAG, "str: " + str);
+                            Log.d(TAG, "sLen: " + sLen);
+                            if (uLen != 0)
+                                score += 1;
+                            else if (str.charAt(uLen) == corWrd.charAt(uLen))
+                                score += 1;
+                        }
+                    }
+                    else if (str.length() == 0 && wordList.get(numWordsTyped).isTyped()) {
+                        --score;
                     }
                     // Store and color incomplete word
                     wordList.get(numWordsTyped).updateUserWord(str, false);
@@ -177,25 +186,25 @@ public class TapActivity extends AppCompatActivity {
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
 
-        if ( e.getAction() == KeyEvent.ACTION_DOWN ) { }
+        if (e.getAction() == KeyEvent.ACTION_DOWN) {
+        }
 
-        if ( e.getAction() == KeyEvent.ACTION_UP ){
-            if ( isValidDelete(e.getKeyCode()) ) {
+        if (e.getAction() == KeyEvent.ACTION_UP) {
+            if (isValidDelete(e.getKeyCode())) {
                 score -= 1;
-                if ( numWordsTyped > numWordsTotal ) {
+                if (numWordsTyped > numWordsTotal) {
                     numWordsTyped--;
-                }
-                else if ( numWordsTyped == numWordsTotal ) {
+                } else if (numWordsTyped == numWordsTotal) {
                     inputField.setText(wordList.get(--numWordsTyped).getUserWord());
                     inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
                     updateParagraphText();
-                }
-                else {
+                } else {
                     wordList.get(numWordsTyped--).resetWordNode();
                     inputField.setText(wordList.get(numWordsTyped).getUserWord());
                     inputField.setSelection(wordList.get(numWordsTyped).getUserWord().length());
                     updateParagraphText();
                 }
+                return true;
             }
         }
 
@@ -205,14 +214,15 @@ public class TapActivity extends AppCompatActivity {
     /**
      * Needed a method to validate if we can delete. Looks better than having in if statement
      * Need delete code, numWords greater than 0 and need current word to have a length of 0.
+     *
      * @param keyCode KeyCode given by the event
      * @return true if delete key and numWordsType > 0 and the length of the currentword is 0
      */
-    private boolean isValidDelete (int keyCode) {
-        if ( numWordsTyped < numWordsTotal )
+    private boolean isValidDelete(int keyCode) {
+        if (numWordsTyped < numWordsTotal)
             return keyCode == KeyEvent.KEYCODE_DEL &&
-                numWordsTyped > 0 &&
-                wordList.get(numWordsTyped).getUserWord().length() == 0;
+                    numWordsTyped > 0 &&
+                    wordList.get(numWordsTyped).getUserWord().length() == 0;
         else
             return keyCode == KeyEvent.KEYCODE_DEL && numWordsTyped > 0;
     }
