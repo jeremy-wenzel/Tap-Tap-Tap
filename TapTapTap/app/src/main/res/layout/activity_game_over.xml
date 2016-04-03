@@ -27,7 +27,8 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/new_game"/>
+            android:text="@string/new_game"
+            android:onClick="newGame"/>
         <Button
             android:id="@+id/retry"
             android:layout_width="200dp"

@@ -13,6 +13,30 @@ public class MainLandingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_landing);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
     public void newGame(View view) {
         Intent intent = new Intent(this, GameTypeActivity.class);
         startActivity(intent);

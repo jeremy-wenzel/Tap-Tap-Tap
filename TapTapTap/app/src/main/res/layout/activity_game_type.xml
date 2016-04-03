@@ -23,21 +23,24 @@
             android:layout_height="wrap_content"
             android:text="@string/single_word"
             android:textSize="24dp"
-            android:layout_weight="0.10" />
+            android:layout_weight="0.10"
+            android:onClick="startSingleWordGame"/>
         <Button
             android:id="@+id/multiple_words_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/multiple_words"
             android:textSize="24dp"
-            android:layout_weight="0.10" />
+            android:layout_weight="0.10"
+            android:onClick="startMultiwordGame"/>
         <Button
             android:id="@+id/paragraph_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/paragraph"
             android:textSize="24dp"
-            android:layout_weight="0.10" />
+            android:layout_weight="0.10"
+            android:onClick="startParagraphGame"/>
 
     </LinearLayout>
 
