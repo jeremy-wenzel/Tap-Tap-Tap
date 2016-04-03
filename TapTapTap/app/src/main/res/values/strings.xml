@@ -15,4 +15,7 @@
     <!-- For Game Over Strings -->
     <string name="retry">Retry</string>
     <string name="return_main_manu">Return to Main Menu</string>
+
+    <!-- Under Construction -->
+    <string name="under_construction_text">Hello, this feature is currently under construction and will be implemented later</string>
 </resources>

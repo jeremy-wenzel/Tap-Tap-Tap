@@ -23,21 +23,24 @@
             android:layout_height="wrap_content"
             android:text="@string/new_game"
             android:layout_weight="0.10"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:onClick="newGame"/>
         <Button
             android:id="@+id/high_scores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/high_scores"
             android:layout_weight="0.10"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:onClick="highScores"/>
         <Button
             android:id="@+id/settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings"
             android:layout_weight="0.10"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:onClick="settings"/>
     </LinearLayout>
 
 </RelativeLayout>
