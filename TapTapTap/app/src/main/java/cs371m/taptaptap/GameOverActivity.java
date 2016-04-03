@@ -37,6 +37,10 @@ public class GameOverActivity extends AppCompatActivity {
 
     }
 
+    public void startNewGame(View view) {
+        Intent intent = new Intent(this, GameTypeActivity.class);
+        startActivity(intent);
+    }
     public void retry(View view) {
         Intent intent = new Intent(this, TapActivity.class);
         startActivity(intent);
