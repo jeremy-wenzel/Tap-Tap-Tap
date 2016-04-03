@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">TapTapTap</string>
+    <string name="title_activity_main_landing">MainLandingActivity</string>
+
+    <!-- For Main Landing Strings -->
+    <string name="new_game">New Game</string>
+    <string name="high_scores">High Scores</string>
+    <string name="settings">Settings</string>
+
+    <!-- For Game Type Strings -->
+    <string name="single_word">Single Word</string>
+    <string name="multiple_words">Multiple Words</string>
+    <string name="paragraph">Paragraph</string>
+
+    <!-- For Game Over Strings -->
+    <string name="retry">Retry</string>
+    <string name="return_main_manu">Return to Main Menu</string>
 </resources>
