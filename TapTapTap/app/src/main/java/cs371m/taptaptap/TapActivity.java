@@ -1,5 +1,6 @@
 package cs371m.taptaptap;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -36,6 +37,8 @@ public class TapActivity extends AppCompatActivity {
     protected TextView paragraphView;
     protected EditText inputField;
 
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,8 @@ public class TapActivity extends AppCompatActivity {
         updateParagraphText();
         Spannable spanText = Spannable.Factory.getInstance().newSpannable(wordList.get(0).getCorrectWord());
 
+        intent = new Intent(this, GameOverActivity.class);
+
         // input listener
         inputField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,6 +82,7 @@ public class TapActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 Log.d(TAG, "In afterTextChanged");
                 if (numWordsTyped >= numWordsTotal) {
+                    gameOver();
                     return;
                 }
                 String str = s.toString();
@@ -140,6 +146,10 @@ public class TapActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+    }
+
+    public void gameOver() {
+        startActivity(intent);
     }
 
     /*protected void updateFieldText() {
