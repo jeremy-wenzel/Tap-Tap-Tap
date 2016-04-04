@@ -27,9 +27,9 @@ public class TapActivity extends AppCompatActivity {
     //Temporary
     protected static int numWordsTotal;
 
-    protected static int numWordsTyped = 0;
+    protected static int numWordsTyped;
 
-    protected static int score = 0;
+    protected static int score;
 
     List<WordNode> wordList = new ArrayList<WordNode>();
 
@@ -230,6 +230,8 @@ public class TapActivity extends AppCompatActivity {
         }
 
         numWordsTotal = wordList.size();
+        numWordsTyped = 0;
+        score = 0;
     }
 
 
