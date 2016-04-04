@@ -61,6 +61,12 @@ public class WordNode {
      */
     public boolean isTyped() { return userWord != null; }
 
+    public boolean isCorrect(){
+        if(userWord != null)
+            return userWord.equals(correctWord);
+        return false;
+    }
+
     /**
      * Method to reset the node back to it's original state
      */
@@ -69,4 +75,5 @@ public class WordNode {
         coloredIWord = null;
         coloredCWord = WordColorer.colorWordBlack(correctWord);
     }
+
 }

@@ -4,13 +4,22 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class GameOverActivity extends AppCompatActivity {
 
-    @Override
+//    TextView statsView = (TextView) findViewById(R.id.game_over_text_view);
+
+//    Intent myIntent = getIntent();
+//    int score = myIntent.getIntExtra("score", 0);
+//    int mistakes = myIntent.getIntExtra("mistakes", 0);
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
+
+        //statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes);
     }
 
     @Override
@@ -41,7 +50,9 @@ public class GameOverActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameTypeActivity.class);
         startActivity(intent);
     }
+
     public void retry(View view) {
+        //need to fix
         Intent intent = new Intent(this, TapActivity.class);
         startActivity(intent);
     }

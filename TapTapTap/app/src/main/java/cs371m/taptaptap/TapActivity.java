@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class TapActivity extends AppCompatActivity {
 
     private static final String TAG = "TapActivity";
@@ -29,7 +30,7 @@ public class TapActivity extends AppCompatActivity {
 
     protected static int numWordsTyped;
 
-    protected static int score;
+    ScoreSystem score = new ScoreSystem();
 
     List<WordNode> wordList = new ArrayList<WordNode>();
 
@@ -95,7 +96,7 @@ public class TapActivity extends AppCompatActivity {
                         int uLen = usrWrd.length();
                         if (sLen < uLen) {
                             Log.d(TAG, "User has deleted a letter");
-                            score -= 1;
+                            score.subtract_score();
                         }
                         else if (sLen <= corWrd.length()
                                 && str.charAt(sLen - 1) == corWrd.charAt(sLen - 1)
@@ -103,14 +104,19 @@ public class TapActivity extends AppCompatActivity {
                             Log.d(TAG, "Incrementing Score");
                             Log.d(TAG, "str: " + str);
                             Log.d(TAG, "sLen: " + sLen);
-                            if (uLen != 0)
-                                score += 1;
-                            else if (str.charAt(uLen) == corWrd.charAt(uLen))
-                                score += 1;
+                            if (uLen != 0 || str.charAt(uLen) == corWrd.charAt(uLen))
+                                score.add_score();
                         }
+                        else if(sLen > corWrd.length()){
+                            score.add_mistake();
+                        }
+                        else if((str.charAt(sLen - 1) != corWrd.charAt(sLen - 1)) && !str.equals(usrWrd)){
+                            score.add_mistake();
+                        }
+
                     }
                     else if (str.length() == 0 && wordList.get(numWordsTyped).isTyped()) {
-                        --score;
+                        score.subtract_score();
                     }
                     // Store and color incomplete word
                     wordList.get(numWordsTyped).updateUserWord(str, false);
@@ -146,6 +152,13 @@ public class TapActivity extends AppCompatActivity {
     }
 
     public void gameOver() {
+//        for(int i = 0; i < wordList.size(); i++){
+//            if(wordList.get(i).isCorrect())
+//                score.add_word_score(wordList.get(i).getCorrectWord().length());
+//        }
+//        Intent intent = new Intent(this, GameOverActivity.class);
+//        intent.putExtra("score", score.get_score());
+//        intent.putExtra("mistakes", score.get_mistakes());
         startActivity(intent);
     }
 
@@ -184,7 +197,7 @@ public class TapActivity extends AppCompatActivity {
     }
 
     protected void updateScore() {
-        scoreView.setText("Score: " + score);
+        scoreView.setText("Score: " + score.get_score());
     }
 
     /**
@@ -231,7 +244,6 @@ public class TapActivity extends AppCompatActivity {
 
         numWordsTotal = wordList.size();
         numWordsTyped = 0;
-        score = 0;
     }
 
 
