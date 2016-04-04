@@ -42,9 +42,15 @@ public class ScoreSystem {
         return mistakes;
     }
 
+    public void set_upper_limit(int paragraph_length){
+        upper_limit = paragraph_length;
+    }
+
     public void time_addition(int time){
-        //needs upper limit, currently its wrong.
-        score = score + time;
+        //upper_limit = upper_limit - time;
+        if(time < upper_limit) {
+            score = score + upper_limit;
+        }
     }
 
 }

@@ -62,6 +62,8 @@ public class TapActivity extends AppCompatActivity {
         wordList.get(0).updateUserWord("", false);
         updateParagraphText();
 
+        score.set_upper_limit(wordList.size());
+
 //        intent = new Intent(this, GameOverActivity.class);
 
         // input listener
@@ -118,8 +120,12 @@ public class TapActivity extends AppCompatActivity {
                     else if (str.length() == 0 && wordList.get(numWordsTyped).isTyped()) {
                         score.subtract_score();
                     }
+
                     // Store and color incomplete word
                     wordList.get(numWordsTyped).updateUserWord(str, false);
+                    if((numWordsTyped == numWordsTotal-1) && str.equals(wordList.get(numWordsTyped).getCorrectWord())){
+                        gameOver();
+                    }
                 }
                 updateParagraphText();
                 updateScore();

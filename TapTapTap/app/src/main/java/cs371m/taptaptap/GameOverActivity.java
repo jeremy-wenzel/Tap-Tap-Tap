@@ -12,7 +12,7 @@ public class GameOverActivity extends AppCompatActivity {
 
     int score;
     int mistakes;
-
+    int time;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +21,8 @@ public class GameOverActivity extends AppCompatActivity {
         statsView = (TextView) findViewById(R.id.game_over_text_view);
         score = getIntent().getIntExtra("score", 0);
         mistakes = getIntent().getIntExtra("mistakes", 0);
-        statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes);
+        time = 0;
+        statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\n Total Time: " + time);
     }
 
     @Override
