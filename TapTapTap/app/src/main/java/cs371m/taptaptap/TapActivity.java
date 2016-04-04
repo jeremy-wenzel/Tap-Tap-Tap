@@ -1,6 +1,7 @@
 package cs371m.taptaptap;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,6 @@ import java.util.Scanner;
 public class TapActivity extends AppCompatActivity {
 
     private static final String TAG = "TapActivity";
-    protected final String correctWords[] = {"My", "name", "is", "Rafik,", "Jeremy", "or", "Frank.", "Here", "is", "a", "sample", "passage", "for", "TapTapTap!"};
 
     //Temporary
     protected static int numWordsTotal;
@@ -29,10 +30,6 @@ public class TapActivity extends AppCompatActivity {
     protected static int numWordsTyped = 0;
 
     protected static int score = 0;
-
-    protected String printingWords[] = new String[numWordsTotal];
-
-    protected String userWords[] = new String[numWordsTotal];
 
     List<WordNode> wordList = new ArrayList<WordNode>();
 
@@ -49,7 +46,7 @@ public class TapActivity extends AppCompatActivity {
 
         Log.d(TAG, "In onCreate");
 
-        // Get intent data
+        // Get intent data and set up game state
         intent = getIntent();
         int value = intent.getIntExtra("GameType", -1);
         setUpGame(value);
@@ -59,18 +56,10 @@ public class TapActivity extends AppCompatActivity {
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
 
-        TextView Highlighter = (TextView) findViewById(R.id.paragraph_view);
-
-        // Put paragraph into the wordList
-//        for (int i = 0; i < correctWords.length; i++)
-//            wordList.add(new WordNode(correctWords[i]));
-
-        numWordsTotal = wordList.size();
 
         // Set the first value to appear on screen
         wordList.get(0).updateUserWord("", false);
         updateParagraphText();
-        Spannable spanText = Spannable.Factory.getInstance().newSpannable(wordList.get(0).getCorrectWord());
 
         intent = new Intent(this, GameOverActivity.class);
 
@@ -164,6 +153,11 @@ public class TapActivity extends AppCompatActivity {
 
     }*/
 
+    /**
+     * Checks to make sure that we have a good game type and then begins to build the game state
+     *
+     * @param gameType The game type we want to play. 0 for single word, 1 for multiword, 2 for paragraph
+     */
     public void setUpGame(int gameType) {
         Log.d(TAG, "Game Type = " + gameType);
         switch (gameType) {
@@ -218,6 +212,13 @@ public class TapActivity extends AppCompatActivity {
         return toReturn.toString();
     }
 
+    /**
+     * Sets up the game state given the Resource id of a file. More specifically, goes
+     * through the file, gets all the words, and adds them to the word list. Then sets
+     * the number of words total to the size of the word list.
+     *
+     * @param file Resource file id of file to be read
+     */
     private void buildCorrectWordList(int file) {
         InputStream input = getResources().openRawResource(file);
         Scanner scan = new Scanner(input);
@@ -227,6 +228,8 @@ public class TapActivity extends AppCompatActivity {
             Log.d(TAG, "word: " +  word);
             wordList.add(new WordNode(word));
         }
+
+        numWordsTotal = wordList.size();
     }
 
 
