@@ -7,6 +7,8 @@ import android.view.View;
 
 public class GameTypeActivity extends AppCompatActivity {
 
+    private final String EXTRA = "GameType";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,16 +41,19 @@ public class GameTypeActivity extends AppCompatActivity {
 
     public void startSingleWordGame(View view) {
         Intent intent = new Intent(this, TapActivity.class);
+        intent.putExtra(EXTRA, 0);
         startActivity(intent);
     }
 
     public void startMultiwordGame(View view) {
         Intent intent = new Intent(this, TapActivity.class);
+        intent.putExtra(EXTRA, 1);
         startActivity(intent);
     }
 
     public void startParagraphGame(View view) {
         Intent intent = new Intent(this, TapActivity.class);
+        intent.putExtra(EXTRA, 2);
         startActivity(intent);
     }
 }

@@ -12,8 +12,11 @@ import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TapActivity extends AppCompatActivity {
 
@@ -46,6 +49,11 @@ public class TapActivity extends AppCompatActivity {
 
         Log.d(TAG, "In onCreate");
 
+        // Get intent data
+        intent = getIntent();
+        int value = intent.getIntExtra("GameType", -1);
+        setUpGame(value);
+
         // Setup views
         scoreView = (TextView) findViewById(R.id.score_view);
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
@@ -54,8 +62,8 @@ public class TapActivity extends AppCompatActivity {
         TextView Highlighter = (TextView) findViewById(R.id.paragraph_view);
 
         // Put paragraph into the wordList
-        for (int i = 0; i < correctWords.length; i++)
-            wordList.add(new WordNode(correctWords[i]));
+//        for (int i = 0; i < correctWords.length; i++)
+//            wordList.add(new WordNode(correctWords[i]));
 
         numWordsTotal = wordList.size();
 
@@ -156,6 +164,24 @@ public class TapActivity extends AppCompatActivity {
 
     }*/
 
+    public void setUpGame(int gameType) {
+        Log.d(TAG, "Game Type = " + gameType);
+        switch (gameType) {
+            case 0:
+                buildCorrectWordList(R.raw.single_word);
+                break;
+            case 1:
+                buildCorrectWordList(R.raw.multiple_words);
+                break;
+            case 2:
+                buildCorrectWordList(R.raw.paragraph);
+                break;
+            default:
+                Log.d(TAG, "Did not get correct gameType");
+                throw new IllegalArgumentException("Did not get correct gameType");
+        }
+    }
+
     /**
      * Updates the paragraph view with the appropriate coloring and words
      */
@@ -190,6 +216,17 @@ public class TapActivity extends AppCompatActivity {
         toReturn.append(" ");
 
         return toReturn.toString();
+    }
+
+    private void buildCorrectWordList(int file) {
+        InputStream input = getResources().openRawResource(file);
+        Scanner scan = new Scanner(input);
+
+        while (scan.hasNext()) {
+            String word = scan.next();
+            Log.d(TAG, "word: " +  word);
+            wordList.add(new WordNode(word));
+        }
     }
 
 
