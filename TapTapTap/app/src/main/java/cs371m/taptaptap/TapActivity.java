@@ -62,7 +62,7 @@ public class TapActivity extends AppCompatActivity {
         wordList.get(0).updateUserWord("", false);
         updateParagraphText();
 
-        intent = new Intent(this, GameOverActivity.class);
+//        intent = new Intent(this, GameOverActivity.class);
 
         // input listener
         inputField.addTextChangedListener(new TextWatcher() {
@@ -152,13 +152,13 @@ public class TapActivity extends AppCompatActivity {
     }
 
     public void gameOver() {
-//        for(int i = 0; i < wordList.size(); i++){
-//            if(wordList.get(i).isCorrect())
-//                score.add_word_score(wordList.get(i).getCorrectWord().length());
-//        }
-//        Intent intent = new Intent(this, GameOverActivity.class);
-//        intent.putExtra("score", score.get_score());
-//        intent.putExtra("mistakes", score.get_mistakes());
+        for(int i = 0; i < wordList.size(); i++){
+            if(wordList.get(i).isCorrect())
+                score.add_word_score(wordList.get(i).getCorrectWord().length());
+        }
+        Intent intent = new Intent(this, GameOverActivity.class);
+        intent.putExtra("score", score.get_score());
+        intent.putExtra("mistakes", score.get_mistakes());
         startActivity(intent);
     }
 

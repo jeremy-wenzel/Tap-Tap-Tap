@@ -8,18 +8,20 @@ import android.widget.TextView;
 
 public class GameOverActivity extends AppCompatActivity {
 
-//    TextView statsView = (TextView) findViewById(R.id.game_over_text_view);
+    TextView statsView;
 
-//    Intent myIntent = getIntent();
-//    int score = myIntent.getIntExtra("score", 0);
-//    int mistakes = myIntent.getIntExtra("mistakes", 0);
+    int score;
+    int mistakes;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
-        //statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes);
+        statsView = (TextView) findViewById(R.id.game_over_text_view);
+        score = getIntent().getIntExtra("score", 0);
+        mistakes = getIntent().getIntExtra("mistakes", 0);
+        statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes);
     }
 
     @Override
