@@ -47,6 +47,7 @@ public class GameOverActivity extends AppCompatActivity {
     }
 
     public void returnToMainMenu(View view) {
-
+        Intent intent = new Intent(this, MainLandingActivity.class);
+        startActivity(intent);
     }
 }
