@@ -12,7 +12,7 @@ How To Begin:
 * The main menu has three selection options as follows:
   New Game - Begin a new game based off of selected game type (game type is selected after New Game is pressed).
   High Score - Display the current user high score. (High scores will be specific to game type and will include more than just the highest score in future releases).
-  Settings - Currently displays an "Under Construction" page which will be replaced by game settings (such as input method) in future releases
+  Settings - Currently displays an option to reset the dialog box checked, in case you want to see the intro message again and have already disabled it.
 
 How To Play:
 * Once a new game has begun, the goal is to score as many points as possible by typing letters and symbols correctly. 

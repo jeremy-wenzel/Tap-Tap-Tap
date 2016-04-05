@@ -10,6 +10,7 @@ c)
 * High Score activity where the highest score is displayed.
 * Functioning menu system.
 * WordNode list structure for organizing user input.
+* Settings menu (only has one option)
 
 d)
 * Database with varying paragraphs words and sentences.
@@ -18,6 +19,7 @@ d)
 * Saving multiple high scores & ranking them.
 
 e)
+* Intro message box with simple instructions
 * HTML formatting to assist in visual feedback during the typing session.
 * WordColorer class for formatting the colored words properly
 * ScoreSystem class for managing the score.
@@ -32,6 +34,7 @@ Classes:
 * GameTypeActivity - Select your game type (paragraph, word or sentence)
 * HighScoreActivity - High score activity to display high scores…
 * MainLandingActivity - Launch Screen of app 
+* SettingsActivity - A settings menu currently only containing the ability to reset whether the intro message has been shown.
 * UnderConstruction - Temporary activity for undeveloped features
 * TapActivity - Game activity
 * ScoreSystem - Score manager for highscore counting
