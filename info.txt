@@ -1,5 +1,5 @@
 a)
-Rafik Razik (ror279), Jeremy Wenzel() & Frank Cerasoli(ftc244)
+Rafik Razik (ror279), Jeremy Wenzel(jhw866) & Frank Cerasoli(ftc244)
 
 b)
 This app is a accuracy typing game. So far the user is not being timed when they play the game. Several options are present at the launch of the app. Options include New Game where you can start playing the typing game, High Scores where you can see the highest score achieved and Settings, where you can see a lovely “Under Construction” page.
