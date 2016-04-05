@@ -1,0 +1,38 @@
+a)
+Rafik Razik (ror279), Jeremy Wenzel() & Frank Cerasoli(ftc244)
+
+b)
+This app is a accuracy typing game. So far the user is not being timed when they play the game. Several options are present at the launch of the app. Options include New Game where you can start playing the typing game, High Scores where you can see the highest score achieved and Settings, where you can see a lovely “Under Construction” page.
+
+c)
+* Colored words to allow for accuracy counters and visual feedback as the user types.
+* User input field for typing in the individual words for the game.
+* High Score activity where the highest score is displayed.
+* Functioning menu system.
+* WordNode list structure for organizing user input.
+
+d)
+* Database with varying paragraphs words and sentences.
+* Same database for scoring high scores.
+* Timing the typing and displaying the Gross Words typed Per Minute (GWAM).
+* Saving multiple high scores & ranking them.
+
+e)
+* HTML formatting to assist in visual feedback during the typing session.
+* WordColorer class for formatting the colored words properly
+* ScoreSystem class for managing the score.
+
+f)
+We took no classes or major chunks of code from online sources
+
+g)
+Classes:
+* GameOverActivity - When the game ends this activity begins.
+* GameTypeActivity - Select your game type (paragraph, word or sentence)
+* HighScoreActivity - High score activity to display high scores…
+* MainLandingActivity - Launch Screen of app 
+* UnderConstruction - Temporary activity for undeveloped features
+* TapActivity - Game activity
+* ScoreSystem - Score manager for highscore counting
+* WordColorer - Word formatter for color and visual feedback
+* WordNode - List structure to organize user input

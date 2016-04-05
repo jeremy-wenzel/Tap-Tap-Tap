@@ -46,7 +46,7 @@
             android:layout_weight="50"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Filler (Shouldn't EVER be visible" />
+            android:text="" />
     </LinearLayout>
 
 </RelativeLayout>
