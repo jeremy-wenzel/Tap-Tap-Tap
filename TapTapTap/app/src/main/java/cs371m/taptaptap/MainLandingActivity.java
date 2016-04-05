@@ -43,7 +43,7 @@ public class MainLandingActivity extends AppCompatActivity {
     }
 
     public void highScores(View view) {
-        Intent intent = new Intent(this, UnderConstruction.class);
+        Intent intent = new Intent(this, HighScoreActivity.class);
         startActivity(intent);
     }
 

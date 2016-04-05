@@ -1,6 +1,8 @@
 package cs371m.taptaptap;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,16 +42,20 @@ public class TapActivity extends AppCompatActivity {
 
     private Intent intent;
 
+    private int gameType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tap);
 
-        Log.d(TAG, "In onCreate");
+//        Log.d(TAG, "In onCreate");
 
         // Get intent data and set up game state
         intent = getIntent();
+
         int value = intent.getIntExtra("GameType", -1);
+        gameType = value;
         setUpGame(value);
 
         // Setup views
@@ -80,32 +86,35 @@ public class TapActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.d(TAG, "In afterTextChanged");
+//                Log.d(TAG, "In afterTextChanged");
                 if (numWordsTyped >= numWordsTotal) {
                     gameOver();
                     return;
                 }
                 String str = s.toString();
                 if ((str.contains(" ") || str.contains("\n"))) {
-                    Log.d(TAG, "Found Space");
+//                    Log.d(TAG, "Found Space");
+                    if(!str.equals(wordList.get(numWordsTyped).getCorrectWord()))
+                        score.add_mistake();
                     wordList.get(numWordsTyped++).updateUserWord(str.trim(), true);
                     s.clear();
-                } else {
+                }
+                else {
                     if (str.length() > 0) {
                         String usrWrd = wordList.get(numWordsTyped).getUserWord();
                         String corWrd = wordList.get(numWordsTyped).getCorrectWord();
                         int sLen = str.length();
                         int uLen = usrWrd.length();
                         if (sLen < uLen) {
-                            Log.d(TAG, "User has deleted a letter");
+//                            Log.d(TAG, "User has deleted a letter");
                             score.subtract_score();
                         }
                         else if (sLen <= corWrd.length()
                                 && str.charAt(sLen - 1) == corWrd.charAt(sLen - 1)
                                 && !str.equals(usrWrd)) {
-                            Log.d(TAG, "Incrementing Score");
-                            Log.d(TAG, "str: " + str);
-                            Log.d(TAG, "sLen: " + sLen);
+//                            Log.d(TAG, "Incrementing Score");
+//                            Log.d(TAG, "str: " + str);
+//                            Log.d(TAG, "sLen: " + sLen);
                             if (uLen != 0 || str.charAt(uLen) == corWrd.charAt(uLen))
                                 score.add_score();
                         }
@@ -162,9 +171,16 @@ public class TapActivity extends AppCompatActivity {
             if(wordList.get(i).isCorrect())
                 score.add_word_score(wordList.get(i).getCorrectWord().length());
         }
+
+        SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("score", score.get_score());
+        editor.commit();
+
         Intent intent = new Intent(this, GameOverActivity.class);
         intent.putExtra("score", score.get_score());
         intent.putExtra("mistakes", score.get_mistakes());
+        intent.putExtra("game type", gameType);
         startActivity(intent);
     }
 
@@ -178,7 +194,7 @@ public class TapActivity extends AppCompatActivity {
      * @param gameType The game type we want to play. 0 for single word, 1 for multiword, 2 for paragraph
      */
     public void setUpGame(int gameType) {
-        Log.d(TAG, "Game Type = " + gameType);
+        //Log.d(TAG, "Game Type = " + gameType);
         switch (gameType) {
             case 0:
                 buildCorrectWordList(R.raw.single_word);
@@ -190,7 +206,7 @@ public class TapActivity extends AppCompatActivity {
                 buildCorrectWordList(R.raw.paragraph);
                 break;
             default:
-                Log.d(TAG, "Did not get correct gameType");
+//                Log.d(TAG, "Did not get correct gameType");
                 throw new IllegalArgumentException("Did not get correct gameType");
         }
     }
@@ -244,7 +260,7 @@ public class TapActivity extends AppCompatActivity {
 
         while (scan.hasNext()) {
             String word = scan.next();
-            Log.d(TAG, "word: " +  word);
+//            Log.d(TAG, "word: " +  word);
             wordList.add(new WordNode(word));
         }
 
