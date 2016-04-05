@@ -30,6 +30,9 @@
         <activity
             android:name=".HighScoreActivity"
             android:label="@string/app_name"></activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/app_name"></activity>
         <activity android:name=".UnderConstruction"></activity>
 
     </application>

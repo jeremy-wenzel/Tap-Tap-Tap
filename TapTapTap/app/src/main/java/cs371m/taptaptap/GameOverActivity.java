@@ -27,7 +27,6 @@ public class GameOverActivity extends AppCompatActivity {
         score = getIntent().getIntExtra("score", -1);
         mistakes = getIntent().getIntExtra("mistakes", -1);
         gameType = getIntent().getIntExtra("game type", -1);
-        Log.d(TAG, "Game Type = " + gameType);
         time = 0;
         statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\n Total Time: " + time);
     }
@@ -62,7 +61,6 @@ public class GameOverActivity extends AppCompatActivity {
     }
 
     public void retry(View view) {
-        //need to fix
         Intent intent = new Intent(this, TapActivity.class);
         intent.putExtra(EXTRA, gameType);
         startActivity(intent);
