@@ -23,7 +23,8 @@ e)
 * ScoreSystem class for managing the score.
 
 f)
-We took no classes or major chunks of code from online sources
+Our code incorporates one snippet of code borrowed from a stack overflow response. This code is used to display a dialog box on initial startup of the app. The dialog box provides preliminary information about playing this game and what is included in the app.
+http://stackoverflow.com/questions/9550039/how-to-make-a-do-not-ask-me-again-dialog-pop-up-box-android
 
 g)
 Classes:
