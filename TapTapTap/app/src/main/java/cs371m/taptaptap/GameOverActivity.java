@@ -29,6 +29,9 @@ public class GameOverActivity extends AppCompatActivity {
         gameType = getIntent().getIntExtra("game type", -1);
         time = 0;
         statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\n Total Time: " + time);
+
+        Database database = new Database(this);
+        database.insertScore(score, gameType);
     }
 
     @Override

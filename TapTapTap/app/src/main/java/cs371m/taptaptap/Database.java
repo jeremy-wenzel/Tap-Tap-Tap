@@ -55,26 +55,48 @@ public class Database {
      * to see if something worked.
      * @return
      */
-    public ArrayList<Integer> getScores() {
-        Log.d(TAG, "In getScores()");
+    public ArrayList<Integer> getGameTypeScores(int gameType) {
+        Log.d(TAG, "In getGameTypeScores()");
+
+        ArrayList<Integer> toReturn = new ArrayList<>(0);
         openDatabaseConnection();
 
-        // This code is just proof of concept. It actually doesn't do anything
-        // However, some of this code could be adapted to fit our needs
 
-        Cursor c = db.query(SCORE_TABLE, new String[]{SCORE_COL, GAME_TYPE_COL},
-                null, null, null, null, null);
+        Cursor c = db.query(SCORE_TABLE, null, GAME_TYPE_COL + "=" + gameType, null, null, null, SCORE_COL + " DESC");
 
         c.moveToFirst();
         while (!c.isAfterLast()) {
             int scoreindex = c.getColumnIndex(SCORE_COL);
             int score = c.getInt(scoreindex);
             Log.d(TAG, "Score = " + score);
+            toReturn.add(score);
             c.move(1);
         }
 
         closeDatabaseConnection();
-        return null;
+        return toReturn;
+    }
+
+    public ArrayList<Integer> getAllGameTypeScores() {
+        Log.d(TAG, "In getGameTypeScores()");
+
+        ArrayList<Integer> toReturn = new ArrayList<>(0);
+        openDatabaseConnection();
+
+
+        Cursor c = db.query(SCORE_TABLE, null, null, null, null, null, SCORE_COL + " DESC");
+
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            int scoreindex = c.getColumnIndex(SCORE_COL);
+            int score = c.getInt(scoreindex);
+            Log.d(TAG, "Score = " + score);
+            toReturn.add(score);
+            c.move(1);
+        }
+
+        closeDatabaseConnection();
+        return toReturn;
     }
 
     /**
@@ -90,7 +112,7 @@ public class Database {
         // This code is just proof of concept. It actually doesn't do anything
         // However, some of this code could be adapted to fit our needs
 
-        contentValues.put(SCORE_COL, 20);
+        contentValues.put(SCORE_COL, score);
         contentValues.put(GAME_TYPE_COL, gametype);
 
         db.insert(SCORE_TABLE, null, contentValues);
@@ -126,6 +148,8 @@ public class Database {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             /* Don't need to do anything. Need method to be overridden though */
+            db.execSQL("DROP TABLE IF EXISTS " + SCORE_TABLE);
+            onCreate(db);
         }
     }
 
