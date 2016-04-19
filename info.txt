@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 a)
 Rafik Razik (ror279), Jeremy Wenzel() & Frank Cerasoli(ftc244)
 
@@ -39,4 +40,47 @@ Classes:
 * TapActivity - Game activity
 * ScoreSystem - Score manager for highscore counting
 * WordColorer - Word formatter for color and visual feedback
+=======
+a)
+Rafik Razik (ror279), Jeremy Wenzel(jhw866) & Frank Cerasoli(ftc244)
+
+b)
+This app is a accuracy typing game. So far the user is not being timed when they play the game. Several options are present at the launch of the app. Options include New Game where you can start playing the typing game, High Scores where you can see the highest score achieved and Settings, where you can see a lovely “Under Construction” page.
+
+c)
+* Colored words to allow for accuracy counters and visual feedback as the user types.
+* User input field for typing in the individual words for the game.
+* High Score activity where the highest score is displayed.
+* Functioning menu system.
+* WordNode list structure for organizing user input.
+* Settings menu (only has one option)
+
+d)
+* Database with varying paragraphs words and sentences.
+* Same database for scoring high scores.
+* Timing the typing and displaying the Gross Words typed Per Minute (GWAM).
+* Saving multiple high scores & ranking them.
+
+e)
+* Intro message box with simple instructions
+* HTML formatting to assist in visual feedback during the typing session.
+* WordColorer class for formatting the colored words properly
+* ScoreSystem class for managing the score.
+
+f)
+Our code incorporates one snippet of code borrowed from a stack overflow response. This code is used to display a dialog box on initial startup of the app. The dialog box provides preliminary information about playing this game and what is included in the app.
+http://stackoverflow.com/questions/9550039/how-to-make-a-do-not-ask-me-again-dialog-pop-up-box-android
+
+g)
+Classes:
+* GameOverActivity - When the game ends this activity begins.
+* GameTypeActivity - Select your game type (paragraph, word or sentence)
+* HighScoreActivity - High score activity to display high scores…
+* MainLandingActivity - Launch Screen of app 
+* SettingsActivity - A settings menu currently only containing the ability to reset whether the intro message has been shown.
+* UnderConstruction - Temporary activity for undeveloped features
+* TapActivity - Game activity
+* ScoreSystem - Score manager for highscore counting
+* WordColorer - Word formatter for color and visual feedback
+>>>>>>> d7de4234e02c0e0c8b2315d87928925982b07ddb
 * WordNode - List structure to organize user input
