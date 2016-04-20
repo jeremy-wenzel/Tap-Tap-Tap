@@ -18,4 +18,11 @@
 
     <!-- Under Construction -->
     <string name="under_construction_text">Hello, this feature is currently under construction and will be implemented later</string>
+
+    <!-- Settins -->
+    <string name="sound">Sound</string>
+    <string name="swype">Swype</string>
+    <string name="word_prediction">Word Prediction</string>
+    <string name="capitalize_first_letter">Capitalize First Letter</string>
+    <string name="show_keyboard_immediately">Show Keyboard Immediately</string>
 </resources>

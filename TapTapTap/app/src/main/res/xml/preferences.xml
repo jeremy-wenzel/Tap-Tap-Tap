@@ -7,4 +7,28 @@
         android:defaultValue="true"
         android:summary="Turn the sound on or off"/>
 
+    <CheckBoxPreference
+        android:key="swype"
+        android:title="@string/swype"
+        android:defaultValue="true"
+        android:summary="Trun on or off the swype functionality"/>
+
+    <CheckBoxPreference
+        android:key="word_prediction"
+        android:title="@string/word_prediction"
+        android:defaultValue="true"
+        android:summary="Turn the word prediction functionality on or off"/>
+
+    <CheckBoxPreference
+        android:key="capitalization"
+        android:title="@string/capitalize_first_letter"
+        android:defaultValue="true"
+        android:summary="Capitalize the first letter of the phrase"/>
+
+    <CheckBoxPreference
+        android:key="show_keyboard"
+        android:title="@string/show_keyboard_immediately"
+        android:defaultValue="true"
+        android:summary="Show the keyboard immediately when starting a game"/>
+
 </PreferenceScreen>
