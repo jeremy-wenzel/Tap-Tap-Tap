@@ -22,13 +22,13 @@
             android:text="Stats stuff goes here"
             android:layout_weight="0.50" />
 
-        <Button
-            android:id="@+id/game_over_new_game_button"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/new_game"
-            android:onClick="startNewGame"/>
+        <!--<Button-->
+            <!--android:id="@+id/game_over_new_game_button"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="@string/new_game"-->
+            <!--android:onClick="startNewGame"/>-->
         <Button
             android:id="@+id/retry"
             android:layout_width="200dp"

@@ -18,13 +18,29 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/new_game"
+            android:id="@+id/single_word_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/new_game"
+            android:text="@string/single_word"
             android:layout_weight="0.10"
             android:textSize="24dp"
-            android:onClick="newGame"/>
+            android:onClick="startSingleWordGame"/>
+        <Button
+            android:id="@+id/multiple_words_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/multiple_words"
+            android:layout_weight="0.10"
+            android:textSize="24dp"
+            android:onClick="startMultiwordGame"/>
+        <Button
+            android:id="@+id/paragraph_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/paragraph"
+            android:layout_weight="0.10"
+            android:textSize="24dp"
+            android:onClick="startParagraphGame"/>
         <Button
             android:id="@+id/high_scores"
             android:layout_width="match_parent"
