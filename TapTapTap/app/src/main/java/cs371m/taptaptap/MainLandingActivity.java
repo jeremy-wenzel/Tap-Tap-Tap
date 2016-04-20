@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -73,6 +76,25 @@ public class MainLandingActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings_action:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+        }
+
+        return false;
+    }
+    @Override
     protected void onPause() {
         super.onPause();
 
@@ -113,8 +135,8 @@ public class MainLandingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void settings(View view) {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }
+//    public void settings(View view) {
+//        Intent intent = new Intent(this, SettingsActivity.class);
+//        startActivity(intent);
+//    }
 }
