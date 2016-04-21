@@ -37,8 +37,6 @@ public class TapActivity extends AppCompatActivity {
 
     private int gameType;
 
-    private boolean isOver = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,12 +157,9 @@ public class TapActivity extends AppCompatActivity {
      * @param
      */
     public void gameOver() {
-        if (!isOver) {
-            for (int i = 0; i < wordList.size(); i++)
-                if (wordList.get(i).isCorrect())
-                    score.add_word_score(wordList.get(i).getCorrectWord().length());
-        }
-        isOver = true;
+        for (int i = 0; i < wordList.size(); i++)
+            if (wordList.get(i).isCorrect())
+                score.add_word_score(wordList.get(i).getCorrectWord().length());
 
         SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -176,6 +171,7 @@ public class TapActivity extends AppCompatActivity {
         intent.putExtra("mistakes", score.get_mistakes());
         intent.putExtra("game type", gameType);
         startActivity(intent);
+        finish();
     }
 
     /**

@@ -1,9 +1,8 @@
 package cs371m.taptaptap;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -62,11 +61,11 @@ public class GameOverActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TapActivity.class);
         intent.putExtra(EXTRA, gameType);
         startActivity(intent);
+        finish();
     }
 
     public void returnToMainMenu(View view) {
-        Intent intent = new Intent(this, MainLandingActivity.class);
-        startActivity(intent);
+        finish();
     }
 }
 
