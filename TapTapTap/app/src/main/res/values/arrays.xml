@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_difficulty_level">
+        <item>@string/easy</item>
+        <item>@string/medium</item>
+        <item>@string/hard</item>
+    </string-array>
+
+    <string-array name="list_text_size">
+        <item>@string/small_size</item>
+        <item>@string/medium_size</item>
+        <item>@string/large_size</item>
+    </string-array>
+</resources>

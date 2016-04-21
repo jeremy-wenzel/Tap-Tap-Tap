@@ -90,6 +90,9 @@ public class MainLandingActivity extends AppCompatActivity {
             case R.id.settings_action:
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
+            case R.id.about_action:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
         }
 
         return false;
