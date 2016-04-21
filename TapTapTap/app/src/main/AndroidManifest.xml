@@ -11,7 +11,10 @@
         <activity
             android:name=".TapActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysVisible">
+        </activity>
+
         <activity
             android:name=".MainLandingActivity"
             android:label="@string/app_name">
