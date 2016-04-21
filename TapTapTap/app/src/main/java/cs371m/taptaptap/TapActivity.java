@@ -22,9 +22,7 @@ public class TapActivity extends AppCompatActivity {
 
     private static final String TAG = "TapActivity";
 
-    //Temporary
     protected static int numWordsTotal;
-
     protected static int numWordsTyped;
 
     ScoreSystem score = new ScoreSystem();
@@ -39,33 +37,29 @@ public class TapActivity extends AppCompatActivity {
 
     private int gameType;
 
+    private boolean isOver = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tap);
-
-
-
-        // Get intent data and set up game state
-        intent = getIntent();
-
-        int value = intent.getIntExtra("GameType", -1);
-        gameType = value;
-        setUpGame(value);
 
         // Setup views
         scoreView = (TextView) findViewById(R.id.score_view);
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
 
+        // Get intent data and set up game state
+        intent = getIntent();
+        int value = intent.getIntExtra("GameType", -1);
+        gameType = value;
+
+        setUpGame(value);
+        score.set_upper_limit(wordList.size());
 
         // Set the first value to appear on screen
         wordList.get(0).updateUserWord("", false);
         updateParagraphText();
-
-        score.set_upper_limit(wordList.size());
-
-//        intent = new Intent(this, GameOverActivity.class);
 
         // input listener
         inputField.addTextChangedListener(new TextWatcher() {
@@ -159,11 +153,18 @@ public class TapActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Ends the game and starts the GameOver activity
+     *
+     * @param
+     */
     public void gameOver() {
-        for(int i = 0; i < wordList.size(); i++){
-            if(wordList.get(i).isCorrect())
-                score.add_word_score(wordList.get(i).getCorrectWord().length());
+        if (!isOver) {
+            for (int i = 0; i < wordList.size(); i++)
+                if (wordList.get(i).isCorrect())
+                    score.add_word_score(wordList.get(i).getCorrectWord().length());
         }
+        isOver = true;
 
         SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -176,10 +177,6 @@ public class TapActivity extends AppCompatActivity {
         intent.putExtra("game type", gameType);
         startActivity(intent);
     }
-
-    /*protected void updateFieldText() {
-
-    }*/
 
     /**
      * Checks to make sure that we have a good game type and then begins to build the game state
