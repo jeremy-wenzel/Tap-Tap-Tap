@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -135,6 +137,7 @@ public class TapActivity extends AppCompatActivity {
             }
         });
 
+        // Timer stuff
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -258,10 +261,11 @@ public class TapActivity extends AppCompatActivity {
             return "";
 
         for (int i = 1; i < numWordsTotal; i++) {
-            String userWord = list.get(i-1).getUserWord();
-            String correctWord = list.get(i-1).getCorrectWord();
+            String prevUserWord = list.get(i-1).getUserWord();
+            String prevCurrWord = list.get(i-1).getCorrectWord();
 
-            if (userWord == null || userWord.length() < correctWord.length() || list.get(i).isTyped())
+            // Checks if we need to add a space or not before the current word
+            if (prevUserWord == null || prevUserWord.length() < prevCurrWord.length() || list.get(i).isTyped())
                 toReturn.append(" ");
 
             if (list.get(i).isTyped())
@@ -269,6 +273,7 @@ public class TapActivity extends AppCompatActivity {
             else
                 toReturn.append(list.get(i).getColoredCWord());
         }
+
         toReturn.append(" ");
 
         return toReturn.toString();
@@ -285,13 +290,38 @@ public class TapActivity extends AppCompatActivity {
         InputStream input = getResources().openRawResource(file);
         Scanner scan = new Scanner(input);
 
+        // Make arraylist for all words in file
+        ArrayList<String> fileWordList = new ArrayList<>(0);
+
+        // Put all words in fileWordList
+        while (scan.hasNextLine()) {
+            String item = scan.nextLine();
+            fileWordList.add(item);
+        }
+
+        // Get random index
+        Random random = new Random();
+        int index = random.nextInt(fileWordList.size());
+
+        // Debug
+        Log.d(TAG, "Index: " + index);
+        Log.d(TAG, "File Word Size: " + fileWordList.size());
+
+        // Close file and make new scanner for random chosen text
+        scan.close();
+        scan = new Scanner(fileWordList.get(index));
+
+        // Go through text and make WordNode's
         while (scan.hasNext()) {
             String word = scan.next();
             wordList.add(new WordNode(word));
         }
 
+        // Setup
         numWordsTotal = wordList.size();
         numWordsTyped = 0;
+
+        scan.close();
     }
 
 
