@@ -36,7 +36,7 @@ public class GameOverActivity extends AppCompatActivity {
         statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\nTotal Time: " + time);
 
         Database database = new Database(this);
-        Log.d(EXTRA, "gametype = " + gameType);
+        Log.d(TAG, "gametype = " + gameType);
         database.insertScore(score, gameType);
     }
 
