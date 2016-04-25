@@ -3,6 +3,7 @@ package cs371m.taptaptap;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class GameOverActivity extends AppCompatActivity {
         statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\n Total Time: " + time);
 
         Database database = new Database(this);
+        Log.d(EXTRA, "gametype = " + gameType);
         database.insertScore(score, gameType);
     }
 
