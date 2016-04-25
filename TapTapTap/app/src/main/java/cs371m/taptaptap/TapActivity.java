@@ -257,11 +257,18 @@ public class TapActivity extends AppCompatActivity {
         else
             return "";
 
-        for (int i = 1; i < numWordsTotal; i++)
+        for (int i = 1; i < numWordsTotal; i++) {
+            String userWord = list.get(i-1).getUserWord();
+            String correctWord = list.get(i-1).getCorrectWord();
+
+            if (userWord == null || userWord.length() < correctWord.length() || list.get(i).isTyped())
+                toReturn.append(" ");
+
             if (list.get(i).isTyped())
-                toReturn.append(" " + list.get(i).getColoredIWord());
+                toReturn.append(list.get(i).getColoredIWord());
             else
-                toReturn.append(" " + list.get(i).getColoredCWord());
+                toReturn.append(list.get(i).getColoredCWord());
+        }
         toReturn.append(" ");
 
         return toReturn.toString();
