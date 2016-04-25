@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,6 +23,12 @@ public class GameOverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
         statsView = (TextView) findViewById(R.id.game_over_text_view);
         score = getIntent().getIntExtra("score", -1);
@@ -40,6 +47,12 @@ public class GameOverActivity extends AppCompatActivity {
         database.insertScore(score, gameType);
     }
 
+    @Override
+    public boolean onOptionsItemSelected (MenuItem menuItem) {
+        if (menuItem.getItemId() == android.R.id.home)
+            finish();
+        return false;
+    }
     @Override
     protected void onResume() {
         super.onResume();
