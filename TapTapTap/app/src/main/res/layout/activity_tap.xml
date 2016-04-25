@@ -14,14 +14,15 @@
         android:layout_height="fill_parent"
         android:layout_weight="100">
 
+
         <TextView
             android:id="@+id/score_view"
             android:gravity="left"
-            android:layout_weight="5"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Score: 0"
             android:textSize="16sp" />
+
         <TextView
             android:id="@+id/paragraph_view"
             android:gravity="center"
@@ -48,5 +49,16 @@
             android:layout_height="wrap_content"
             android:text="" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/timer_view"
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Timer: 0:00"
+        android:textSize="16sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

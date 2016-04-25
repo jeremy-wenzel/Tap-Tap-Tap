@@ -14,7 +14,7 @@ public class GameOverActivity extends AppCompatActivity {
 
     int score;
     int mistakes;
-    int time;
+    String time;
     int gameType;
 
     private final String EXTRA = "GameType";
@@ -27,8 +27,13 @@ public class GameOverActivity extends AppCompatActivity {
         score = getIntent().getIntExtra("score", -1);
         mistakes = getIntent().getIntExtra("mistakes", -1);
         gameType = getIntent().getIntExtra("game type", -1);
-        time = 0;
-        statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\n Total Time: " + time);
+        int seconds = getIntent().getIntExtra("seconds", -1);
+        int minutes = getIntent().getIntExtra("minutes", -1);
+        time = "" + minutes + ":";
+        if (seconds < 10)
+            time += "0";
+        time += seconds;
+        statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\nTotal Time: " + time);
 
         Database database = new Database(this);
         Log.d(EXTRA, "gametype = " + gameType);

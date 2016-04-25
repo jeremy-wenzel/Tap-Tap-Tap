@@ -16,6 +16,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class TapActivity extends AppCompatActivity {
@@ -31,11 +33,16 @@ public class TapActivity extends AppCompatActivity {
 
     protected TextView scoreView;
     protected TextView paragraphView;
+    protected TextView timerView;
     protected EditText inputField;
 
     private Intent intent;
 
     private int gameType;
+
+    private Timer timer;
+    private int minutes = 0;
+    private int seconds = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,7 @@ public class TapActivity extends AppCompatActivity {
         scoreView = (TextView) findViewById(R.id.score_view);
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
+        timerView = (TextView) findViewById(R.id.timer_view);
 
         // Get intent data and set up game state
         intent = getIntent();
@@ -75,6 +83,7 @@ public class TapActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 //                Log.d(TAG, "In afterTextChanged");
                 if (numWordsTyped >= numWordsTotal) {
+                    timer.cancel();
                     gameOver();
                     return;
                 }
@@ -125,6 +134,31 @@ public class TapActivity extends AppCompatActivity {
                 updateScore();
             }
         });
+
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ++seconds;
+                        if (seconds >= 60) {
+                            ++minutes;
+                            seconds = 0;
+                        }
+
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("Timer: " + minutes + ":");
+                        if (seconds < 10)
+                            sb.append("0");
+                        sb.append(seconds);
+
+                        timerView.setText(sb.toString());
+                    }
+                });
+            }
+        }, 1000, 1000);
     }
 
     @Override
@@ -170,6 +204,8 @@ public class TapActivity extends AppCompatActivity {
         intent.putExtra("score", score.get_score());
         intent.putExtra("mistakes", score.get_mistakes());
         intent.putExtra("game type", gameType);
+        intent.putExtra("seconds", seconds);
+        intent.putExtra("minutes", minutes);
         startActivity(intent);
         finish();
     }
