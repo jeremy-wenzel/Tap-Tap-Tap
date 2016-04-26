@@ -60,12 +60,17 @@ public class TapActivity extends AppCompatActivity {
         // Layout stuff and home button
         setContentView(R.layout.activity_tap);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        String textSize = settings.getString("text_size", "Medium");
+
 
         // Setup views
         scoreView = (TextView) findViewById(R.id.score_view);
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
         timerView = (TextView) findViewById(R.id.timer_view);
+
+        setUpTextSize(textSize);
 
         // Get intent data and set up game state
         intent = getIntent();
@@ -204,6 +209,24 @@ public class TapActivity extends AppCompatActivity {
         if (menuItem.getItemId() == android.R.id.home)
             finish();
         return false;
+    }
+
+    private void setUpTextSize(String textSize) {
+        if (textSize == null)
+            throw new IllegalArgumentException("textSize is null");
+
+        if (textSize.equals("Small")) {
+            paragraphView.setTextSize(12.0f);
+        }
+        else if (textSize.equals("Medium")) {
+            paragraphView.setTextSize(20.0f);
+        }
+        else if (textSize.equals("Large")) {
+            paragraphView.setTextSize(26.0f);
+        }
+        else {
+            throw new IllegalArgumentException("Bad text size " + textSize);
+        }
     }
 
     /**

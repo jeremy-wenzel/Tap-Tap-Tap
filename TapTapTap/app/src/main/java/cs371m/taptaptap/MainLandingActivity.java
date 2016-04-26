@@ -100,6 +100,7 @@ public class MainLandingActivity extends AppCompatActivity {
 
         return false;
     }
+
     @Override
     protected void onPause() {
         super.onPause();
