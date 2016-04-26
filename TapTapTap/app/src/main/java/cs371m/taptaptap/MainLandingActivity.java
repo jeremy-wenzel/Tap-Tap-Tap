@@ -19,7 +19,9 @@ public class MainLandingActivity extends AppCompatActivity {
 
     public CheckBox dontShowAgain;
 
-    private final String EXTRA = "GameType";
+    private final String GAME_TYPE_EXTRA = "GameType";
+    private final String NEW_GAME_EXTRA = "NewGame";
+    private final String PHRASE_EXTRA = "Phrase";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,22 +118,24 @@ public class MainLandingActivity extends AppCompatActivity {
 
     }
 
-    public void startSingleWordGame(View view) {
+    private void startTapActivity(int gameType) {
         Intent intent = new Intent(this, TapActivity.class);
-        intent.putExtra(EXTRA, 0);
+        intent.putExtra(GAME_TYPE_EXTRA, gameType);
+        intent.putExtra(NEW_GAME_EXTRA, true);
+        intent.putExtra(PHRASE_EXTRA, "");
         startActivity(intent);
+    }
+
+    public void startSingleWordGame(View view) {
+        startTapActivity(0);
     }
 
     public void startMultiwordGame(View view) {
-        Intent intent = new Intent(this, TapActivity.class);
-        intent.putExtra(EXTRA, 1);
-        startActivity(intent);
+        startTapActivity(1);
     }
 
     public void startParagraphGame(View view) {
-        Intent intent = new Intent(this, TapActivity.class);
-        intent.putExtra(EXTRA, 2);
-        startActivity(intent);
+        startTapActivity(2);
     }
 
     public void highScores(View view) {

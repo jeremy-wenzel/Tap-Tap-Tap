@@ -28,6 +28,10 @@ public class TapActivity extends AppCompatActivity {
 
     private static final String TAG = "TapActivity";
 
+    private final String GAME_TYPE_EXTRA = "GameType";
+    private final String NEW_GAME_EXTRA = "NewGame";
+    private final String PHRASE_EXTRA = "Phrase";
+
     protected static int numWordsTotal;
     protected static int numWordsTyped;
 
@@ -43,6 +47,7 @@ public class TapActivity extends AppCompatActivity {
     private Intent intent;
 
     private int gameType;
+    private String mPhrase;
 
     private Timer timer;
     private int minutes = 0;
@@ -64,10 +69,11 @@ public class TapActivity extends AppCompatActivity {
 
         // Get intent data and set up game state
         intent = getIntent();
-        int value = intent.getIntExtra("GameType", -1);
-        gameType = value;
+        gameType = intent.getIntExtra(GAME_TYPE_EXTRA, -1);
+        boolean isNewGame = intent.getBooleanExtra(NEW_GAME_EXTRA, true);
+        mPhrase = intent.getStringExtra(PHRASE_EXTRA);
 
-        setUpGame(value);
+        setUpGame(gameType, isNewGame);
         score.set_upper_limit(wordList.size());
 
         // Set the first value to appear on screen
@@ -221,29 +227,43 @@ public class TapActivity extends AppCompatActivity {
         intent.putExtra("game type", gameType);
         intent.putExtra("seconds", seconds);
         intent.putExtra("minutes", minutes);
+        intent.putExtra(PHRASE_EXTRA, mPhrase);
         startActivity(intent);
         finish();
     }
 
     /**
      * Checks to make sure that we have a good game type and then begins to build the game state
+     * If the game is new, then we get a random word from thw corresponding word file
+     * If the game is not new, then there must be a valid phrase that is going to be used in the game
      *
      * @param gameType The game type we want to play. 0 for single word, 1 for multiword, 2 for paragraph
+     * @param isNewGame Is the game new or a retry
      */
-    public void setUpGame(int gameType) {
-        switch (gameType) {
-            case 0:
-                buildCorrectWordList(R.raw.single_word);
-                break;
-            case 1:
-                buildCorrectWordList(R.raw.multiple_words);
-                break;
-            case 2:
-                buildCorrectWordList(R.raw.paragraph);
-                break;
-            default:
-                throw new IllegalArgumentException("Did not get correct gameType");
+    public void setUpGame(int gameType, boolean isNewGame) {
+        Log.d(TAG, mPhrase);
+        if(gameType < 0 || gameType > 2)
+            throw new IllegalArgumentException("Game Type is not valid: " + gameType);
+        if (!isNewGame && (mPhrase == null || mPhrase.length() == 0))
+            throw new IllegalArgumentException("Phrase is null or zero length on a retry game");
+
+        if (isNewGame) {
+            switch (gameType) {
+                case 0:
+                    mPhrase = getStringFromFile(R.raw.single_word);
+                    break;
+                case 1:
+                    mPhrase = getStringFromFile(R.raw.multiple_words);
+                    break;
+                case 2:
+                    mPhrase = getStringFromFile(R.raw.paragraph);
+                    break;
+                default:
+                    throw new IllegalStateException("Should not be in default section");
+            }
         }
+
+        buildCorrectWordList(mPhrase);
     }
 
     /**
@@ -298,7 +318,7 @@ public class TapActivity extends AppCompatActivity {
      *
      * @param file Resource file id of file to be read
      */
-    private void buildCorrectWordList(int file) {
+    private String getStringFromFile(int file) {
         InputStream input = getResources().openRawResource(file);
         Scanner scan = new Scanner(input);
 
@@ -313,15 +333,21 @@ public class TapActivity extends AppCompatActivity {
 
         // Get random index
         Random random = new Random();
-        int index = random.nextInt(fileWordList.size());
+        int randomIndex = random.nextInt(fileWordList.size());
 
         // Debug
-        Log.d(TAG, "Index: " + index);
+        Log.d(TAG, "Index: " + randomIndex);
         Log.d(TAG, "File Word Size: " + fileWordList.size());
 
         // Close file and make new scanner for random chosen text
         scan.close();
-        scan = new Scanner(fileWordList.get(index));
+
+        return fileWordList.get(randomIndex);
+
+    }
+
+    private void buildCorrectWordList(String phrase) {
+        Scanner scan = new Scanner(phrase);
 
         // Go through text and make WordNode's
         while (scan.hasNext()) {
@@ -335,7 +361,6 @@ public class TapActivity extends AppCompatActivity {
 
         scan.close();
     }
-
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {

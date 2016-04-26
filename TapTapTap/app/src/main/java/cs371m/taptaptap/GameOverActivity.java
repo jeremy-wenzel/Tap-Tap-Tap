@@ -11,12 +11,18 @@ import android.widget.TextView;
 public class GameOverActivity extends AppCompatActivity {
 
     private static final String TAG = "GameOverActivity";
+
+    private final String PHRASE_EXTRA = "Phrase";
+    private final String NEW_GAME_EXTRA = "NewGame";
+
+
     TextView statsView;
 
-    int score;
-    int mistakes;
-    String time;
-    int gameType;
+    private int score;
+    private int mistakes;
+    private String time;
+    private int gameType;
+    private String phrase;
 
     private final String EXTRA = "GameType";
 
@@ -36,6 +42,11 @@ public class GameOverActivity extends AppCompatActivity {
         gameType = getIntent().getIntExtra("game type", -1);
         int seconds = getIntent().getIntExtra("seconds", -1);
         int minutes = getIntent().getIntExtra("minutes", -1);
+        phrase = getIntent().getStringExtra(PHRASE_EXTRA);
+        if (phrase == null)
+            Log.d(TAG, "phrase is null or length is zero");
+        else if (phrase.length() == 0)
+            Log.d(TAG, "length is zero");
         time = "" + minutes + ":";
         if (seconds < 10)
             time += "0";
@@ -80,6 +91,8 @@ public class GameOverActivity extends AppCompatActivity {
     public void retry(View view) {
         Intent intent = new Intent(this, TapActivity.class);
         intent.putExtra(EXTRA, gameType);
+        intent.putExtra(NEW_GAME_EXTRA, false);
+        intent.putExtra(PHRASE_EXTRA, phrase);
         startActivity(intent);
         finish();
     }
