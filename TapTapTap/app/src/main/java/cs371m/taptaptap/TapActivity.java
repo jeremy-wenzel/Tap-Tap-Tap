@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuItemImpl;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -53,9 +52,15 @@ public class TapActivity extends AppCompatActivity {
     private int minutes = 0;
     private int seconds = 0;
 
+    private boolean orientationChanged = false;
+
+    private SharedPreferences mPrefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mPrefs = getSharedPreferences("ttt_prefs", MODE_PRIVATE);
 
         // Layout stuff and home button
         setContentView(R.layout.activity_tap);
@@ -72,18 +77,26 @@ public class TapActivity extends AppCompatActivity {
 
         setUpTextSize(textSize);
 
-        // Get intent data and set up game state
-        intent = getIntent();
-        gameType = intent.getIntExtra(GAME_TYPE_EXTRA, -1);
-        boolean isNewGame = intent.getBooleanExtra(NEW_GAME_EXTRA, true);
-        mPhrase = intent.getStringExtra(PHRASE_EXTRA);
-
-        setUpGame(gameType, isNewGame);
         score.set_upper_limit(wordList.size());
 
-        // Set the first value to appear on screen
-        wordList.get(0).updateUserWord("", false);
-        updateParagraphText();
+        if ( savedInstanceState == null ) {
+            // Get intent data and set up game state
+            intent = getIntent();
+            gameType = intent.getIntExtra(GAME_TYPE_EXTRA, -1);
+            boolean isNewGame = intent.getBooleanExtra(NEW_GAME_EXTRA, true);
+            mPhrase = intent.getStringExtra(PHRASE_EXTRA);
+
+            setUpGame(gameType, isNewGame);
+            numWordsTyped = 0;
+
+            // Set the first value to appear on screen
+            wordList.get(0).updateUserWord("", false);
+            updateParagraphText();
+        }
+        else {
+            orientationChanged = true;
+            rebuildGame(savedInstanceState);
+        }
 
         // input listener
         inputField.addTextChangedListener(new TextWatcher() {
@@ -99,7 +112,6 @@ public class TapActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-//                Log.d(TAG, "In afterTextChanged");
                 if (numWordsTyped >= numWordsTotal) {
                     timer.cancel();
                     gameOver();
@@ -108,8 +120,9 @@ public class TapActivity extends AppCompatActivity {
                 String str = s.toString();
                 if ((str.contains(" ") || str.contains("\n"))) {
 
-                    if(!str.equals(wordList.get(numWordsTyped).getCorrectWord()))
-                        score.add_mistake();
+                    if (!str.equals(wordList.get(numWordsTyped).getCorrectWord())) {
+                            score.add_mistake();
+                   }
                     wordList.get(numWordsTyped++).updateUserWord(str.trim(), true);
                     s.clear();
                 }
@@ -117,6 +130,10 @@ public class TapActivity extends AppCompatActivity {
                     if (str.length() > 0) {
                         String usrWrd = wordList.get(numWordsTyped).getUserWord();
                         String corWrd = wordList.get(numWordsTyped).getCorrectWord();
+
+                        if ( wordList.get(numWordsTyped).getUserWord() == null )
+                            return;
+
                         int sLen = str.length();
                         int uLen = usrWrd.length();
                         if (sLen < uLen) {
@@ -139,7 +156,10 @@ public class TapActivity extends AppCompatActivity {
 
                     }
                     else if (str.length() == 0 && wordList.get(numWordsTyped).isTyped()) {
-                        score.subtract_score();
+                        if ( orientationChanged )
+                            orientationChanged = false;
+                        else
+                            score.subtract_score();
                     }
 
                     // Store and color incomplete word
@@ -150,6 +170,7 @@ public class TapActivity extends AppCompatActivity {
                 }
                 updateParagraphText();
                 updateScore();
+                orientationChanged = false;
             }
         });
 
@@ -195,13 +216,23 @@ public class TapActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArray("userWords", getUserWords());
+        outState.putString("currentWord", inputField.getText().toString());
+        outState.putInt("score", score.get_score());
+        outState.putInt("gameType", gameType);
+        outState.putInt("timerMins", minutes);
+        outState.putInt("timerSecs", seconds);
     }
 
     @Override
@@ -227,6 +258,34 @@ public class TapActivity extends AppCompatActivity {
         else {
             throw new IllegalArgumentException("Bad text size " + textSize);
         }
+    }
+
+    public void rebuildGame(Bundle savedInstanceState) {
+
+        String[] userWords = savedInstanceState.getStringArray("userWords");
+        intent = getIntent();
+        mPhrase = "Saved Game";
+        gameType = savedInstanceState.getInt("gameType");
+        minutes = savedInstanceState.getInt("timerMins");
+        seconds = savedInstanceState.getInt("timerSecs");
+
+        setUpGame(gameType, true);
+
+        score.add_word_score(savedInstanceState.getInt("score"));
+
+        numWordsTyped = userWords.length;
+        int i = 0;
+        for ( ; i < numWordsTyped ; i++ )
+            wordList.get(i).updateUserWord(userWords[i], true);
+
+        wordList.get(i).updateUserWord(savedInstanceState.getString("currentWord"), false);
+        inputField.setText(wordList.get(i).getColoredIWord());
+
+        score.set_upper_limit(wordList.size());
+        updateParagraphText();
+        updateScore();
+
+
     }
 
     /**
@@ -380,9 +439,18 @@ public class TapActivity extends AppCompatActivity {
 
         // Setup
         numWordsTotal = wordList.size();
-        numWordsTyped = 0;
 
         scan.close();
+    }
+
+    protected String[] getUserWords() {
+        String[] userWords = new String[numWordsTyped];
+
+        int i = 0;
+        for ( ; i < numWordsTyped ; i++ )
+            userWords[i] = wordList.get(i).getUserWord();
+
+        return userWords;
     }
 
     @Override
