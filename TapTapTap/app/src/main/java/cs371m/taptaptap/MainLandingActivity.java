@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 public class MainLandingActivity extends AppCompatActivity {
 
@@ -41,9 +42,10 @@ public class MainLandingActivity extends AppCompatActivity {
         String skipMessage = settings.getString("skipMessage", "NOT checked");
 
         dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
+        TextView textView = (TextView) eulaLayout.findViewById(R.id.greeting_textview);
+        textView.setText(R.string.how_to_navigate);
         dialogBox.setView(eulaLayout);
-        dialogBox.setTitle("Hello");
-        dialogBox.setMessage(R.string.how_to_play_text);
+        dialogBox.setTitle("Welcome to TapTapTap!!!");
 
         dialogBox.setPositiveButton("Close", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
