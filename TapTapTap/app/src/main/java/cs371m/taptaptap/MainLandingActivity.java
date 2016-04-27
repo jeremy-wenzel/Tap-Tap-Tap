@@ -43,14 +43,7 @@ public class MainLandingActivity extends AppCompatActivity {
         dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
         dialogBox.setView(eulaLayout);
         dialogBox.setTitle("Hello");
-        dialogBox.setMessage("This is TapTapTap. Its an App that helps you text faster." +
-                "\nRules: " +
-                "\n1) Every correct letters  that you type gives you a point." +
-                "\n2) every mistake you make takes away a point." +
-                "\n3) Fully Complete words give you bonus points." +
-                "\nThe game ends once you have completed the provided text. " +
-                "\nHave fun :)");
-
+        dialogBox.setMessage(R.string.how_to_play_text);
 
         dialogBox.setPositiveButton("Close", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -137,6 +130,11 @@ public class MainLandingActivity extends AppCompatActivity {
 
     public void startParagraphGame(View view) {
         startTapActivity(2);
+    }
+
+    public void howToPlay(View view) {
+        Intent intent = new Intent(this, HowToPlayActivity.class);
+        startActivity(intent);
     }
 
     public void highScores(View view) {

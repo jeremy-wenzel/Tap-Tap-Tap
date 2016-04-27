@@ -6,6 +6,7 @@
     <string name="new_game">New Game</string>
     <string name="high_scores">High Scores</string>
     <string name="settings">Settings</string>
+    <string name="how_to_play_label">How To Play</string>
 
     <!-- For Game Type Strings -->
     <string name="single_word">Single Word</string>
@@ -36,4 +37,13 @@
     <string name="small_size">Small</string>
     <string name="medium_size">Medium</string>
     <string name="large_size">Large</string>
+
+    <!-- How to play -->
+    <string name="how_to_play_text">"This is TapTapTap. Its an App that helps you text faster."
+                "\nRules: "
+                "\n1) Every correct letters  that you type gives you a point."
+                "\n2) every mistake you make takes away a point."
+                "\n3) Fully Complete words give you bonus points."
+                "\nThe game ends once you have completed the provided text. "
+                "\nHave fun :)"</string>
 </resources>
