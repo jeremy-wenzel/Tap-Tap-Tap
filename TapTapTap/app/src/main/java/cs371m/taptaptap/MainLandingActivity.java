@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 public class MainLandingActivity extends AppCompatActivity {
 
@@ -41,16 +42,10 @@ public class MainLandingActivity extends AppCompatActivity {
         String skipMessage = settings.getString("skipMessage", "NOT checked");
 
         dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
+        TextView textView = (TextView) eulaLayout.findViewById(R.id.greeting_textview);
+        textView.setText(R.string.how_to_navigate);
         dialogBox.setView(eulaLayout);
-        dialogBox.setTitle("Hello");
-        dialogBox.setMessage("This is TapTapTap. Its an App that helps you text faster." +
-                "\nRules: " +
-                "\n1) Every correct letters  that you type gives you a point." +
-                "\n2) every mistake you make takes away a point." +
-                "\n3) Fully Complete words give you bonus points." +
-                "\nThe game ends once you have completed the provided text. " +
-                "\nHave fun :)");
-
+        dialogBox.setTitle("Welcome to TapTapTap!!!");
 
         dialogBox.setPositiveButton("Close", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -137,6 +132,11 @@ public class MainLandingActivity extends AppCompatActivity {
 
     public void startParagraphGame(View view) {
         startTapActivity(2);
+    }
+
+    public void howToPlay(View view) {
+        Intent intent = new Intent(this, HowToPlayActivity.class);
+        startActivity(intent);
     }
 
     public void highScores(View view) {
