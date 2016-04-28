@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +22,12 @@ public class MainLandingActivity extends AppCompatActivity {
     public CheckBox dontShowAgain;
 
     private final String EXTRA = "GameType";
+
+    private SoundPool mSounds;
+    private int mButtonSoundID;
+//    private int mCheckSoundID;
+//    private int mKeyboardSoundID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +82,11 @@ public class MainLandingActivity extends AppCompatActivity {
             dialogBox.show();
         }
 
+        mSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        mButtonSoundID = mSounds.load(this, R.raw.button_click, 1);
+//        mCheckSoundID = mSounds.load(this, R.raw.button_click, 1);
+//        mKeyboardSoundID = mSounds.load(this, R.raw.button_click, 1);
+
     }
 
     @Override
@@ -88,49 +102,57 @@ public class MainLandingActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings_action:
+                Log.d(EXTRA, findViewById(R.id.sound).isEnabled() + "");
+//                Log.d(EXTRA, getSharedPreferences("prefs", 0).getBoolean("sound", true) + "");
+                if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
+//                mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
                 startActivity(new Intent(this, SettingsActivity.class));
+
                 return true;
         }
 
         return false;
     }
+
     @Override
     protected void onPause() {
         super.onPause();
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
 
     public void startSingleWordGame(View view) {
+
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, TapActivity.class);
         intent.putExtra(EXTRA, 0);
         startActivity(intent);
     }
 
     public void startMultiwordGame(View view) {
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, TapActivity.class);
         intent.putExtra(EXTRA, 1);
         startActivity(intent);
     }
 
     public void startParagraphGame(View view) {
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, TapActivity.class);
         intent.putExtra(EXTRA, 2);
         startActivity(intent);
     }
 
     public void highScores(View view) {
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, HighScoreActivity.class);
         startActivity(intent);
     }
