@@ -11,6 +11,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -67,7 +69,6 @@ public class TapActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         String textSize = settings.getString("text_size", "Medium");
-
 
         // Setup views
         scoreView = (TextView) findViewById(R.id.score_view);
