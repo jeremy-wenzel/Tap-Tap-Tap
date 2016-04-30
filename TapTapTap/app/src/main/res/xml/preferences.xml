@@ -47,4 +47,11 @@
         android:entries="@array/list_text_size"
         android:entryValues="@array/list_text_size"/>
 
+    <ListPreference
+        android:key="orientation_pref"
+        android:title="Orientation"
+        android:defaultValue="@string/portrait"
+        android:entries="@array/list_orientation"
+        android:entryValues="@array/list_orientation"/>
+
 </PreferenceScreen>

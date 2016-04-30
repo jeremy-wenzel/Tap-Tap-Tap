@@ -9,6 +9,8 @@ import android.preference.PreferenceActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import java.util.List;
+
 /**
  * Created by Rafik on 4/4/2016.
  */
@@ -50,6 +52,22 @@ public class SettingsActivity extends PreferenceActivity {
 
                 SharedPreferences.Editor ed = prefs.edit();
                 ed.putString("text_size", newValue.toString());
+                ed.apply();
+                return true;
+            }
+        });
+
+        final ListPreference orientationPref = (ListPreference) findPreference("orientation_pref");
+        final String orientationString = prefs.getString("orientation_pref",
+                getResources().getString(R.string.portrait));
+        orientationPref.setSummary((CharSequence) orientationString);
+
+        orientationPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                orientationPref.setSummary((CharSequence) newValue);
+                SharedPreferences.Editor ed = prefs.edit();
+                ed.putString("orientation_pref", newValue.toString());
                 ed.apply();
                 return true;
             }

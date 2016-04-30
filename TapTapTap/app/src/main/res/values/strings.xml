@@ -46,6 +46,10 @@
     <string name="medium_size">Medium</string>
     <string name="large_size">Large</string>
 
+    <!-- Orientations -->
+    <string name="portrait">Portrait</string>
+    <string name="landscape">Landscape</string>
+
     <!-- How to play -->
     <string name="how_to_play_text">"This is TapTapTap. Its an App that helps you text faster."
                 "\nRules: "

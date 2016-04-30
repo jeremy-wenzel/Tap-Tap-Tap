@@ -11,4 +11,9 @@
         <item>@string/medium_size</item>
         <item>@string/large_size</item>
     </string-array>
+
+    <string-array name="list_orientation">
+        <item>@string/portrait</item>
+        <item>@string/landscape</item>
+    </string-array>
 </resources>

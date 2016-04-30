@@ -50,7 +50,7 @@ public class TapActivity extends AppCompatActivity {
     private Intent intent;
 
     private int gameType;
-    private String mPhrase;
+    private String mPhrase = null;
 
     private Timer timer;
     private int minutes = 0;
@@ -79,16 +79,27 @@ public class TapActivity extends AppCompatActivity {
         timerView = (TextView) findViewById(R.id.timer_view);
 
         // Lock in Orientation
-        switch (this.getResources().getConfiguration().orientation) {
-            case Configuration.ORIENTATION_LANDSCAPE :
-                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
-                imm.showSoftInput(inputField, InputMethodManager.SHOW_FORCED);
-                break;
-            case Configuration.ORIENTATION_PORTRAIT :
-                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                break;
+//        switch (this.getResources().getConfiguration().orientation) {
+//            case Configuration.ORIENTATION_LANDSCAPE :
+//                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+//                imm.showSoftInput(inputField, InputMethodManager.SHOW_FORCED);
+//                break;
+//            case Configuration.ORIENTATION_PORTRAIT :
+//                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//                break;
+//        }
+        String orientationPref = mPrefs.getString("orientation_pref",
+                getResources().getString(R.string.portrait));
+        if (orientationPref.equals(getResources().getString(R.string.portrait))) {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        else {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+            imm.showSoftInput(inputField, InputMethodManager.SHOW_FORCED);
         }
 
         setUpTextSize(textSize);
@@ -226,7 +237,11 @@ public class TapActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @Override
