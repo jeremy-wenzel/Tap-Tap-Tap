@@ -79,17 +79,6 @@ public class TapActivity extends AppCompatActivity {
         timerView = (TextView) findViewById(R.id.timer_view);
 
         // Lock in Orientation
-//        switch (this.getResources().getConfiguration().orientation) {
-//            case Configuration.ORIENTATION_LANDSCAPE :
-//                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-//                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
-//                imm.showSoftInput(inputField, InputMethodManager.SHOW_FORCED);
-//                break;
-//            case Configuration.ORIENTATION_PORTRAIT :
-//                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//                break;
-//        }
         String orientationPref = mPrefs.getString("orientation_pref",
                 getResources().getString(R.string.portrait));
         if (orientationPref.equals(getResources().getString(R.string.portrait))) {

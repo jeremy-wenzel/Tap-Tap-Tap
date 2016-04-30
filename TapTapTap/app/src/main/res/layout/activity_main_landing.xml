@@ -42,14 +42,6 @@
             android:textSize="24dp"
             android:onClick="startParagraphGame"/>
         <Button
-            android:id="@+id/how_to_play"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/how_to_play_label"
-            android:layout_weight="0.10"
-            android:textSize="24dp"
-            android:onClick="howToPlay"/>
-        <Button
             android:id="@+id/high_scores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,6 +49,23 @@
             android:layout_weight="0.10"
             android:textSize="24dp"
             android:onClick="highScores"/>
+        <Button
+            android:id="@+id/add_words"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_words_label"
+            android:layout_weight="0.10"
+            android:textSize="24dp"
+            android:onClick="addWords"/>
+        <Button
+            android:id="@+id/how_to_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/how_to_play_label"
+            android:layout_weight="0.10"
+            android:textSize="24dp"
+            android:onClick="howToPlay"/>
+
     </LinearLayout>
 
 </RelativeLayout>

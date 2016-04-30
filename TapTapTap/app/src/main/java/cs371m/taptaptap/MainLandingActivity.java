@@ -134,13 +134,18 @@ public class MainLandingActivity extends AppCompatActivity {
         startTapActivity(2);
     }
 
-    public void howToPlay(View view) {
-        Intent intent = new Intent(this, HowToPlayActivity.class);
+    public void highScores(View view) {
+        Intent intent = new Intent(this, HighScoreActivity.class);
         startActivity(intent);
     }
 
-    public void highScores(View view) {
-        Intent intent = new Intent(this, HighScoreActivity.class);
+    public void addWords(View view) {
+        Intent intent = new Intent(this, AddWordsGameTypeActivity.class);
+        startActivity(intent);
+    }
+
+    public void howToPlay(View view) {
+        Intent intent = new Intent(this, HowToPlayActivity.class);
         startActivity(intent);
     }
 }
