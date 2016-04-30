@@ -20,7 +20,7 @@ public class SettingsActivity extends PreferenceActivity {
         getPreferenceManager().setSharedPreferencesName("prefs");
         addPreferencesFromResource(R.xml.preferences);
 
-        final SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        final SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         final ListPreference difficultyLevelPref = (ListPreference) findPreference("difficulty_level");
         final String difficulty = prefs.getString("difficulty_level",
                 getResources().getString(R.string.easy));

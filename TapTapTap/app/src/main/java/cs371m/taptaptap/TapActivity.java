@@ -3,6 +3,8 @@ package cs371m.taptaptap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -62,7 +64,7 @@ public class TapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPrefs = getSharedPreferences("ttt_prefs", MODE_PRIVATE);
+        mPrefs = getSharedPreferences("prefs", MODE_PRIVATE);
 
         // Layout stuff and home button
         setContentView(R.layout.activity_tap);
@@ -75,6 +77,19 @@ public class TapActivity extends AppCompatActivity {
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
         timerView = (TextView) findViewById(R.id.timer_view);
+
+        // Lock in Orientation
+        switch (this.getResources().getConfiguration().orientation) {
+            case Configuration.ORIENTATION_LANDSCAPE :
+                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+                imm.showSoftInput(inputField, InputMethodManager.SHOW_FORCED);
+                break;
+            case Configuration.ORIENTATION_PORTRAIT :
+                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                break;
+        }
 
         setUpTextSize(textSize);
 
