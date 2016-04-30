@@ -37,7 +37,7 @@ public class WordColorer {
         return blackBegin + word + endTag;
     }
 
-    public static String getHighlitedSpace(){ return blueBegin + big + big + big + big + "<u> </u>"  + endBig + endBig + endBig + endBig + endTag; }
+    public static String getHighlitedSpace(){ return blueBegin + big + "_"  + endBig + endTag; }
 
     private static String colorIncompleteWord ( String userWord, String correctWord ) {
         return colorLetters(userWord, correctWord);

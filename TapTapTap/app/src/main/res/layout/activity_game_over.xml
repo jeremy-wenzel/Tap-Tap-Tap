@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/default_image"
     tools:context="cs371m.taptaptap.GameOverActivity">
 
     <LinearLayout
@@ -20,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Stats stuff goes here"
+            android:textColor="#FFFFFF"
             android:layout_weight="0.50" />
 
         <Button

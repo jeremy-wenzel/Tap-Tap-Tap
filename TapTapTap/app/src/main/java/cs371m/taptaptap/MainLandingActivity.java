@@ -16,12 +16,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 public class MainLandingActivity extends AppCompatActivity {
 
     public CheckBox dontShowAgain;
 
-    private final String EXTRA = "GameType";
+    private final String GAME_TYPE_EXTRA = "GameType";
+    private final String NEW_GAME_EXTRA = "NewGame";
+    private final String PHRASE_EXTRA = "Phrase";
 
     private SoundPool mSounds;
     private int mButtonSoundID;
@@ -47,16 +50,10 @@ public class MainLandingActivity extends AppCompatActivity {
         String skipMessage = settings.getString("skipMessage", "NOT checked");
 
         dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
+        TextView textView = (TextView) eulaLayout.findViewById(R.id.greeting_textview);
+        textView.setText(R.string.how_to_navigate);
         dialogBox.setView(eulaLayout);
-        dialogBox.setTitle("Hello");
-        dialogBox.setMessage("This is TapTapTap. Its an App that helps you text faster." +
-                "\nRules: " +
-                "\n1) Every correct letters  that you type gives you a point." +
-                "\n2) every mistake you make takes away a point." +
-                "\n3) Fully Complete words give you bonus points." +
-                "\nThe game ends once you have completed the provided text. " +
-                "\nHave fun :)");
-
+        dialogBox.setTitle("Welcome to TapTapTap!!!");
 
         dialogBox.setPositiveButton("Close", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -72,8 +69,6 @@ public class MainLandingActivity extends AppCompatActivity {
                 editor.putString("skipMessage", checkBox);
                 editor.commit();
 
-                // Do what you want to do on "OK" action
-
                 return;
             }
         });
@@ -84,9 +79,6 @@ public class MainLandingActivity extends AppCompatActivity {
 
         mSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
         mButtonSoundID = mSounds.load(this, R.raw.button_click, 1);
-//        mCheckSoundID = mSounds.load(this, R.raw.button_click, 1);
-//        mKeyboardSoundID = mSounds.load(this, R.raw.button_click, 1);
-
     }
 
     @Override
@@ -102,12 +94,16 @@ public class MainLandingActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings_action:
-                Log.d(EXTRA, findViewById(R.id.sound).isEnabled() + "");
+                //Log.d(GAME_TYPE_EXTRA, findViewById(R.id.sound).isEnabled() + "");
 //                Log.d(EXTRA, getSharedPreferences("prefs", 0).getBoolean("sound", true) + "");
-                if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
-//                mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
+                //if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
+                mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
                 startActivity(new Intent(this, SettingsActivity.class));
 
+                return true;
+            case R.id.about_action:
+                mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
+                startActivity(new Intent(this, AboutActivity.class));
                 return true;
         }
 
@@ -129,25 +125,53 @@ public class MainLandingActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void startSingleWordGame(View view) {
-
-        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
+//<<<<<<< HEAD
+//    public void startSingleWordGame(View view) {
+//
+//        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
+//=======
+    private void startTapActivity(int gameType) {
+//>>>>>>> ecb38c723bfc96471282f43f99a6c53d9829c17d
+        mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
         Intent intent = new Intent(this, TapActivity.class);
-        intent.putExtra(EXTRA, 0);
+        intent.putExtra(GAME_TYPE_EXTRA, gameType);
+        intent.putExtra(NEW_GAME_EXTRA, true);
+        intent.putExtra(PHRASE_EXTRA, "");
         startActivity(intent);
     }
 
-    public void startMultiwordGame(View view) {
-        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
-        Intent intent = new Intent(this, TapActivity.class);
-        intent.putExtra(EXTRA, 1);
-        startActivity(intent);
+    public void startSingleWordGame(View view) {
+        startTapActivity(0);
+    }
+
+//    public void startMultiwordGame(View view) {
+//<<<<<<< HEAD
+//        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
+//        Intent intent = new Intent(this, TapActivity.class);
+//        intent.putExtra(NEW_GAME_EXTRA, 1);
+//        startActivity(intent);
+//    }
+
+//    public void startParagraphGame(View view) {
+//        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
+//        Intent intent = new Intent(this, TapActivity.class);
+//        intent.putExtra(EXTRA, 2);
+//=======
+//        startTapActivity(1);
+//    }
+
+    public void startMultiwordGame(View view){
+        startTapActivity(1);
     }
 
     public void startParagraphGame(View view) {
-        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
-        Intent intent = new Intent(this, TapActivity.class);
-        intent.putExtra(EXTRA, 2);
+        startTapActivity(2);
+    }
+
+    public void howToPlay(View view) {
+        mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
+        Intent intent = new Intent(this, HowToPlayActivity.class);
+//>>>>>>> ecb38c723bfc96471282f43f99a6c53d9829c17d
         startActivity(intent);
     }
 

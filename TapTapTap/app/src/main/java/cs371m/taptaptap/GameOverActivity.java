@@ -1,37 +1,89 @@
 package cs371m.taptaptap;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 public class GameOverActivity extends AppCompatActivity {
 
     private static final String TAG = "GameOverActivity";
+
+    private final String PHRASE_EXTRA = "Phrase";
+    private final String NEW_GAME_EXTRA = "NewGame";
+
+
     TextView statsView;
 
-    int score;
-    int mistakes;
-    int time;
-    int gameType;
+    private int score;
+    private int mistakes;
+    private String time;
+    private int gameType;
+    private String phrase;
 
     private final String EXTRA = "GameType";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
         statsView = (TextView) findViewById(R.id.game_over_text_view);
         score = getIntent().getIntExtra("score", -1);
         mistakes = getIntent().getIntExtra("mistakes", -1);
         gameType = getIntent().getIntExtra("game type", -1);
-        time = 0;
-        statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\n Total Time: " + time);
+        int seconds = getIntent().getIntExtra("seconds", -1);
+        int minutes = getIntent().getIntExtra("minutes", -1);
+        phrase = getIntent().getStringExtra(PHRASE_EXTRA);
+        if (phrase == null)
+            Log.d(TAG, "phrase is null or length is zero");
+        else if (phrase.length() == 0)
+            Log.d(TAG, "length is zero");
+        time = "" + minutes + ":";
+        if (seconds < 10)
+            time += "0";
+        time += seconds;
+        statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\nTotal Time: " + time);
 
         Database database = new Database(this);
+        Log.d(TAG, "gametype = " + gameType);
         database.insertScore(score, gameType);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings_action:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            case R.id.about_action:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -61,12 +113,14 @@ public class GameOverActivity extends AppCompatActivity {
     public void retry(View view) {
         Intent intent = new Intent(this, TapActivity.class);
         intent.putExtra(EXTRA, gameType);
+        intent.putExtra(NEW_GAME_EXTRA, false);
+        intent.putExtra(PHRASE_EXTRA, phrase);
         startActivity(intent);
+        finish();
     }
 
     public void returnToMainMenu(View view) {
-        Intent intent = new Intent(this, MainLandingActivity.class);
-        startActivity(intent);
+        finish();
     }
 }
 
