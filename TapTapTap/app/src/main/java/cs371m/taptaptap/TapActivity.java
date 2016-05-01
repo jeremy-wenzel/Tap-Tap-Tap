@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -314,9 +313,13 @@ public class TapActivity extends AppCompatActivity {
      * @param
      */
     public void gameOver() {
-        for (int i = 0; i < wordList.size(); i++)
-            if (wordList.get(i).isCorrect())
+        int correctWords = 0;
+        for (int i = 0; i < wordList.size(); i++) {
+            if (wordList.get(i).isCorrect()) {
                 score.add_word_score(wordList.get(i).getCorrectWord().length());
+                correctWords++;
+            }
+        }
 
         SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -329,6 +332,8 @@ public class TapActivity extends AppCompatActivity {
         intent.putExtra("game type", gameType);
         intent.putExtra("seconds", seconds);
         intent.putExtra("minutes", minutes);
+        intent.putExtra("numWordsTot", numWordsTotal);
+        intent.putExtra("numWordsCor", correctWords);
         intent.putExtra(PHRASE_EXTRA, mPhrase);
         startActivity(intent);
         finish();

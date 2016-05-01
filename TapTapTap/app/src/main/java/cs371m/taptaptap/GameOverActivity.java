@@ -37,13 +37,20 @@ public class GameOverActivity extends AppCompatActivity {
         catch (NullPointerException e) {
             e.printStackTrace();
         }
+        Intent intent = getIntent();
 
         statsView = (TextView) findViewById(R.id.game_over_text_view);
-        score = getIntent().getIntExtra("score", -1);
-        mistakes = getIntent().getIntExtra("mistakes", -1);
-        gameType = getIntent().getIntExtra("game type", -1);
-        int seconds = getIntent().getIntExtra("seconds", -1);
-        int minutes = getIntent().getIntExtra("minutes", -1);
+        score = intent.getIntExtra("score", -1);
+        mistakes = intent.getIntExtra("mistakes", -1);
+        gameType = intent.getIntExtra("game type", -1);
+        int seconds = intent.getIntExtra("seconds", -1);
+        int minutes = intent.getIntExtra("minutes", -1);
+        int numWordsTotal = intent.getIntExtra("numWordsTot", -1);
+        int numWordsCorrect = intent.getIntExtra("numWordsCor", -1);
+        double timeInMins = ((double)seconds)/60.0 + ((double)minutes);
+        double gwam = Math.round(numWordsTotal/timeInMins);
+        double cgwam = Math.round(numWordsCorrect/timeInMins);
+        score = (int)Math.round(score*10.0*cgwam/gwam);
         phrase = getIntent().getStringExtra(PHRASE_EXTRA);
         if (phrase == null)
             Log.d(TAG, "phrase is null or length is zero");
@@ -53,7 +60,8 @@ public class GameOverActivity extends AppCompatActivity {
         if (seconds < 10)
             time += "0";
         time += seconds;
-        statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\nTotal Time: " + time);
+        statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\nTotal Time: " + time
+                + "\nGWAM (Total): " + gwam + "\nGWAM (Correct): " + cgwam);
 
         Database database = new Database(this);
         Log.d(TAG, "gametype = " + gameType);
@@ -95,7 +103,6 @@ public class GameOverActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
     }
 
     @Override
