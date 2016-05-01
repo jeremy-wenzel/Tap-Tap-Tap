@@ -16,4 +16,11 @@
         <item>@string/portrait</item>
         <item>@string/landscape</item>
     </string-array>
+
+    <string-array name="list_game_type">
+        <item>@string/single_word</item>
+        <item>@string/multiple_words</item>
+        <item>@string/paragraph</item>
+    </string-array>
+
 </resources>

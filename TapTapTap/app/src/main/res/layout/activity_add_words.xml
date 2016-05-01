@@ -16,6 +16,11 @@
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:weightSum="1">
+        <Spinner
+            android:id="@+id/gametype_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"/>
         <TextView
             android:id="@+id/add_words_type_text_view"
             android:layout_width="match_parent"
@@ -42,10 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.10"
             android:text="@string/save"
-            android:textSize="24dp"
-            android:onClick="saveButtons"/>
-
-
+            android:textSize="24dp"/>
     </LinearLayout>
 
 </RelativeLayout>

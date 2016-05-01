@@ -1,70 +1,79 @@
 package cs371m.taptaptap;
 
-import android.content.Intent;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class AddWordsActivity extends AppCompatActivity {
 
-    private final String GAMETYPE_EXTRA = "gameType";
+    private final String TAG = "AddWords";
 
-    private TextView typeTextView;
-
-    private final int MAX_SINGLE_WORD_CHARS = 15;
-    private final int MAX_MULTIPLE_WORD_CHARS = 45;
-    private final int MAX_PARAGRAPH_CHARS = 90;
+    // Max Chars stuff
+    private String maxCharsString;
+    private final int[] maxCharNum = {15, 45, 90};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_words);
 
-        Intent intent = getIntent();
-        int gameType = intent.getIntExtra(GAMETYPE_EXTRA, -1);
-        setUpTypeTextView(gameType);
+        maxCharsString = getResources().getString(R.string.max_chars);
+
+        final Spinner spinner = (Spinner) findViewById(R.id.gametype_spinner);
+        spinner.setAdapter(new MyAdapter(this, R.layout.spinner_item, getResources().getStringArray(R.array.list_game_type)));
+
+        Button button = (Button) findViewById(R.id.add_words_save);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = spinner.getSelectedItem().toString();
+                Log.d(TAG, text);
+                finish();
+            }
+        });
     }
 
-    /**
-     * Sets up the TextView to tell the user what kind of gameType they have selected and
-     * how many characters they can enter
-     * @param gameType
-     */
-    private void setUpTypeTextView(int gameType) {
-        StringBuilder type = new StringBuilder();
-        type.append("For ");
+    public class MyAdapter extends ArrayAdapter<String> {
 
-        int maxChars = 0;
-
-        switch (gameType) {
-            case 0 :
-                type.append(getResources().getString(R.string.single_word));
-                maxChars = MAX_SINGLE_WORD_CHARS;
-                break;
-            case 1 :
-                type.append(getResources().getString(R.string.multiple_words));
-                maxChars = MAX_MULTIPLE_WORD_CHARS;
-                break;
-            case 2 :
-                type.append(getResources().getString(R.string.paragraph));
-                maxChars = MAX_PARAGRAPH_CHARS;
-                break;
-            default :
-                throw new IllegalArgumentException("gameType not correct: " + gameType);
+        public MyAdapter(Context ctx, int textViewResourceId, String[] objects) {
+            super(ctx, textViewResourceId, objects);
         }
 
-        type.append(" the max characters you can enter is ");
-        type.append(maxChars);
+        @Override
+        public View getDropDownView(int position, View cnvtView, ViewGroup prnt) {
+            return getCustomView(position, cnvtView, prnt);
+        }
 
-        typeTextView = (TextView) findViewById(R.id.add_words_type_text_view);
-        typeTextView.setText(type.toString());
+        @Override
+        public View getView(int position, View contextView, ViewGroup parent) {
+            return getCustomView(position, contextView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+            // Inflate the View
+            LayoutInflater inflater = getLayoutInflater();
+            View mySpinner = inflater.inflate(R.layout.spinner_item, parent, false);
+
+            // Set the first main text
+            TextView main_text = (TextView) mySpinner.findViewById(R.id.spinner_main);
+            main_text.setText(getResources().getStringArray(R.array.list_game_type)[position]);
+
+            // Set the second sub text
+            TextView sub_text = (TextView) mySpinner.findViewById(R.id.spinner_sub);
+            sub_text.setText(maxCharsString + maxCharNum[position]);
+
+            return mySpinner;
+        }
     }
-
-    // Temporary
-    public void saveButton(View view) {
-        finish();
-    }
-
 
 }

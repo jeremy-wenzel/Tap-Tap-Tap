@@ -73,7 +73,6 @@ public class SettingsActivity extends PreferenceActivity {
 
 
         sound = (CheckBox) findViewById(R.id.sound);
-        Log.d("OK", prefs.getString("sound", "ok") + "");
 
 //        sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //        @Override

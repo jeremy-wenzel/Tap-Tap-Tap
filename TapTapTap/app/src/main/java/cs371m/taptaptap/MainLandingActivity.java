@@ -93,16 +93,13 @@ public class MainLandingActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.settings_action:
-                //Log.d(GAME_TYPE_EXTRA, findViewById(R.id.sound).isEnabled() + "");
-//                Log.d(EXTRA, getSharedPreferences("prefs", 0).getBoolean("sound", true) + "");
-                //if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
-                mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
+            case R.id.settings_action :
+                if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
                 startActivity(new Intent(this, SettingsActivity.class));
 
                 return true;
             case R.id.about_action:
-                mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
+                if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
                 startActivity(new Intent(this, AboutActivity.class));
                 return true;
         }
@@ -131,8 +128,7 @@ public class MainLandingActivity extends AppCompatActivity {
 //        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
 //=======
     private void startTapActivity(int gameType) {
-//>>>>>>> ecb38c723bfc96471282f43f99a6c53d9829c17d
-        mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, TapActivity.class);
         intent.putExtra(GAME_TYPE_EXTRA, gameType);
         intent.putExtra(NEW_GAME_EXTRA, true);
@@ -144,22 +140,6 @@ public class MainLandingActivity extends AppCompatActivity {
         startTapActivity(0);
     }
 
-//    public void startMultiwordGame(View view) {
-//<<<<<<< HEAD
-//        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
-//        Intent intent = new Intent(this, TapActivity.class);
-//        intent.putExtra(NEW_GAME_EXTRA, 1);
-//        startActivity(intent);
-//    }
-
-//    public void startParagraphGame(View view) {
-//        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
-//        Intent intent = new Intent(this, TapActivity.class);
-//        intent.putExtra(EXTRA, 2);
-//=======
-//        startTapActivity(1);
-//    }
-
     public void startMultiwordGame(View view){
         startTapActivity(1);
     }
@@ -170,21 +150,20 @@ public class MainLandingActivity extends AppCompatActivity {
 
 
     public void highScores(View view) {
-        mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, HighScoreActivity.class);
         startActivity(intent);
     }
 
     public void addWords(View view) {
-        mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
-        Intent intent = new Intent(this, AddWordsGameTypeActivity.class);
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
+        Intent intent = new Intent(this, AddWordsActivity.class);
         startActivity(intent);
     }
 
     public void howToPlay(View view) {
-        mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, HowToPlayActivity.class);
-
         startActivity(intent);
     }
 }
