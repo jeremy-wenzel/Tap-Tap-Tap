@@ -35,6 +35,12 @@
     <string name="capitalize_first_letter">Capitalize First Letter</string>
     <string name="show_keyboard_immediately">Show Keyboard Immediately</string>
     <string name="about">About</string>
+    <string name="reset_game_dictionary_key">reset_dictionary</string>
+    <string name="reset_game_dictionary_title">Reset Game Dictionaries</string>
+    <string name="reset_game_dictionary_summary">Resets all the words in the game dictionaries with default values</string>
+    <string name="reset_high_score_key">reset_high_score</string>
+    <string name="reset_high_score_title">Reset High Scores</string>
+    <string name="reset_high_score_summary">Deletes all high scores</string>
 
     <!-- Difficulties -->
     <string name="easy">Easy</string>

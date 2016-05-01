@@ -52,14 +52,26 @@ public class Database {
     public void resetDatabase() {
         Log.d(TAG, "beginning resetDatabase");
         // Delete all entries from database
-        openDatabaseConnection();
-        openHelper.deleteAllHighScores(db);
-        openHelper.deleteAllPhrases(db);
-        closeDatabaseConnection();
+        resetAllPhrases();
+        resetHighScores();
 
         // Insert all gametype files into database
         initializeDatabase();
         Log.d(TAG, "Finishing resetDatabase");
+    }
+
+    public void resetAllPhrases() {
+        openDatabaseConnection();
+        openHelper.deleteAllPhrases(db);
+        initializeDatabase();
+        closeDatabaseConnection();
+    }
+
+    public void resetHighScores() {
+        openDatabaseConnection();
+        openHelper.deleteAllHighScores(db);
+        closeDatabaseConnection();
+
     }
 
     /**

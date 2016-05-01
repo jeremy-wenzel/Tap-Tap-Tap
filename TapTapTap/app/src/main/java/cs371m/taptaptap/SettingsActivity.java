@@ -97,5 +97,25 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
+
+        Preference resetDictionaryButton = (Preference)findPreference(getString(R.string.reset_game_dictionary_key));
+        resetDictionaryButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Database database = new Database(SettingsActivity.this.getApplicationContext());
+                database.resetAllPhrases();
+                return true;
+            }
+        });
+
+        Preference resetHighScoresButton = (Preference)findPreference(getString(R.string.reset_high_score_key));
+        resetHighScoresButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Database database = new Database (SettingsActivity.this.getApplicationContext());
+                database.resetHighScores();
+                return true;
+            }
+        });
     }
 }

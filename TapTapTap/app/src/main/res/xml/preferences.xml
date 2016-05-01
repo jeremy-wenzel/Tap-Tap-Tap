@@ -55,4 +55,14 @@
         android:entries="@array/list_orientation"
         android:entryValues="@array/list_orientation"/>
 
+    <Preference
+        android:key="@string/reset_game_dictionary_key"
+        android:title="@string/reset_game_dictionary_title"
+        android:summary="@string/reset_game_dictionary_summary"/>
+
+    <Preference
+        android:key="@string/reset_high_score_key"
+        android:title="@string/reset_high_score_title"
+        android:summary="@string/reset_high_score_summary"/>
+
 </PreferenceScreen>
