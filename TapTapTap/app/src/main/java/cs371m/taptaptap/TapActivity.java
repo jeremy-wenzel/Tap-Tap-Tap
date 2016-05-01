@@ -3,6 +3,8 @@ package cs371m.taptaptap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -11,6 +13,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -46,7 +50,7 @@ public class TapActivity extends AppCompatActivity {
     private Intent intent;
 
     private int gameType;
-    private String mPhrase;
+    private String mPhrase = null;
 
     private Timer timer;
     private int minutes = 0;
@@ -60,7 +64,7 @@ public class TapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPrefs = getSharedPreferences("ttt_prefs", MODE_PRIVATE);
+        mPrefs = getSharedPreferences("prefs", MODE_PRIVATE);
 
         // Layout stuff and home button
         setContentView(R.layout.activity_tap);
@@ -68,12 +72,24 @@ public class TapActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         String textSize = settings.getString("text_size", "Medium");
 
-
         // Setup views
         scoreView = (TextView) findViewById(R.id.score_view);
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
         timerView = (TextView) findViewById(R.id.timer_view);
+
+        // Lock in Orientation
+        String orientationPref = mPrefs.getString("orientation_pref",
+                getResources().getString(R.string.portrait));
+        if (orientationPref.equals(getResources().getString(R.string.portrait))) {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        else {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+            imm.showSoftInput(inputField, InputMethodManager.SHOW_FORCED);
+        }
 
         setUpTextSize(textSize);
 
@@ -210,7 +226,11 @@ public class TapActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @Override

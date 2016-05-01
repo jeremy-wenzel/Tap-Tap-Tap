@@ -17,6 +17,8 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 /**
  * Created by Rafik on 4/4/2016.
  */
@@ -32,7 +34,8 @@ public class SettingsActivity extends PreferenceActivity {
         getPreferenceManager().setSharedPreferencesName("prefs");
         addPreferencesFromResource(R.xml.preferences);
 
-        final SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+
+        final SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
 
         final ListPreference difficultyLevelPref = (ListPreference) findPreference("difficulty_level");
         final String difficulty = prefs.getString("difficulty_level",
@@ -68,6 +71,7 @@ public class SettingsActivity extends PreferenceActivity {
             }
         });
 
+
         sound = (CheckBox) findViewById(R.id.sound);
         Log.d("OK", prefs.getString("sound", "ok") + "");
 
@@ -77,6 +81,23 @@ public class SettingsActivity extends PreferenceActivity {
 //                //Log.d("CHECK", "CHECKED");
 //            }
 //        });
+
+
+        final ListPreference orientationPref = (ListPreference) findPreference("orientation_pref");
+        final String orientationString = prefs.getString("orientation_pref",
+                getResources().getString(R.string.portrait));
+        orientationPref.setSummary((CharSequence) orientationString);
+
+        orientationPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                orientationPref.setSummary((CharSequence) newValue);
+                SharedPreferences.Editor ed = prefs.edit();
+                ed.putString("orientation_pref", newValue.toString());
+                ed.apply();
+                return true;
+            }
+        });
 
     }
 

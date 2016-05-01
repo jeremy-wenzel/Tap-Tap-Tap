@@ -168,16 +168,23 @@ public class MainLandingActivity extends AppCompatActivity {
         startTapActivity(2);
     }
 
-    public void howToPlay(View view) {
+
+    public void highScores(View view) {
         mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
-        Intent intent = new Intent(this, HowToPlayActivity.class);
-//>>>>>>> ecb38c723bfc96471282f43f99a6c53d9829c17d
+        Intent intent = new Intent(this, HighScoreActivity.class);
         startActivity(intent);
     }
 
-    public void highScores(View view) {
-        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
-        Intent intent = new Intent(this, HighScoreActivity.class);
+    public void addWords(View view) {
+        mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
+        Intent intent = new Intent(this, AddWordsGameTypeActivity.class);
+        startActivity(intent);
+    }
+
+    public void howToPlay(View view) {
+        mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
+        Intent intent = new Intent(this, HowToPlayActivity.class);
+
         startActivity(intent);
     }
 }

@@ -15,6 +15,7 @@
     "\n\nTo change settings, select Setting in the toolbar at the top right"
     "\n\nEnjoy!"
     </string>
+    <string name="add_words_label">Add Words</string>
 
     <!-- For Game Type Strings -->
     <string name="single_word">Single Word</string>
@@ -45,6 +46,19 @@
     <string name="small_size">Small</string>
     <string name="medium_size">Medium</string>
     <string name="large_size">Large</string>
+
+    <!-- Orientations -->
+    <string name="portrait">Portrait</string>
+    <string name="landscape">Landscape</string>
+
+    <!-- Add Words Game Type Activity -->
+    <string name="add_single_word">Add Single Word</string>
+    <string name="add_multiple_words">Add Multiple Words</string>
+    <string name="add_paragraph">Add Paragraph</string>
+
+    <!-- Add Words Activity -->
+    <string name="enter_words">Enter the word(s) you would like to save</string>
+    <string name="save">Save</string>
 
     <!-- How to play -->
     <string name="how_to_play_text">"This is TapTapTap. Its an App that helps you text faster."

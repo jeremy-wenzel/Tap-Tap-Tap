@@ -1,0 +1,458 @@
+[33mcommit 1bc02a835ab5ffcf73150f50085dc3d248aac16d[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sat Apr 30 00:08:37 2016 -0500
+
+    Was bored. Partial Implementation of add words feature
+
+[33mcommit 11ca57a558c9445e3d3e171a1a51af2f3496b27b[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Fri Apr 29 21:23:34 2016 -0500
+
+    Orientation now preference and minor fixes
+
+[33mcommit 4dceccc05e8457b9c2dd7a91de24dd68aca14744[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Fri Apr 29 20:44:48 2016 -0500
+
+    Locked in Orientation. Need to make a preference
+
+[33mcommit 6f6c651a15424c5b7b7c6e78fcd216e5ac6e8aaa[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Thu Apr 28 22:46:46 2016 -0500
+
+    Adding landscape
+
+[33mcommit e21b59eef4c75ed7df8865a546e349d4dbe8eede[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Thu Apr 28 22:45:47 2016 -0500
+
+    Can play in landscape better now
+
+[33mcommit ecb38c723bfc96471282f43f99a6c53d9829c17d[m
+Merge: 154f8ad 78a7ae1
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Tue Apr 26 22:41:20 2016 -0500
+
+    Merged SavedInstanceState persistance.
+
+[33mcommit 154f8ad4a4a6ddb839bbc0a2db2f12e0ae54aafc[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Tue Apr 26 22:39:25 2016 -0500
+
+    SavedInstanceState persistance.
+
+[33mcommit 78a7ae1a898e71a379d19e0545b88342612ccb3d[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Tue Apr 26 22:25:21 2016 -0500
+
+    Updated Dialog box
+
+[33mcommit 9bd12158962542c3ee7516b1a4b00b0af18b4725[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Tue Apr 26 21:37:39 2016 -0500
+
+    Added HowToPlay Activity to the MainLanding Activity
+
+[33mcommit cb5ac0d4637a4089f01c2e1f6ff25e773ee304fb[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Mon Apr 25 22:31:41 2016 -0500
+
+    Textsize of paragraph changes based on user settings
+
+[33mcommit de76769e024d90b4f09aaccaecce13cf5d0253cc[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Mon Apr 25 20:46:05 2016 -0500
+
+    Fixed bug with retry
+
+[33mcommit 4b4c6bf003b4f8b067614876786cc91ff750bc91[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 24 23:05:16 2016 -0500
+
+    Added back button to most activities
+
+[33mcommit cec6b7b7bc1d7f3cc9c835f44f47ff07f9c1ab22[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 24 22:47:53 2016 -0500
+
+    Random passage selection
+
+[33mcommit a35d950318bdf37740a0f0e2827180fa0ef16390[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 24 22:25:56 2016 -0500
+
+    Replaced html underline with underscore character and improved spacing problem
+
+[33mcommit 7f1502fdb8a6894d760a81ff32cc088fe3ee2d9a[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 24 21:47:23 2016 -0500
+
+    Clean up and got rid of Stopwatch.java as we don't need it
+
+[33mcommit 703bdd6134bf241aa8ee833e946eb54e320953a5[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 24 21:12:08 2016 -0500
+
+    Got timer working!
+
+[33mcommit bc8c86fc63680086e4fbcf470d2bdf3adb1a8500[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 24 20:33:42 2016 -0500
+
+    Added fragments to highscores! God that was a pain in the ass
+
+[33mcommit 2a64269e51efe9d50074e15645f8df1244f96a4c[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Thu Apr 21 22:09:35 2016 -0500
+
+    Cleanup
+
+[33mcommit 7afa5a62f4ac37674400254268511abaade3a054[m
+Merge: b43de3a ec4baf7
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Wed Apr 20 23:04:26 2016 -0500
+
+    Merge branch 'master' of https://github.com/jhw866/Tap-Tap-Tap
+
+[33mcommit b43de3a8dd739b148e27c3eaa2d265c1cdeaaf37[m
+Merge: 0636c49 397eba7
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Wed Apr 20 23:03:24 2016 -0500
+
+    Merge branch 'master' of https://github.com/jhw866/Tap-Tap-Tap
+    
+    # Conflicts:
+    #	TapTapTap/app/src/main/AndroidManifest.xml
+
+[33mcommit ec4baf732f4291b9ef9c5516cdfd2953826229c4[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Wed Apr 20 23:01:46 2016 -0500
+
+    Back button always takes user to MainActivity
+
+[33mcommit 0636c4910c3e76e869cacbbe876fb90f59dd82ee[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Wed Apr 20 22:59:45 2016 -0500
+
+    Added About section, difficulty, and text size preferences
+
+[33mcommit 397eba757d521756d6793421e50024940ef2fdc6[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Wed Apr 20 22:49:15 2016 -0500
+
+    TapTapTap maintains typed words on orientation change. Fixes infinite score possibility.
+
+[33mcommit 99e55d205adb08782f05523c136c1feadce0c919[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Tue Apr 19 22:09:55 2016 -0500
+
+    Cleaned up and added in more preferences
+
+[33mcommit f7690bf454119c572c560f08042dfb37caa40756[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Tue Apr 19 21:54:15 2016 -0500
+
+    Added action bar
+
+[33mcommit 29b02bd156afbba87b7f833c16ec511b8e012589[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Tue Apr 19 21:19:52 2016 -0500
+
+    Moved game types to main landing activity.
+
+[33mcommit 62cf983e124d8cd9306ed6c3cc67fd18181116bc[m
+Merge: be92820 5c5d7db
+Author: kishkumen123 <rizik944@gmail.com>
+Date:   Mon Apr 18 21:00:00 2016 -0500
+
+    Merge branch 'master' of https://github.com/jhw866/Tap-Tap-Tap
+
+[33mcommit be92820c94629d516cdc4611d1b8c05f82cd0a4c[m
+Merge: 6fc7051 d7de423
+Author: kishkumen123 <rizik944@gmail.com>
+Date:   Mon Apr 18 20:59:48 2016 -0500
+
+    because i can
+
+[33mcommit 5c5d7db5061ecdab3c5aff2b63f46e210bdd32dd[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Mon Apr 18 20:09:12 2016 -0500
+
+    Added Stopwatch.java class
+
+[33mcommit 6fc7051e49816ca36219f16ad8d95c455fee6218[m
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Mon Apr 18 20:07:31 2016 -0500
+
+    commiting to push
+
+[33mcommit d7de4234e02c0e0c8b2315d87928925982b07ddb[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 17 21:29:27 2016 -0500
+
+    Database now saves and shows scores
+
+[33mcommit 4df1aa1af521a6e77b9c9af649ecafa27d6c3782[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Fri Apr 8 21:29:48 2016 -0500
+
+    Added Database skeleton code
+
+[33mcommit e42c810d2ee96e8044331b9f4aeebb59d27338f1[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Mon Apr 4 20:46:48 2016 -0500
+
+    Updated info.txt
+
+[33mcommit 4a2bdec5a01f3b7808f6a69509a591773757ad69[m
+Merge: 3f89bd2 565b3c7
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Mon Apr 4 20:33:08 2016 -0500
+
+    Merge branch 'master' of https://github.com/jhw866/Tap-Tap-Tap
+
+[33mcommit 565b3c7b1fa7252c76d7cf376bb14ee810c8cf45[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Mon Apr 4 20:32:38 2016 -0500
+
+    Updated README & info
+
+[33mcommit 3f89bd2280a4f0c63a415986824bc24afe7fbce1[m
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Mon Apr 4 20:32:18 2016 -0500
+
+    added a dialog box with option to never show again or show again in the settings tab
+
+[33mcommit 92f4908039657d2f48507742f1f097f0690134db[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Mon Apr 4 20:14:30 2016 -0500
+
+    Updated README & info .txt
+
+[33mcommit 582d3487158ef20243aca3873826af4dd1dcf801[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Mon Apr 4 19:58:50 2016 -0500
+
+    Added info.txt and removed Filler text in TapActivity
+
+[33mcommit e65e0140c19a16cf2f54b7c90f0c58a26b660585[m
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Mon Apr 4 19:40:08 2016 -0500
+
+    fixed an issue with scoring where you wouldnt gain a mistake if you pressed space before finishing the word. added basic high score functionality
+
+[33mcommit f6c37cbb58a9ecef8d4f0022d362525ae5124de8[m
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Mon Apr 4 18:04:19 2016 -0500
+
+    added time stat at end of game, not yet calculated. Fixed issue where game doesnt end if last word is complete
+
+[33mcommit cb73c795245884c16fa2a0451faee766441f1bb5[m
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Mon Apr 4 17:47:35 2016 -0500
+
+    fixed scoring issues, now its pretty cool
+
+[33mcommit 76d9c08c4f57fa82cb80cda06df5aeaad7c8d99c[m
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Mon Apr 4 16:51:47 2016 -0500
+
+    end game is broken trying to fix
+
+[33mcommit 2e18de02da9a99b3c88d7fa1e74f9d3764d98de5[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 20:32:49 2016 -0500
+
+    Added readme and got rid of unnecessary folder
+
+[33mcommit aa24dc91980b41ae74b4aaf3fc4f98aaedcbe3da[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 20:30:57 2016 -0500
+
+    Fixed issue with numWordsTyped messing up new games. closes #15
+
+[33mcommit 60ae11bd132f75e6487866989b1c1e8f168735d2[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 20:16:01 2016 -0500
+
+    Cleaned up some unnecessary variables
+
+[33mcommit fdd73f52eec680d3d2f3143468fbbb5747ade4ef[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 20:04:11 2016 -0500
+
+    Added files for single word, multiple words, and paragraph
+
+[33mcommit 3bb29ec8d7ad5acf862c00dd87b31e755447482e[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 19:20:57 2016 -0500
+
+    returnToMainMenu works
+
+[33mcommit 6a7de2418760cecdd8233a74b27cf04833a2b7c2[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 17:51:17 2016 -0500
+
+    fixed issue in GameOverActivity
+
+[33mcommit 88587e42f60044fee29f1ebe3ffa517b02cd3880[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 17:46:01 2016 -0500
+
+    Hooked up game to gameover
+
+[33mcommit 2bcda9923818d57f1d0114ec23f62d19505b76f5[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 17:28:03 2016 -0500
+
+    Connected most activities
+
+[33mcommit 53376f55ba24d53a01715b3498e35390efdb9ea9[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 17:17:18 2016 -0500
+
+    Connected MainLandingActivity to other activities
+
+[33mcommit b13e093b33f2cdc99f0ad917fd716e628e8fbfe4[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 16:57:36 2016 -0500
+
+    Created skeleton for activities
+
+[33mcommit 397038f5476110f98d1360d39f6955e8e03be487[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sun Apr 3 16:02:51 2016 -0500
+
+    Updated .gitignore
+
+[33mcommit efcc0b6847a846dfbb7b9bfe5ece9995624c117c[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sat Apr 2 15:54:28 2016 -0500
+
+    Fixed issue with scoring and going back to previous word
+
+[33mcommit 0bf506d7f8a0d07236ebe45d48ef83abf2644510[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Sat Apr 2 14:16:21 2016 -0500
+
+    May have fixed a few issues
+
+[33mcommit 0d4596ac0ea7208ef6058101d401ce6dd424c6fd[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Fri Apr 1 19:06:16 2016 -0500
+
+    Cleaned up lingering trash commented code.
+
+[33mcommit 2213f63edc51a1637b6665dc5be6f61238f31797[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Fri Apr 1 18:51:27 2016 -0500
+
+    Basic scoring system added.
+
+[33mcommit ba43cd483a45e3c2cbfe6059f3d2e2d2e18ff19c[m
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Fri Apr 1 00:06:10 2016 -0500
+
+    added highlighted space
+
+[33mcommit a47037f8dc804956876034720756c302238a3d6e[m
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Thu Mar 31 23:51:18 2016 -0500
+
+    made bolded highlighted letters
+
+[33mcommit e7a7e4bdbd88b58fd1392647c0d8b421b67d3583[m
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Thu Mar 31 22:41:02 2016 -0500
+
+    fixed all known bugs and solidified implementation
+
+[33mcommit 4c9a41f7e7f5a6e6847b4a9188c910e1495c1ecb[m
+Author: Rafik Rizik <rizik944@gmail.com>
+Date:   Thu Mar 31 22:15:23 2016 -0500
+
+    working on fixes for spaces
+
+[33mcommit 5ceb354389055241a44a70f7196c4b9a3ff7f734[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Thu Mar 31 12:38:10 2016 -0500
+
+    Solved issue with multiple deletes. fixes #5
+
+[33mcommit 1b8df000d52069739b9faa5c9b3fd889a8f3072e[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Thu Mar 31 12:12:57 2016 -0500
+
+    Fixes#3 App wont crash on end of paragraph. Entire paragraph displayed.
+
+[33mcommit a8d6d3f2a0ce3072b72d5f7ad89b85fa1f397ede[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Thu Mar 31 00:50:30 2016 -0500
+
+    Added in delete functionality
+
+[33mcommit ee3db76d3e32ebbe54c1c69a9777477271312f30[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Wed Mar 30 23:03:18 2016 -0500
+
+    Added key listener for special keys.
+
+[33mcommit 67fef03ef42be0b17717ad978dc3d4cecf6fbf29[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Wed Mar 30 20:05:07 2016 -0500
+
+    Progress! Delete is bugged and the entire paragraph doesnt show, but all words typed are colored properly
+
+[33mcommit c331effdda12e1d22f868a714a07fc84ef2d9020[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Wed Mar 30 14:21:08 2016 -0500
+
+    Fixed bug causing array out of bounds
+
+[33mcommit 3ee384b2f378d0cd3e772b88c16e1c5c1d4d31ce[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Wed Mar 30 01:11:49 2016 -0500
+
+    Proof of concept. Linked list NOT implemented.
+
+[33mcommit 1b83836ee7009dde4554993e9c99676e1a3328ba[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Tue Mar 29 22:39:07 2016 -0500
+
+    Added WordNode data structure
+
+[33mcommit f48ea204c0e8da1f453ea65d193485ae7381a493[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Tue Mar 29 22:15:48 2016 -0500
+
+    Added WordCollorer class.
+
+[33mcommit aca5bb17459e5d655b7e65dc5ff74b7d94ddbe3e[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Mon Mar 28 22:20:19 2016 -0500
+
+    Added word coloring funcitonality
+
+[33mcommit 30a0e463a64d136573e137dce764107f3ef2642a[m
+Author: Sassafrass6 <Frank@Franks-MacBook-Pro.local>
+Date:   Mon Mar 28 19:38:05 2016 -0500
+
+    First Prototype
+
+[33mcommit 50b308b5c5e344fcf4ed23fc6fa97255e981d507[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Wed Mar 23 09:46:14 2016 -0500
+
+    Initial Commit
+
+[33mcommit 762698aeb6e545418389121fc973b2d03c78e920[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Mon Mar 21 09:55:37 2016 -0500
+
+    Updated .gitignore
+
+[33mcommit bd2285709f7a7f5e614d1e02f69d31cdcdb4eeed[m
+Author: Jeremy Wenzel <wenzeljeremy15@gmail.com>
+Date:   Mon Mar 21 09:52:11 2016 -0500
+
+    Initial commit
