@@ -140,7 +140,7 @@ public class MainLandingActivity extends AppCompatActivity {
     }
 
     public void addWords(View view) {
-        Intent intent = new Intent(this, AddWordsGameTypeActivity.class);
+        Intent intent = new Intent(this, AddWordsActivity.class);
         startActivity(intent);
     }
 

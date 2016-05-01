@@ -59,6 +59,7 @@
     <!-- Add Words Activity -->
     <string name="enter_words">Enter the word(s) you would like to save</string>
     <string name="save">Save</string>
+    <string name="max_chars">Max characters allowed: </string>
 
     <!-- How to play -->
     <string name="how_to_play_text">"This is TapTapTap. Its an App that helps you text faster."

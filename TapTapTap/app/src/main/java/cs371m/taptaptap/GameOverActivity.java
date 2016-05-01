@@ -115,8 +115,8 @@ public class GameOverActivity extends AppCompatActivity {
         intent.putExtra(EXTRA, gameType);
         intent.putExtra(NEW_GAME_EXTRA, false);
         intent.putExtra(PHRASE_EXTRA, phrase);
-        startActivity(intent);
         finish();
+        startActivity(intent);
     }
 
     public void returnToMainMenu(View view) {
