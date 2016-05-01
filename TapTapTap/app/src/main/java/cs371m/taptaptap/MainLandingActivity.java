@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -23,6 +25,12 @@ public class MainLandingActivity extends AppCompatActivity {
     private final String GAME_TYPE_EXTRA = "GameType";
     private final String NEW_GAME_EXTRA = "NewGame";
     private final String PHRASE_EXTRA = "Phrase";
+
+    private SoundPool mSounds;
+    private int mButtonSoundID;
+//    private int mCheckSoundID;
+//    private int mKeyboardSoundID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +69,6 @@ public class MainLandingActivity extends AppCompatActivity {
                 editor.putString("skipMessage", checkBox);
                 editor.commit();
 
-                // Do what you want to do on "OK" action
-
                 return;
             }
         });
@@ -71,6 +77,8 @@ public class MainLandingActivity extends AppCompatActivity {
             dialogBox.show();
         }
 
+        mSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        mButtonSoundID = mSounds.load(this, R.raw.button_click, 1);
     }
 
     @Override
@@ -85,10 +93,13 @@ public class MainLandingActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.settings_action:
+            case R.id.settings_action :
+                if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
                 startActivity(new Intent(this, SettingsActivity.class));
+
                 return true;
             case R.id.about_action:
+                if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
                 startActivity(new Intent(this, AboutActivity.class));
                 return true;
         }
@@ -99,22 +110,25 @@ public class MainLandingActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
 
+//<<<<<<< HEAD
+//    public void startSingleWordGame(View view) {
+//
+//        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
+//=======
     private void startTapActivity(int gameType) {
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, TapActivity.class);
         intent.putExtra(GAME_TYPE_EXTRA, gameType);
         intent.putExtra(NEW_GAME_EXTRA, true);
@@ -126,7 +140,7 @@ public class MainLandingActivity extends AppCompatActivity {
         startTapActivity(0);
     }
 
-    public void startMultiwordGame(View view) {
+    public void startMultiwordGame(View view){
         startTapActivity(1);
     }
 
@@ -134,17 +148,21 @@ public class MainLandingActivity extends AppCompatActivity {
         startTapActivity(2);
     }
 
+
     public void highScores(View view) {
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, HighScoreActivity.class);
         startActivity(intent);
     }
 
     public void addWords(View view) {
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, AddWordsActivity.class);
         startActivity(intent);
     }
 
     public void howToPlay(View view) {
+        if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
         Intent intent = new Intent(this, HowToPlayActivity.class);
         startActivity(intent);
     }
