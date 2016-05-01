@@ -22,14 +22,6 @@
             android:layout_height="wrap_content"
             android:textSize="24dp"/>
         <TextView
-            android:id="@+id/add_words_type_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Type"
-            android:textSize="24dp"
-            android:layout_weight="0.10"
-            android:textAlignment="center"/>
-        <TextView
             android:id="@+id/add_words_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +32,9 @@
         <EditText
             android:id="@+id/add_words_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textNoSuggestions|textMultiLine"
+            android:maxLength="15"/>
         <Button
             android:id="@+id/add_words_save"
             android:layout_width="match_parent"
