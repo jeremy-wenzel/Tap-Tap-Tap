@@ -7,13 +7,12 @@
     <string name="high_scores">High Scores</string>
     <string name="settings">Settings</string>
     <string name="how_to_play_label">How To Play</string>
-    <string name="how_to_navigate">"To get started, all you have to do is choose between one of the three options:"
+    <string name="how_to_navigate">"To get started, read the instructions in \"How To Play\", or choose between one of the three game modes:"
     "\n\nSingle Word - A single word game"
     "\nMultiple Words - A game with a few words"
     "\nParagraph - A game with a TON of words"
-    "\n\nTo understand the rules select the \"How To Play\" button"
-    "\n\nTo change settings, select Setting in the toolbar at the top right"
-    "\n\nEnjoy!"
+        "\n\nTo add customized phrases to the various game modes select \"Add Words\" in the Main Menu."
+    "\n\nTo change settings select the Settings from the toolbar at the top right"
     </string>
     <string name="add_words_label">Add Words</string>
 
@@ -62,11 +61,13 @@
     <string name="max_chars">Max characters allowed: </string>
 
     <!-- How to play -->
-    <string name="how_to_play_text">"This is TapTapTap. Its an App that helps you text faster."
-                "\nRules: "
-                "\n1) Every correct letters  that you type gives you a point."
-                "\n2) every mistake you make takes away a point."
-                "\n3) Fully Complete words give you bonus points."
-                "\nThe game ends once you have completed the provided text. "
-                "\nHave fun :)"</string>
+    <string name="how_to_play_text">"Welcome to TapTapTap, an App designed to test and improve your texting skills."
+                "\nRules:"
+                "\n1) The game begins after a game mode has been selected and any character is typed."
+                "\n2) The game ends once the phrase is complete."
+                "\n3) Type correct letters to gain points. Each correct letter is worth 1 point and each letter removed is worth -1 point. The score cannot be negative."
+                "\n4) Correctly typed words award bonus points on completion of the phrase."
+                "\n5) GWAM (Gross Words A Minute) statistics for all words and correctly typed words are displayed after completion."
+                "\n6) The value for Gross Correct Words A Minute determines a score multiplier, so type as many words correctly as possible!"
+                "\n7) Have fun :)"</string>
 </resources>

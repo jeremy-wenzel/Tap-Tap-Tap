@@ -50,7 +50,7 @@ public class GameOverActivity extends AppCompatActivity {
         double timeInMins = ((double)seconds)/60.0 + ((double)minutes);
         double gwam = Math.round(numWordsTotal/timeInMins);
         double cgwam = Math.round(numWordsCorrect/timeInMins);
-        score = (int)Math.round(score*10.0*cgwam/gwam);
+        score = (int)Math.round(score*cgwam);
         phrase = getIntent().getStringExtra(PHRASE_EXTRA);
         if (phrase == null)
             Log.d(TAG, "phrase is null or length is zero");
