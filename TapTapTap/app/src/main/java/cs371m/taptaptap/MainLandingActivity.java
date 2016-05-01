@@ -26,6 +26,8 @@ public class MainLandingActivity extends AppCompatActivity {
     private final String NEW_GAME_EXTRA = "NewGame";
     private final String PHRASE_EXTRA = "Phrase";
 
+    private SharedPreferences mPrefs;
+
     private SoundPool mSounds;
     private int mButtonSoundID;
 //    private int mCheckSoundID;
@@ -37,7 +39,13 @@ public class MainLandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_landing);
 
-
+        mPrefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        if (mPrefs.getBoolean("isFirstStartup", true)) {
+            new Database(this).resetDatabase();
+            SharedPreferences.Editor ed = mPrefs.edit();
+            ed.putBoolean("isFirstStartup", false);
+            ed.commit();
+        }
     }
 
     @Override
@@ -99,7 +107,7 @@ public class MainLandingActivity extends AppCompatActivity {
 
                 return true;
             case R.id.about_action:
-                if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
+                mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1);
                 startActivity(new Intent(this, AboutActivity.class));
                 return true;
         }

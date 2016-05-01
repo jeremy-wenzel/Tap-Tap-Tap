@@ -1,18 +1,14 @@
 package cs371m.taptaptap;
 
 import android.content.Context;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -22,18 +18,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 
 public class AddWordsActivity extends AppCompatActivity implements OnItemSelectedListener {
 
     private final String TAG = "AddWords";
-
-    private final String singleWordFileString = "single_word.txt";
-    private final String multipleWordFileString = "multiple_word.txt";
-    private final String paragraphFileString = "paragraph.txt";
 
     // Max Chars stuff
     private String maxCharsString;
@@ -83,20 +71,7 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
                 Log.d(TAG, text);
 
                 String input = editText.getText().toString();
-
-                boolean cleanExit = false;
-                switch (itemId) {
-                    case 0 :
-                        cleanExit = writeToFile(singleWordFileString, input);
-                        break;
-                    case 1 :
-                        cleanExit = writeToFile(multipleWordFileString, input);
-                        break;
-                    case 2 :
-                        cleanExit = writeToFile(paragraphFileString, input);
-                        break;
-                }
-
+                boolean cleanExit = writeStringToDatabase(input, itemId);
                 StringBuilder sb = new StringBuilder();
 
                 if (!cleanExit) {
@@ -134,26 +109,9 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
         // Another interface callback
     }
 
-    private boolean writeToFile(String fileName, String input) {
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = openFileOutput(fileName, MODE_APPEND);
-            input = input + "\n";
-            OutputStreamWriter osw = new OutputStreamWriter(fileOutputStream);
-            osw.write(input);
-            osw.flush();
-            osw.close();
-        }
-        catch (FileNotFoundException e) {
-            Log.d(TAG, "Could Not Find File");
-            return false;
-        }
-        catch (IOException e) {
-            Log.d(TAG, "Could Not write to file");
-            return false;
-        }
-
-        Log.d(TAG, "Everything written correctly");
+    private boolean writeStringToDatabase(String input, int gametype) {
+        Database database = new Database(this);
+        database.insertPhrase(input, gametype);
         return true;
     }
 

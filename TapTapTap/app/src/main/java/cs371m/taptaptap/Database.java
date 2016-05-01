@@ -7,8 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Database class for interacting with the SQLite Database. If the databased is opened,
@@ -31,6 +33,9 @@ public class Database {
     public static final String WORDS_TABLE = "words";
     public static final String PHRASE_COL = "phrase";
 
+    // Context
+    Context context;    // Needed to access the database
+
     /**
      * Database Constructor. Sets up the database and creates one if one does not exist.
      *
@@ -38,6 +43,61 @@ public class Database {
      */
     public Database(Context context) {
         openHelper = new DatabaseOpenHelper(context.getApplicationContext());
+        this.context = context.getApplicationContext();
+    }
+
+    /**
+     * Deletes all scores and phrases from database and reenters Raw files back into database
+     */
+    public void resetDatabase() {
+        Log.d(TAG, "beginning resetDatabase");
+        // Delete all entries from database
+        openDatabaseConnection();
+        openHelper.deleteAllHighScores(db);
+        openHelper.deleteAllPhrases(db);
+        closeDatabaseConnection();
+
+        // Insert all gametype files into database
+        initializeDatabase();
+        Log.d(TAG, "Finishing resetDatabase");
+    }
+
+    /**
+     * Inserts all words from Raw files into the database
+     */
+    private void initializeDatabase() {
+        for (int i = 0; i < 3; ++i)
+            buildGameTypePhrases(i);
+    }
+
+    /**
+     * Builds the database for the game type
+     * @param gameType
+     */
+    private void buildGameTypePhrases(int gameType) {
+        int fileId = -1;
+
+        // Get the file for the gametype
+        switch (gameType) {
+            case 0 :
+                fileId = R.raw.single_word;
+                break;
+            case 1 :
+                fileId = R.raw.multiple_words;
+                break;
+            case 2 :
+                fileId = R.raw.paragraph;
+                break;
+        }
+
+        InputStream input = context.getResources().openRawResource(fileId);
+        Scanner scan = new Scanner(input);
+
+        // Put all words into the database
+        while (scan.hasNextLine()) {
+            String phrase = scan.nextLine();
+            insertPhrase(phrase, gameType);
+        }
     }
 
     /**
@@ -178,6 +238,11 @@ public class Database {
                         PHRASE_COL + " TEXT," +
                         GAME_TYPE_COL + " INT" + ")";
 
+        private static final String SQL_DELETE_ALL_WORDS =
+                "DELETE FROM " + WORDS_TABLE;
+        private static final String SQL_DELETE_ALL_HIGH_SCORES =
+                "DELETE FROM " + SCORE_TABLE;
+
         private final String TAG = "DatabaseOpenHelper";
 
         public DatabaseOpenHelper (Context context) {
@@ -198,6 +263,13 @@ public class Database {
             db.execSQL("DROP TABLE IF EXISTS " + WORDS_TABLE);
             onCreate(db);
         }
-    }
 
+        public void deleteAllPhrases(SQLiteDatabase db) {
+            db.execSQL(SQL_DELETE_ALL_WORDS);
+        }
+
+        public void deleteAllHighScores(SQLiteDatabase db) {
+            db.execSQL(SQL_DELETE_ALL_HIGH_SCORES);
+        }
+    }
 }

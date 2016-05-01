@@ -97,9 +97,5 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
-
     }
-
-
-
 }

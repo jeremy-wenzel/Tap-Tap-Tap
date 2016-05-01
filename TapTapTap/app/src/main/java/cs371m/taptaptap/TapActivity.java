@@ -354,21 +354,8 @@ public class TapActivity extends AppCompatActivity {
         if (!isNewGame && (mPhrase == null || mPhrase.length() == 0))
             throw new IllegalArgumentException("Phrase is null or zero length on a retry game");
 
-        if (isNewGame) {
-            switch (gameType) {
-                case 0:
-                    mPhrase = getStringFromFile(R.raw.single_word);
-                    break;
-                case 1:
-                    mPhrase = getStringFromFile(R.raw.multiple_words);
-                    break;
-                case 2:
-                    mPhrase = getStringFromFile(R.raw.paragraph);
-                    break;
-                default:
-                    throw new IllegalStateException("Should not be in default section");
-            }
-        }
+        if (isNewGame)
+            mPhrase = getStringFromDatabase(gameType);
 
         buildCorrectWordList(mPhrase);
     }
@@ -416,6 +403,12 @@ public class TapActivity extends AppCompatActivity {
         toReturn.append(" ");
 
         return toReturn.toString();
+    }
+
+    private String getStringFromDatabase(int gameType) {
+        Database database = new Database(this);
+        String phrase = database.getRandomPhraseByGameType(gameType);
+        return phrase;
     }
 
     /**
