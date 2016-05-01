@@ -17,10 +17,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -409,41 +407,6 @@ public class TapActivity extends AppCompatActivity {
         Database database = new Database(this);
         String phrase = database.getRandomPhraseByGameType(gameType);
         return phrase;
-    }
-
-    /**
-     * Sets up the game state given the Resource id of a file. More specifically, goes
-     * through the file, gets all the words, and adds them to the word list. Then sets
-     * the number of words total to the size of the word list.
-     *
-     * @param file Resource file id of file to be read
-     */
-    private String getStringFromFile(int file) {
-        InputStream input = getResources().openRawResource(file);
-        Scanner scan = new Scanner(input);
-
-        // Make arraylist for all words in file
-        ArrayList<String> fileWordList = new ArrayList<>(0);
-
-        // Put all words in fileWordList
-        while (scan.hasNextLine()) {
-            String item = scan.nextLine();
-            fileWordList.add(item);
-        }
-
-        // Get random index
-        Random random = new Random();
-        int randomIndex = random.nextInt(fileWordList.size());
-
-        // Debug
-        Log.d(TAG, "Index: " + randomIndex);
-        Log.d(TAG, "File Word Size: " + fileWordList.size());
-
-        // Close file and make new scanner for random chosen text
-        scan.close();
-
-        return fileWordList.get(randomIndex);
-
     }
 
     private void buildCorrectWordList(String phrase) {
