@@ -27,6 +27,7 @@ public class Database {
     // Score Table
     public static final String SCORE_TABLE = "scores";
     public static final String SCORE_COL = "score";
+    public static final String CORRECT_WPM_COL = "cwpm";
     public static final String GAME_TYPE_COL = "gametype";
 
     // Words Table
@@ -142,12 +143,15 @@ public class Database {
 
         c.moveToFirst();
         while (!c.isAfterLast()) {
-            int scoreindex = c.getColumnIndex(SCORE_COL);
-            int score = c.getInt(scoreindex);
+            int scoreIndex = c.getColumnIndex(SCORE_COL);
+            int cwpmIndex = c.getColumnIndex(CORRECT_WPM_COL);
+
+            int score = c.getInt(scoreIndex);
+            double cwpm = c.getFloat(cwpmIndex);
 
             Log.d(TAG, "Score = " + score);
 
-            toReturn.add(new ScoreSystem(score, 0, 0, gameType));
+            toReturn.add(new ScoreSystem(score, cwpm, gameType));
             c.move(1);
         }
 
@@ -165,15 +169,17 @@ public class Database {
 
         c.moveToFirst();
         while (!c.isAfterLast()) {
-            int scoreindex = c.getColumnIndex(SCORE_COL);
+            int scoreIndex = c.getColumnIndex(SCORE_COL);
+            int cwpmIndex = c.getColumnIndex(CORRECT_WPM_COL);
             int gameTypeIndex = c.getColumnIndex(GAME_TYPE_COL);
 
-            int score = c.getInt(scoreindex);
+            int score = c.getInt(scoreIndex);
+            double cwpm = c.getDouble(cwpmIndex);
             int gameType = c.getInt(gameTypeIndex);
 
             Log.d(TAG, "Score = " + score);
 
-            toReturn.add(new ScoreSystem(score, 0, 0, gameType));
+            toReturn.add(new ScoreSystem(score, cwpm, gameType));
             c.move(1);
         }
 
@@ -181,14 +187,15 @@ public class Database {
         return toReturn;
     }
 
-    public void insertScore(int score, int gametype) {
+    public void insertScore(int score, double correctWordsPerMinute, int gameType) {
         Log.d(TAG, "Inserting scores");
 
         openDatabaseConnection();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(SCORE_COL, score);
-        contentValues.put(GAME_TYPE_COL, gametype);
+        contentValues.put(CORRECT_WPM_COL, correctWordsPerMinute);
+        contentValues.put(GAME_TYPE_COL, gameType);
 
         db.insert(SCORE_TABLE, null, contentValues);
         closeDatabaseConnection();
@@ -210,6 +217,8 @@ public class Database {
             toReturn.add(phrase);
             c.move(1);
         }
+
+        closeDatabaseConnection();
         return toReturn;
     }
 
@@ -228,6 +237,7 @@ public class Database {
         String phrase = c.getString(phraseIndex);
         Log.d(TAG, "Phrase = " + phrase);
 
+        closeDatabaseConnection();
         return phrase;
     }
 
@@ -255,6 +265,7 @@ public class Database {
         private static final String SQL_CREATE_SCORE =
                 "CREATE TABLE " + SCORE_TABLE + " (" +
                         SCORE_COL + " INT," +
+                        CORRECT_WPM_COL + " REAL," +
                         GAME_TYPE_COL + " INT" + ")";
         private static final String SQL_CREATE_WORDS =
                 "CREATE TABLE " + WORDS_TABLE + " (" +

@@ -46,6 +46,7 @@ public class MainLandingActivity extends AppCompatActivity {
             ed.putBoolean("isFirstStartup", false);
             ed.commit();
         }
+
     }
 
     @Override

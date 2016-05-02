@@ -205,7 +205,7 @@ public class HighScoreActivity
                 correctWPM.setText("Correct Words Per Minute: " + objects.get(position).getCorrectWordsPerMinute());
 
                 TextView gameTypeView = (TextView) scoreListView.findViewById(R.id.game_type_text_view);
-                gameTypeView.setText("Game Type: " + 0);
+                gameTypeView.setText("Game Type: " + objects.get(position).getGameType());
 
                 return scoreListView;
             }

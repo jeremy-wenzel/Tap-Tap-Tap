@@ -17,7 +17,6 @@ public class GameOverActivity extends AppCompatActivity {
     private final String PHRASE_EXTRA = "Phrase";
     private final String NEW_GAME_EXTRA = "NewGame";
 
-
     TextView statsView;
 
     private int score;
@@ -40,6 +39,7 @@ public class GameOverActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         statsView = (TextView) findViewById(R.id.game_over_text_view);
+
         score = intent.getIntExtra("score", -1);
         mistakes = intent.getIntExtra("mistakes", -1);
         gameType = intent.getIntExtra("game type", -1);
@@ -47,25 +47,30 @@ public class GameOverActivity extends AppCompatActivity {
         int minutes = intent.getIntExtra("minutes", -1);
         int numWordsTotal = intent.getIntExtra("numWordsTot", -1);
         int numWordsCorrect = intent.getIntExtra("numWordsCor", -1);
+
         double timeInMins = ((double)seconds)/60.0 + ((double)minutes);
         double gwam = Math.round(numWordsTotal/timeInMins);
         double cgwam = Math.round(numWordsCorrect/timeInMins);
         score = (int)Math.round(score*cgwam);
         phrase = getIntent().getStringExtra(PHRASE_EXTRA);
+
         if (phrase == null)
             Log.d(TAG, "phrase is null or length is zero");
         else if (phrase.length() == 0)
             Log.d(TAG, "length is zero");
+
         time = "" + minutes + ":";
+
         if (seconds < 10)
             time += "0";
         time += seconds;
+
         statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\nTotal Time: " + time
                 + "\nGWAM (Total): " + gwam + "\nGWAM (Correct): " + cgwam);
 
         Database database = new Database(this);
         Log.d(TAG, "gametype = " + gameType);
-        database.insertScore(score, gameType);
+        database.insertScore(score, cgwam, gameType);
     }
 
     @Override

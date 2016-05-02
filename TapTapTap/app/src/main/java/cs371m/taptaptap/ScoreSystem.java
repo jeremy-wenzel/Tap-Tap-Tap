@@ -19,9 +19,8 @@ public class ScoreSystem {
         correctWordsPerMinute = 0.0;
     }
 
-    public ScoreSystem(int score, int grossWordsPerMinute, int correctWordsPerMinute, int gameType) {
+    public ScoreSystem(int score, double correctWordsPerMinute, int gameType) {
         this.score = score;
-        this.grossWordsPerMinute = grossWordsPerMinute;
         this.correctWordsPerMinute = correctWordsPerMinute;
         this.gameType = gameType;
     }
