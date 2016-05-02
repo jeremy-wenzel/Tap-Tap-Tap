@@ -15,6 +15,8 @@
     "\n\nTo change settings select the Settings from the toolbar at the top right"
     </string>
     <string name="add_words_label">Add Words</string>
+    <string name="edit_dictionaries">Edit Dictionaries</string>
+
 
     <!-- For Game Type Strings -->
     <string name="single_word">Single Word</string>

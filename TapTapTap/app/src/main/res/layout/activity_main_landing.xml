@@ -54,7 +54,7 @@
             android:id="@+id/add_words"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_words_label"
+            android:text="@string/edit_dictionaries"
             android:layout_weight="0.10"
             android:textSize="24dp"
             android:onClick="addWords"/>

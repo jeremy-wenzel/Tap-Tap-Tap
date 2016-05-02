@@ -17,22 +17,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class EditWordsActivity extends AppCompatActivity implements ActionBar.TabListener {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
-     * three primary sections of the app. We use a {@link android.support.v4.app.FragmentPagerAdapter}
-     * derivative, which will keep every loaded fragment in memory. If this becomes too memory
-     * intensive, it may be best to switch to a {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
+    private static final String TAG = "EditWordsActivity";
+
     private AppSectionsPagerAdapter mAppSectionsPagerAdapter;
 
-    public static final String[] sectionTabs = {"Single Word", "Multiple Words", "Paragraph", "Overall"};
+    public static final String[] sectionTabs = {"Single Word", "Multiple Words", "Paragraph"};
 
     /**
      * The {@link ViewPager} that will display the three primary sections of the app, one at a
@@ -169,7 +168,7 @@ public class EditWordsActivity extends AppCompatActivity implements ActionBar.Ta
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
             Database database = new Database(getActivity());
-            ArrayList<String> gameDictionary;
+            ArrayList<String> gameDictionary = new ArrayList<>();
             Log.d("HighScore", "Gametype = " + gameType);
             switch (gameType) {
                 case 0:
@@ -181,11 +180,20 @@ public class EditWordsActivity extends AppCompatActivity implements ActionBar.Ta
                 case 2:
                     gameDictionary = database.getAllPhrasesByGameType(gameType);
                     break;
-                default:
-                    gameDictionary = database.getAllPhrasesByGameType(0);
             }
 
-            setListAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, gameDictionary));
+            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, gameDictionary);
+            setListAdapter(adapter);
+
+            getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+                @Override
+                public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                               int arg2, long arg3) {
+                    Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+            });
         }
 
         /**
