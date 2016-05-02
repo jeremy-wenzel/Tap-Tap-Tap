@@ -254,6 +254,14 @@ public class Database {
         closeDatabaseConnection();
     }
 
+    public void deletePhrase(String phrase) {
+        Log.d(TAG, "Delete Phrase");
+
+        openDatabaseConnection();
+        openHelper.deletePhrase(phrase);
+        closeDatabaseConnection();
+    }
+
     /**
      * Helper class that makes the connection to the actual database and opens it. This also
      * creates the database if one does not already exist
@@ -304,6 +312,10 @@ public class Database {
 
         public void deleteAllHighScores(SQLiteDatabase db) {
             db.execSQL(SQL_DELETE_ALL_HIGH_SCORES);
+        }
+
+        public void deletePhrase(String phrase) {
+            db.execSQL("DELETE FROM " + WORDS_TABLE + " WHERE " + PHRASE_COL + " = '" + phrase +"'");
         }
     }
 }

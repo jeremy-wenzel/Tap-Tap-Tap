@@ -23,12 +23,7 @@ public class HighScoreActivity
         extends AppCompatActivity
         implements ActionBar.TabListener {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
-     * three primary sections of the app. We use a {@link android.support.v4.app.FragmentPagerAdapter}
-     * derivative, which will keep every loaded fragment in memory. If this becomes too memory
-     * intensive, it may be best to switch to a {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
+    private static final String TAG = "HighScoreActivity";
     private AppSectionsPagerAdapter mAppSectionsPagerAdapter;
 
     public static final String[] sectionTabs = {"Single Word", "Multiple Words", "Paragraph", "Overall"};
@@ -156,7 +151,7 @@ public class HighScoreActivity
             super.onActivityCreated(savedInstanceState);
             Database database = new Database(getActivity());
             ArrayList<ScoreSystem> gameScores;
-            Log.d("HighScore", "Gametype = " + gameType);
+            Log.d(TAG, "Gametype = " + gameType);
             switch (gameType) {
                 case 0:
                     gameScores = database.getGameTypeScores(gameType);
