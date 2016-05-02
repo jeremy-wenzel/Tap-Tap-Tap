@@ -166,7 +166,7 @@ public class MainLandingActivity extends AppCompatActivity {
 
     public void addWords(View view) {
         if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
-        Intent intent = new Intent(this, AddWordsActivity.class);
+        Intent intent = new Intent(this, EditWordsActivity.class);
         startActivity(intent);
     }
 

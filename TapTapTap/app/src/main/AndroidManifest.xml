@@ -32,7 +32,8 @@
             android:label="@string/app_name" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".HowToPlayActivity" />
-        <activity android:name=".AddWordsActivity"></activity>
+        <activity android:name=".AddWordsActivity" />
+        <activity android:name=".EditWordsActivity"></activity>
     </application>
 
 </manifest>
