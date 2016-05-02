@@ -1,5 +1,6 @@
 package cs371m.taptaptap;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -153,7 +155,7 @@ public class HighScoreActivity
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
             Database database = new Database(getActivity());
-            ArrayList<Integer> gameScores;
+            ArrayList<ScoreSystem> gameScores;
             Log.d("HighScore", "Gametype = " + gameType);
             switch (gameType) {
                 case 0:
@@ -169,7 +171,46 @@ public class HighScoreActivity
                     gameScores = database.getAllGameTypeScores();
             }
 
-            setListAdapter(new ArrayAdapter(getActivity(), R.layout.score_list_view, gameScores));
+            setListAdapter(new HighScoreAdapter(getActivity(), R.layout.score_list_view, gameScores));
+        }
+
+        /**
+         * Lol, a class inside a class inside a class
+         */
+        public class HighScoreAdapter extends ArrayAdapter<ScoreSystem> {
+
+            ArrayList<ScoreSystem> objects;
+            Context context;
+
+            public HighScoreAdapter(Context ctx, int textViewResourceId, ArrayList<ScoreSystem> objects) {
+                super(ctx, textViewResourceId, objects);
+                this.objects = objects;
+                context = ctx;
+            }
+
+            @Override
+            public View getView(int position, View contextView, ViewGroup parent) {
+                return getCustomView(position, contextView, parent);
+            }
+
+            public View getCustomView(int position, View convertView, ViewGroup parent) {
+                // Inflate the View
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View scoreListView = inflater.inflate(R.layout.score_list_view, parent, false);
+
+                TextView mainScore = (TextView) scoreListView.findViewById(R.id.total_score_text_view);
+                mainScore.setText("Total Score: " + objects.get(position).get_score());
+
+                TextView correctWPM = (TextView) scoreListView.findViewById(R.id.correct_wpm);
+                correctWPM.setText("Correct Words Per Minute: " + objects.get(position).getCorrectWordsPerMinute());
+
+                TextView gameTypeView = (TextView) scoreListView.findViewById(R.id.game_type_text_view);
+                gameTypeView.setText("Game Type: " + 0);
+
+                return scoreListView;
+            }
         }
     }
+
+
 }

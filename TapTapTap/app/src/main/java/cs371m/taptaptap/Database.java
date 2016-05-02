@@ -132,10 +132,10 @@ public class Database {
      * to see if something worked.
      * @return
      */
-    public ArrayList<Integer> getGameTypeScores(int gameType) {
+    public ArrayList<ScoreSystem> getGameTypeScores(int gameType) {
         Log.d(TAG, "In getGameTypeScores()");
 
-        ArrayList<Integer> toReturn = new ArrayList<>(0);
+        ArrayList<ScoreSystem> toReturn = new ArrayList<>(0);
         openDatabaseConnection();
 
         Cursor c = db.query(SCORE_TABLE, null, GAME_TYPE_COL + "=" + gameType, null, null, null, SCORE_COL + " DESC");
@@ -144,8 +144,10 @@ public class Database {
         while (!c.isAfterLast()) {
             int scoreindex = c.getColumnIndex(SCORE_COL);
             int score = c.getInt(scoreindex);
+
             Log.d(TAG, "Score = " + score);
-            toReturn.add(score);
+
+            toReturn.add(new ScoreSystem(score, 0, 0, gameType));
             c.move(1);
         }
 
@@ -153,10 +155,10 @@ public class Database {
         return toReturn;
     }
 
-    public ArrayList<Integer> getAllGameTypeScores() {
+    public ArrayList<ScoreSystem> getAllGameTypeScores() {
         Log.d(TAG, "In getGameTypeScores()");
 
-        ArrayList<Integer> toReturn = new ArrayList<>(0);
+        ArrayList<ScoreSystem> toReturn = new ArrayList<>(0);
         openDatabaseConnection();
 
         Cursor c = db.query(SCORE_TABLE, null, null, null, null, null, SCORE_COL + " DESC");
@@ -164,9 +166,14 @@ public class Database {
         c.moveToFirst();
         while (!c.isAfterLast()) {
             int scoreindex = c.getColumnIndex(SCORE_COL);
+            int gameTypeIndex = c.getColumnIndex(GAME_TYPE_COL);
+
             int score = c.getInt(scoreindex);
+            int gameType = c.getInt(gameTypeIndex);
+
             Log.d(TAG, "Score = " + score);
-            toReturn.add(score);
+
+            toReturn.add(new ScoreSystem(score, 0, 0, gameType));
             c.move(1);
         }
 
@@ -176,6 +183,7 @@ public class Database {
 
     public void insertScore(int score, int gametype) {
         Log.d(TAG, "Inserting scores");
+
         openDatabaseConnection();
         ContentValues contentValues = new ContentValues();
 
@@ -188,6 +196,7 @@ public class Database {
 
     public ArrayList<String> getAllPhrasesByGameType(int gameType) {
         Log.d(TAG, "getPhrase");
+
         openDatabaseConnection();
 
         ArrayList<String> toReturn = new ArrayList<>();
@@ -206,6 +215,7 @@ public class Database {
 
     public String getRandomPhraseByGameType(int gameType) {
         Log.d(TAG, "getPhrase");
+
         openDatabaseConnection();
 
         Random rand = new Random();
@@ -223,6 +233,7 @@ public class Database {
 
     public void insertPhrase(String phrase, int gametype) {
         Log.d(TAG, "Inserting Phrase");
+
         openDatabaseConnection();
         ContentValues contentValues = new ContentValues();
 
