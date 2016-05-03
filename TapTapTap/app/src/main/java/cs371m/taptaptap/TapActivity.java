@@ -50,6 +50,8 @@ public class TapActivity extends AppCompatActivity {
     private int gameType;
     private String mPhrase = null;
 
+    private int maxWordLength = 20;
+
     private Timer timer;
     private int minutes = 0;
     private int seconds = 0;
@@ -124,6 +126,7 @@ public class TapActivity extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
@@ -135,11 +138,13 @@ public class TapActivity extends AppCompatActivity {
                 }
 
                 String str = s.toString();
+                int sLen = str.length();
 
                 String corWrd = wordList.get(numWordsTyped).getCorrectWord();
+
                 char corChr = corWrd.charAt(0);
 
-                if ( (str.contains(" ") || str.contains("\n")) ) {
+                if ( (str.contains(" ") || str.contains("\n")) || sLen >= maxWordLength  ) {
                     if ( !str.equals(corWrd) ) {
                             score.add_mistake();
                     }
@@ -153,8 +158,12 @@ public class TapActivity extends AppCompatActivity {
                         if ( usrWrd == null )
                             return;
 
-                        int sLen = str.length();
                         int uLen = usrWrd.length();
+
+                        if ( capitalize ) {
+                            corWrd = corWrd.toLowerCase();
+                            usrWrd = usrWrd.toLowerCase();
+                        }
 
                         if (sLen < uLen) {
                             score.subtract_score();
