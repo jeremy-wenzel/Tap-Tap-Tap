@@ -254,6 +254,26 @@ public class Database {
         closeDatabaseConnection();
     }
 
+    public void deletePhrase(String phrase) {
+        Log.d(TAG, "Delete Phrase");
+
+        openDatabaseConnection();
+        openHelper.deletePhrase(phrase);
+        closeDatabaseConnection();
+    }
+
+    public boolean isWordsInGameType(int gameType) {
+        Log.d(TAG, "isWordsInGameType");
+
+        openDatabaseConnection();
+        Cursor c = db.query(WORDS_TABLE, null, GAME_TYPE_COL + "=" + gameType, null, null, null, null);
+
+        boolean toReturn = c.getCount() > 0;
+        closeDatabaseConnection();
+
+        return  toReturn;
+    }
+
     /**
      * Helper class that makes the connection to the actual database and opens it. This also
      * creates the database if one does not already exist
@@ -304,6 +324,10 @@ public class Database {
 
         public void deleteAllHighScores(SQLiteDatabase db) {
             db.execSQL(SQL_DELETE_ALL_HIGH_SCORES);
+        }
+
+        public void deletePhrase(String phrase) {
+            db.execSQL("DELETE FROM " + WORDS_TABLE + " WHERE " + PHRASE_COL + " = '" + phrase +"'");
         }
     }
 }

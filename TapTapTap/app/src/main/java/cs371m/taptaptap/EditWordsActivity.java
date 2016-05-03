@@ -1,6 +1,5 @@
 package cs371m.taptaptap;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,8 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -152,6 +149,8 @@ public class EditWordsActivity extends AppCompatActivity implements ActionBar.Ta
 
         public static final String ARG_SECTION_NUMBER = "section_number";
         private int gameType;
+        private Database database;
+        private ArrayAdapter adapter;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -167,9 +166,9 @@ public class EditWordsActivity extends AppCompatActivity implements ActionBar.Ta
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
-            Database database = new Database(getActivity());
+            database = new Database(getActivity());
             ArrayList<String> gameDictionary = new ArrayList<>();
-            Log.d("HighScore", "Gametype = " + gameType);
+            Log.d(TAG, "Gametype = " + gameType);
             switch (gameType) {
                 case 0:
                     gameDictionary = database.getAllPhrasesByGameType(gameType);
@@ -182,7 +181,7 @@ public class EditWordsActivity extends AppCompatActivity implements ActionBar.Ta
                     break;
             }
 
-            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, gameDictionary);
+            adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, gameDictionary);
             setListAdapter(adapter);
 
             getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -190,47 +189,24 @@ public class EditWordsActivity extends AppCompatActivity implements ActionBar.Ta
                 @Override
                 public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                                int arg2, long arg3) {
-                    Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), arg0.getItemAtPosition(arg2).toString(), Toast.LENGTH_LONG).show();
+                    database.deletePhrase(arg0.getItemAtPosition(arg2).toString());
+                    resetListView();
                     return true;
                 }
             });
         }
 
-        /**
-         * Lol, a class inside a class inside a class
-         */
-        public class HighScoreAdapter extends ArrayAdapter<ScoreSystem> {
+        @Override
+        public void onResume(){
+            super.onResume();
+            resetListView();
+        }
 
-            ArrayList<ScoreSystem> objects;
-            Context context;
-
-            public HighScoreAdapter(Context ctx, int textViewResourceId, ArrayList<ScoreSystem> objects) {
-                super(ctx, textViewResourceId, objects);
-                this.objects = objects;
-                context = ctx;
-            }
-
-            @Override
-            public View getView(int position, View contextView, ViewGroup parent) {
-                return getCustomView(position, contextView, parent);
-            }
-
-            public View getCustomView(int position, View convertView, ViewGroup parent) {
-                // Inflate the View
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View scoreListView = inflater.inflate(R.layout.score_list_view, parent, false);
-
-                TextView mainScore = (TextView) scoreListView.findViewById(R.id.total_score_text_view);
-                mainScore.setText("Total Score: " + objects.get(position).get_score());
-
-                TextView correctWPM = (TextView) scoreListView.findViewById(R.id.correct_wpm);
-                correctWPM.setText("Correct Words Per Minute: " + objects.get(position).getCorrectWordsPerMinute());
-
-                TextView gameTypeView = (TextView) scoreListView.findViewById(R.id.game_type_text_view);
-                gameTypeView.setText("Game Type: " + objects.get(position).getGameType());
-
-                return scoreListView;
-            }
+        private void resetListView() {
+            adapter.clear();
+            adapter.addAll(database.getAllPhrasesByGameType(gameType));
+            adapter.notifyDataSetChanged();
         }
     }
 }

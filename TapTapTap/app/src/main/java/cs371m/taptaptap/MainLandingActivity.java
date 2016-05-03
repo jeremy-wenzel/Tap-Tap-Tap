@@ -15,8 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainLandingActivity extends AppCompatActivity {
+
+    private final String TAG = "MainLandingActivity";
 
     public CheckBox dontShowAgain;
 
@@ -28,6 +31,8 @@ public class MainLandingActivity extends AppCompatActivity {
 
     private SoundPool mSounds;
     private int mButtonSoundID;
+
+    private Database database;
 //    private int mCheckSoundID;
 //    private int mKeyboardSoundID;
 
@@ -44,6 +49,8 @@ public class MainLandingActivity extends AppCompatActivity {
             ed.putBoolean("isFirstStartup", false);
             ed.commit();
         }
+
+        database = new Database(this);
 
     }
 
@@ -131,11 +138,34 @@ public class MainLandingActivity extends AppCompatActivity {
 
     private void startTapActivity(int gameType) {
         if(getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("sound", true)){ mSounds.play(mButtonSoundID, 1, 1, 1, 0, 1); }
-        Intent intent = new Intent(this, TapActivity.class);
-        intent.putExtra(GAME_TYPE_EXTRA, gameType);
-        intent.putExtra(NEW_GAME_EXTRA, true);
-        intent.putExtra(PHRASE_EXTRA, "");
-        startActivity(intent);
+
+        if (database.isWordsInGameType(gameType)) {
+            Intent intent = new Intent(this, TapActivity.class);
+            intent.putExtra(GAME_TYPE_EXTRA, gameType);
+            intent.putExtra(NEW_GAME_EXTRA, true);
+            intent.putExtra(PHRASE_EXTRA, "");
+            startActivity(intent);
+        }
+        else {
+            Log.d(TAG, "in else statement");
+            StringBuilder sb = new StringBuilder();
+            sb.append("No words for ");
+
+            switch (gameType) {
+                case 0 :
+                    sb.append("Single Word");
+                    break;
+                case 1 :
+                    sb.append("Multiple Words");
+                    break;
+                case 2:
+                    sb.append("Paragraph");
+                    break;
+            }
+
+            sb.append(" dictionary. Please add words to this dictionary to play.");
+            Toast.makeText(getApplication(), sb.toString(), Toast.LENGTH_LONG).show();
+        }
     }
 
     public void startSingleWordGame(View view) {
