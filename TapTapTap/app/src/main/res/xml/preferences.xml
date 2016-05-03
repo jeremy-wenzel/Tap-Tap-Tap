@@ -21,6 +21,7 @@
         android:summary="Turn the word prediction functionality on or off"/>
 
     <CheckBoxPreference
+        android:id="@+id/capitalization"
         android:key="capitalization"
         android:title="@string/capitalize_first_letter"
         android:defaultValue="true"

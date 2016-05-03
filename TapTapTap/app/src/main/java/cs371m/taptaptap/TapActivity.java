@@ -35,6 +35,7 @@ public class TapActivity extends AppCompatActivity {
     protected static int numWordsTotal;
     protected static int numWordsTyped;
 
+
     ScoreSystem score = new ScoreSystem();
 
     List<WordNode> wordList = new ArrayList<WordNode>();
@@ -54,6 +55,7 @@ public class TapActivity extends AppCompatActivity {
     private int seconds = 0;
 
     private boolean orientationChanged = false;
+    private boolean capitalize;
 
     private SharedPreferences mPrefs;
 
@@ -62,6 +64,8 @@ public class TapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         mPrefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        capitalize = getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("capitalization", true);
+        WordColorer.setCapitalized(capitalize);
 
         // Layout stuff and home button
         setContentView(R.layout.activity_tap);
@@ -120,7 +124,6 @@ public class TapActivity extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -130,27 +133,30 @@ public class TapActivity extends AppCompatActivity {
                     gameOver();
                     return;
                 }
-                String str = s.toString();
-                if ((str.contains(" ") || str.contains("\n"))) {
 
-                    if (!str.equals(wordList.get(numWordsTyped).getCorrectWord())) {
+                String str = s.toString();
+
+                String corWrd = wordList.get(numWordsTyped).getCorrectWord();
+                char corChr = corWrd.charAt(0);
+
+                if ( (str.contains(" ") || str.contains("\n")) ) {
+                    if ( !str.equals(corWrd) ) {
                             score.add_mistake();
-                   }
+                    }
                     wordList.get(numWordsTyped++).updateUserWord(str.trim(), true);
                     s.clear();
                 }
                 else {
                     if (str.length() > 0) {
                         String usrWrd = wordList.get(numWordsTyped).getUserWord();
-                        String corWrd = wordList.get(numWordsTyped).getCorrectWord();
 
-                        if ( wordList.get(numWordsTyped).getUserWord() == null )
+                        if ( usrWrd == null )
                             return;
 
                         int sLen = str.length();
                         int uLen = usrWrd.length();
-                        if (sLen < uLen) {
 
+                        if (sLen < uLen) {
                             score.subtract_score();
                         }
                         else if (sLen <= corWrd.length()
@@ -177,8 +183,11 @@ public class TapActivity extends AppCompatActivity {
 
                     // Store and color incomplete word
                     wordList.get(numWordsTyped).updateUserWord(str, false);
-                    if((numWordsTyped == numWordsTotal-1) && str.equals(wordList.get(numWordsTyped).getCorrectWord())){
-                        gameOver();
+                    if((numWordsTyped == numWordsTotal-1) ){
+                        if ( capitalize && str.toLowerCase().equals(corWrd.toLowerCase()) )
+                            gameOver();
+                        else if ( str.equals(corWrd) )
+                            gameOver();
                     }
                 }
                 updateParagraphText();
