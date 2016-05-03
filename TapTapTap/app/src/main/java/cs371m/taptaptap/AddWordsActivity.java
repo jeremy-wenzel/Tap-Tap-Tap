@@ -26,6 +26,7 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
     // Max Chars stuff
     private String maxCharsString;
     private final int[] maxCharNum = {15, 45, 90};
+    private final int[] minCharNum = {3, 15, 45};
 
     private int maxCharNumPos = 0;
 
@@ -57,7 +58,9 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
 
         // Views and buttons
         final Spinner spinner = (Spinner) findViewById(R.id.gametype_spinner);
-        spinner.setAdapter(new MyAdapter(this, R.layout.spinner_item, getResources().getStringArray(R.array.list_game_type)));
+        MyAdapter adapter = new MyAdapter(this, R.layout.spinner_item, getResources().getStringArray(R.array.list_game_type));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
         editText = (EditText) findViewById(R.id.add_words_edit_text);
@@ -66,23 +69,29 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int itemId = (int) spinner.getSelectedItemId();
-                String text = "Item Id = " + itemId;
+                int gameType = (int) spinner.getSelectedItemId();
+                String text = "Game Type = " + gameType;
                 Log.d(TAG, text);
 
                 String input = editText.getText().toString();
-                boolean cleanExit = writeStringToDatabase(input, itemId);
-                StringBuilder sb = new StringBuilder();
 
-                if (!cleanExit) {
-                    sb.append("Could not save input correctly.");
+                if (isValidPhrase(input, gameType)) {
+
+                    boolean cleanExit = writeStringToDatabase(input, gameType);
+                    StringBuilder sb = new StringBuilder();
+
+                    if (!cleanExit) {
+                        sb.append("Could not save input correctly.");
+                    } else {
+                        sb.append("Saved input!");
+                    }
+
+                    Toast.makeText(getApplicationContext(), sb.toString(), Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 else {
-                    sb.append("Saved input!");
+                    Toast.makeText(getApplicationContext(), "Input is too short for game type.", Toast.LENGTH_SHORT).show();
                 }
-
-                Toast.makeText(getApplicationContext(), sb.toString(), Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
     }
@@ -115,6 +124,10 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
         return true;
     }
 
+    private boolean isValidPhrase(String input, int gameType) {
+        return input.length() >= minCharNum[gameType];
+    }
+
     public class MyAdapter extends ArrayAdapter<String> {
 
         public MyAdapter(Context ctx, int textViewResourceId, String[] objects) {
@@ -143,6 +156,10 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
             // Set the second sub text
             TextView sub_text = (TextView) mySpinner.findViewById(R.id.spinner_sub);
             sub_text.setText(maxCharsString + maxCharNum[position]);
+
+            // Set the third sub text
+            TextView min_sub_text = (TextView) mySpinner.findViewById(R.id.min_spinner_sub);
+            min_sub_text.setText("Min characters: " + minCharNum[position]);
 
             return mySpinner;
         }

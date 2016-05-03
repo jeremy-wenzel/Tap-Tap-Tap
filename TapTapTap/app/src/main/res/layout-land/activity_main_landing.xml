@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="24dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingTop="24dp"
+    android:background="@drawable/main_menu"
+    tools:context="cs371m.taptaptap.MainLandingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:id="@+id/linearLayout"
+        android:gravity="center">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/single_word_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/single_word"
+
+                android:layout_weight="0.10"
+                android:textSize="24dp"
+                android:onClick="startSingleWordGame"
+                android:layout_below="@+id/linearLayout"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/multiple_words_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/multiple_words"
+                android:layout_weight="0.10"
+                android:textSize="24dp"
+                android:onClick="startMultiwordGame"/>
+
+            <Button
+                android:id="@+id/high_scores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/high_scores"
+                android:layout_weight="0.10"
+                android:textSize="24dp"
+                android:onClick="highScores" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/paragraph_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/paragraph"
+                android:layout_weight="0.10"
+                android:textSize="24dp"
+                android:onClick="startParagraphGame" />
+
+            <Button
+                android:id="@+id/add_words"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="Edit Dictionaries"
+                android:layout_weight="0.10"
+                android:textSize="24dp"
+                android:onClick="addWords" />
+
+            <Button
+                android:id="@+id/how_to_play"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/how_to_play_label"
+                android:layout_weight="0.10"
+                android:textSize="24dp"
+                android:onClick="howToPlay" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
