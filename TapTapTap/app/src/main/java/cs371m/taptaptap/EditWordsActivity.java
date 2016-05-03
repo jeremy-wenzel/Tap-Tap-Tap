@@ -1,5 +1,7 @@
 package cs371m.taptaptap;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -189,9 +191,30 @@ public class EditWordsActivity extends AppCompatActivity implements ActionBar.Ta
                 @Override
                 public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                                int arg2, long arg3) {
-                    Toast.makeText(getActivity(), arg0.getItemAtPosition(arg2).toString(), Toast.LENGTH_LONG).show();
-                    database.deletePhrase(arg0.getItemAtPosition(arg2).toString());
-                    resetListView();
+                    final AdapterView<?> view = arg0;
+                    final int position = arg2;
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Delete entry")
+                            .setMessage("Are you sure you want to delete \n\""
+                                        + view.getItemAtPosition(position).toString() + "\" ?")
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // do nothing
+                                        }
+                                    })
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // continue with delete
+                                            Toast.makeText(getActivity(),
+                                                    view.getItemAtPosition(position).toString(),
+                                                    Toast.LENGTH_LONG).show();
+
+                                            database.deletePhrase(view.getItemAtPosition(position).toString());
+                                            resetListView();
+                                        }
+                                    })
+                            .show();
+
                     return true;
                 }
             });
