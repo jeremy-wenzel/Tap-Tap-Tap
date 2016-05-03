@@ -19,6 +19,8 @@ public class WordColorer {
     protected final static String bold = "<b>";
     protected final static String endBold = "</b>";
 
+    private static boolean capitalize;
+
     private static WordColorer instance = new WordColorer();
 
     private WordColorer ( ) { }
@@ -27,8 +29,15 @@ public class WordColorer {
         if (userWord == null || correctWord == null)
             throw new IllegalArgumentException("userWord or correctWord is null");
 
-        if (isComplete)
-            return colorCompleteWord(correctWord, correctWord.equals(userWord));
+        if (isComplete) {
+            boolean correct;
+            if ( capitalize )
+                correct = correctWord.toLowerCase().equals(userWord.toLowerCase());
+            else
+                correct = correctWord.equals(userWord);
+
+            return colorCompleteWord(correctWord, correct);
+        }
         else
             return colorIncompleteWord(userWord, correctWord);
     }
@@ -38,6 +47,8 @@ public class WordColorer {
     }
 
     public static String getHighlitedSpace(){ return blueBegin +  "_"  + endTag; }
+
+    public static void setCapitalized ( boolean cap ) { capitalize = cap; }
 
     private static String colorIncompleteWord ( String userWord, String correctWord ) {
         return colorLetters(userWord, correctWord);
@@ -53,12 +64,20 @@ public class WordColorer {
 
         // Adding appropriate color to letter (red is wrong, green if right)
         int i = 0;
-        for ( ; i < userWord.length() && i < correctWord.length() ; ++i )
-            if (userWord.charAt(i) == correctWord.charAt(i))
-                toReturn.append(greenBegin + correctWord.charAt(i) + endTag);
-            else
-                toReturn.append(redBegin + correctWord.charAt(i) + endTag);
-
+        for ( ; i < userWord.length() && i < correctWord.length() ; ++i ) {
+            if ( capitalize ) {
+                if (Character.toLowerCase(userWord.charAt(i)) == Character.toLowerCase(correctWord.charAt(i)))
+                    toReturn.append(greenBegin + correctWord.charAt(i) + endTag);
+                else
+                    toReturn.append(redBegin + correctWord.charAt(i) + endTag);
+            }
+            else {
+                if ( userWord.charAt(i) == correctWord.charAt(i) )
+                    toReturn.append(greenBegin + correctWord.charAt(i) + endTag);
+                else
+                    toReturn.append(redBegin + correctWord.charAt(i) + endTag);
+            }
+        }
         // If the user word is less than the correct word, append black to returning word
         if (userWord.length() < correctWord.length()) {
             toReturn.append(blueBegin + big + bold + correctWord.charAt(i++) + endBold + endBig +  endTag);

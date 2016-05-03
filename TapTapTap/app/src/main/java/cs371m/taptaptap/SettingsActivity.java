@@ -15,6 +15,7 @@ public class SettingsActivity extends PreferenceActivity {
 
 
     private CheckBox sound;
+    private CheckBox wordCap;
     private Button Clickhere;
 
     @Override
@@ -60,16 +61,8 @@ public class SettingsActivity extends PreferenceActivity {
             }
         });
 
-
         sound = (CheckBox) findViewById(R.id.sound);
-
-//        sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//        @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                //Log.d("CHECK", "CHECKED");
-//            }
-//        });
-
+        wordCap = (CheckBox) findViewById(R.id.capitalization);
 
         final ListPreference orientationPref = (ListPreference) findPreference("orientation_pref");
         final String orientationString = prefs.getString("orientation_pref",
