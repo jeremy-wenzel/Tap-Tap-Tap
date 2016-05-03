@@ -157,6 +157,10 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
             TextView sub_text = (TextView) mySpinner.findViewById(R.id.spinner_sub);
             sub_text.setText(maxCharsString + maxCharNum[position]);
 
+            // Set the third sub text
+            TextView min_sub_text = (TextView) mySpinner.findViewById(R.id.min_spinner_sub);
+            min_sub_text.setText("Min characters: " + minCharNum[position]);
+
             return mySpinner;
         }
     }

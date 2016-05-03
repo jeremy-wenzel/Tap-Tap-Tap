@@ -9,6 +9,7 @@
         android:id="@+id/spinner_main"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textColor="#000000"
         android:textSize="24dp"
         />
 
@@ -16,6 +17,11 @@
         android:id="@+id/spinner_sub"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="24dp"
-        />
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/min_spinner_sub"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp" />
 </LinearLayout>
