@@ -27,23 +27,6 @@ public class SettingsActivity extends PreferenceActivity {
 
         final SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
 
-        final ListPreference difficultyLevelPref = (ListPreference) findPreference("difficulty_level");
-        final String difficulty = prefs.getString("difficulty_level",
-                getResources().getString(R.string.easy));
-        difficultyLevelPref.setSummary((CharSequence) difficulty);
-
-        difficultyLevelPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                difficultyLevelPref.setSummary((CharSequence) newValue);
-
-                SharedPreferences.Editor ed = prefs.edit();
-                ed.putString("difficulty_level", newValue.toString());
-                ed.apply();
-                return true;
-            }
-        });
-
         final ListPreference textSizePref = (ListPreference) findPreference("text_size");
         final String textSize = prefs.getString("text_size", getResources().getString(R.string.medium_size));
 
