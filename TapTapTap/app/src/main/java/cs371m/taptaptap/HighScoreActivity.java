@@ -26,7 +26,7 @@ public class HighScoreActivity
     private static final String TAG = "HighScoreActivity";
     private AppSectionsPagerAdapter mAppSectionsPagerAdapter;
 
-    public static final String[] sectionTabs = {"Single Word", "Multiple Words", "Paragraph", "Overall"};
+    public static final String[] sectionTabs = {"Single Word", "Multiple Words", "Paragraph"};
 
     /**
      * The {@link ViewPager} that will display the three primary sections of the app, one at a
@@ -199,8 +199,7 @@ public class HighScoreActivity
                 TextView correctWPM = (TextView) scoreListView.findViewById(R.id.correct_wpm);
                 correctWPM.setText("Correct Words Per Minute: " + objects.get(position).getCorrectWordsPerMinute());
 
-                TextView gameTypeView = (TextView) scoreListView.findViewById(R.id.game_type_text_view);
-                gameTypeView.setText("Game Type: " + objects.get(position).getGameType());
+
 
                 return scoreListView;
             }
