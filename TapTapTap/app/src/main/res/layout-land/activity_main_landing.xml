@@ -7,7 +7,7 @@
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
     android:paddingTop="24dp"
-    android:background="@drawable/main_menu"
+    android:background="@drawable/main_menu_landscape"
     tools:context="cs371m.taptaptap.MainLandingActivity">
 
     <LinearLayout
@@ -16,13 +16,49 @@
         android:orientation="horizontal"
         android:weightSum="1"
         android:id="@+id/linearLayout"
-        android:gravity="center">
+        android:gravity="right">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center">
+
+            <Button
+                android:id="@+id/how_to_play"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/how_to_play_label"
+                android:layout_weight="0.10"
+                android:textSize="24dp"
+                android:onClick="howToPlay" />
+
+            <Button
+                android:id="@+id/high_scores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/high_scores"
+                android:layout_weight="0.10"
+                android:textSize="24dp"
+                android:onClick="highScores" />
+
+            <Button
+                android:id="@+id/add_words"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Dictionaries"
+                android:layout_weight="0.10"
+                android:textSize="24dp"
+                android:onClick="addWords" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/single_word_button"
@@ -49,23 +85,6 @@
                 android:onClick="startMultiwordGame"/>
 
             <Button
-                android:id="@+id/high_scores"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:text="@string/high_scores"
-                android:layout_weight="0.10"
-                android:textSize="24dp"
-                android:onClick="highScores" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <Button
                 android:id="@+id/paragraph_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,26 +93,6 @@
                 android:layout_weight="0.10"
                 android:textSize="24dp"
                 android:onClick="startParagraphGame" />
-
-            <Button
-                android:id="@+id/add_words"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:text="Edit Dictionaries"
-                android:layout_weight="0.10"
-                android:textSize="24dp"
-                android:onClick="addWords" />
-
-            <Button
-                android:id="@+id/how_to_play"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:text="@string/how_to_play_label"
-                android:layout_weight="0.10"
-                android:textSize="24dp"
-                android:onClick="howToPlay" />
 
         </LinearLayout>
 
