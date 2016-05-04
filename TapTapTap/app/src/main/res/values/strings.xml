@@ -78,4 +78,15 @@
                 "\n5) GWAM (Gross Words A Minute) statistics for all words and correctly typed words are displayed after completion."
                 "\n6) The value for Gross Correct Words A Minute determines a score multiplier, so type as many words correctly as possible!"
                 "\n7) Have fun :)"</string>
+    <string name="about_desc">"TapTapTap is a typing game aimed toward increasing texting profiency for all "
+                "users in a fun and exciting way. The app determines users' GWAM (Gross Words A Minute) and scores users' "
+                "based on their performance. The users can analyze their GWAM history in order to "
+                "improve their texting ability and monitor progress."
+                "\n\n\n\nTapTapTap is an Android game developed for the CS 371m Mobile Computing course at The University of Texas at Austin."
+                "\n\nFrankie Cerasoli:"
+                "\n\nRafik Rizik:"
+                "\n\nJeremy Wenzel: As a senior at UT Austin, Jeremy will be graduating in Spring 2016 with a degree in Computer Science. "
+                "When he is not coding up exciting projects, Jeremy enjoys playing sports, lifting weights, and playing video games with his friends. "
+                "In August of 2016, he will begin working at Alarm.com as Software Engineer."
+                </string>
 </resources>
