@@ -34,8 +34,7 @@
             android:id="@+id/add_words_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textNoSuggestions|textMultiLine"
-            android:maxLength="15"/>
+            android:inputType="textNoSuggestions|textMultiLine" />
         <Button
             android:id="@+id/add_words_save"
             android:layout_width="match_parent"

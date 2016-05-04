@@ -262,6 +262,19 @@ public class Database {
         closeDatabaseConnection();
     }
 
+    public boolean containsPhrase(String phrase) {
+        Log.d(TAG, "isPhraseInDatabase");
+
+        openDatabaseConnection();
+
+        Cursor c = db.query(WORDS_TABLE, null, PHRASE_COL + "='" + phrase + "'", null, null, null, null);
+
+        boolean toReturn = c.getCount() > 0;
+        closeDatabaseConnection();
+
+        return toReturn;
+    }
+
     public boolean isWordsInGameType(int gameType) {
         Log.d(TAG, "isWordsInGameType");
 

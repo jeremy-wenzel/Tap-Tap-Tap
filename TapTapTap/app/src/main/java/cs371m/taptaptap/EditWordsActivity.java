@@ -42,11 +42,59 @@ public class EditWordsActivity extends AppCompatActivity implements ActionBar.Ta
         super.onCreate(savedInstanceState);
         setContentView(R.layout.high_score);
 
+        recreateFragments();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_edit_dictionary, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == android.R.id.home)
+            finish();
+        else if (menuItem.getItemId() == R.id.add_word) {
+            Intent intent = new Intent(this, AddWordsActivity.class);
+            startActivity(intent);
+        }
+        else if (menuItem.getItemId() == R.id.restore_dictionary) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Delete All Dictionary")
+                    .setMessage("Are you sure you want to delete all dictionaries? " +
+                            "This will be permanent and will restore default words to the dictionaries.")
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                            Toast.makeText(getApplicationContext(),
+                                    "Deleting Dictionaries.",
+                                    Toast.LENGTH_LONG).show();
+
+                            new Database(getApplicationContext()).resetAllPhrases();
+                            recreateFragments();
+                        }
+                    })
+                    .show();
+        }
+        return false;
+    }
+
+    private void recreateFragments() {
         final ActionBar actionBar = getSupportActionBar();
+
+        actionBar.removeAllTabs();
         actionBar.setHomeButtonEnabled(true);
         // Specify that we will be displaying tabs in the action bar.
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
         // Create the adapter that will return a fragment for each of the three primary sections
         // of the app.
         mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager());
@@ -76,26 +124,6 @@ public class EditWordsActivity extends AppCompatActivity implements ActionBar.Ta
                             .setText(mAppSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_edit_dictionary, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == android.R.id.home)
-            finish();
-        else if (menuItem.getItemId() == R.id.add_word) {
-            Intent intent = new Intent(this, AddWordsActivity.class);
-            startActivity(intent);
-        }
-        return false;
     }
 
     @Override

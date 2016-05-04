@@ -3,4 +3,7 @@
     <item
         android:id="@+id/add_word"
         android:title="Add Word" />
+    <item
+        android:id="@+id/restore_dictionary"
+        android:title="Restore Dictionary" />
 </menu>
