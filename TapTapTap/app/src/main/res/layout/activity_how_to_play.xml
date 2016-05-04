@@ -11,6 +11,7 @@
     tools:context="cs371m.taptaptap.HowToPlayActivity">
 
     <TextView
+        android:id="@+id/how_to_play_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textColor="#FFFFFF"

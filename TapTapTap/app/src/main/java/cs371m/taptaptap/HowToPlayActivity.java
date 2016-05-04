@@ -1,11 +1,13 @@
 package cs371m.taptaptap;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class HowToPlayActivity extends AppCompatActivity {
 
@@ -19,6 +21,10 @@ public class HowToPlayActivity extends AppCompatActivity {
         catch (NullPointerException e) {
             e.printStackTrace();
         }
+
+        TextView howToView = (TextView) findViewById(R.id.how_to_play_text);
+        howToView.setTextSize(24.0f);
+        howToView.setTextColor(Color.BLACK);
     }
 
     @Override

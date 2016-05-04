@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -80,6 +81,9 @@ public class TapActivity extends AppCompatActivity {
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
         inputField = (EditText) findViewById(R.id.input_view);
         timerView = (TextView) findViewById(R.id.timer_view);
+
+        scoreView.setTextColor(Color.BLACK);
+        timerView.setTextColor(Color.BLACK);
 
         // Lock in Orientation
         String orientationPref = mPrefs.getString("orientation_pref",

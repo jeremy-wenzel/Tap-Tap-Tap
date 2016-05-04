@@ -1,5 +1,6 @@
 package cs371m.taptaptap;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -21,6 +22,8 @@ public class AboutActivity extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.about_section);
         textView.setText(getString(R.string.about_desc));
+        textView.setTextSize(18.0f);
+        textView.setTextColor(Color.BLACK);
     }
 
     @Override
