@@ -14,6 +14,8 @@
         android:id="@+id/about_section"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines = "999"
+        android:scrollbars = "vertical"
         android:textColor="#FFFFFF"
         android:text="We are Frank, Rafik, and Jeremy and we are making some really cool shit man."/>
 

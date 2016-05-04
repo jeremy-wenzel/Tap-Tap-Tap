@@ -1,8 +1,9 @@
 package cs371m.taptaptap;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -21,8 +22,9 @@ public class AboutActivity extends AppCompatActivity {
         }
 
         TextView textView = (TextView) findViewById(R.id.about_section);
+        textView.setMovementMethod(new ScrollingMovementMethod());
         textView.setText(getString(R.string.about_desc));
-        textView.setTextSize(18.0f);
+        textView.setTextSize(19.0f);
         textView.setTextColor(Color.BLACK);
     }
 
