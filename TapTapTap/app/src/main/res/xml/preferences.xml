@@ -22,14 +22,6 @@
         android:summary="Show the keyboard immediately when starting a game"/>
 
     <ListPreference
-        android:key="difficulty_level"
-        android:title="Difficulty Level"
-        android:summary=""
-        android:defaultValue="@string/easy"
-        android:entries="@array/list_difficulty_level"
-        android:entryValues="@array/list_difficulty_level"/>
-
-    <ListPreference
         android:key="text_size"
         android:title="Text Size"
         android:summary=""
