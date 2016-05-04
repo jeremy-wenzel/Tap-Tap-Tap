@@ -33,6 +33,10 @@ public class TapActivity extends AppCompatActivity {
     private final String NEW_GAME_EXTRA = "NewGame";
     private final String PHRASE_EXTRA = "Phrase";
 
+    private final float textSizeSmall = 14.0f;
+    private final float textSizeMedium = 20.0f;
+    private final float textSizeLarge = 26.0f;
+
     protected static int numWordsTotal;
     protected static int numWordsTyped;
 
@@ -286,13 +290,19 @@ public class TapActivity extends AppCompatActivity {
             throw new IllegalArgumentException("textSize is null");
 
         if (textSize.equals("Small")) {
-            paragraphView.setTextSize(12.0f);
+            scoreView.setTextSize(textSizeSmall);
+            timerView.setTextSize(textSizeSmall);
+            paragraphView.setTextSize(textSizeSmall);
         }
         else if (textSize.equals("Medium")) {
-            paragraphView.setTextSize(20.0f);
+            scoreView.setTextSize(textSizeMedium);
+            timerView.setTextSize(textSizeMedium);
+            paragraphView.setTextSize(textSizeMedium);
         }
         else if (textSize.equals("Large")) {
-            paragraphView.setTextSize(26.0f);
+            scoreView.setTextSize(textSizeLarge);
+            timerView.setTextSize(textSizeLarge);
+            paragraphView.setTextSize(textSizeLarge);
         }
         else {
             throw new IllegalArgumentException("Bad text size " + textSize);
