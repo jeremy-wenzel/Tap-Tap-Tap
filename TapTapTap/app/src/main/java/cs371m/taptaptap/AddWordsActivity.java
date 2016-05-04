@@ -34,12 +34,15 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
 
     private InputFilter characterFilter;
 
+    private Database database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_words);
 
         maxCharsString = getResources().getString(R.string.max_chars);
+        database = new Database(this);
 
         // InputFilter
         characterFilter = new InputFilter() {
@@ -89,9 +92,6 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
                     Toast.makeText(getApplicationContext(), sb.toString(), Toast.LENGTH_SHORT).show();
                     finish();
                 }
-                else {
-                    Toast.makeText(getApplicationContext(), "Input is too short for game type.", Toast.LENGTH_SHORT).show();
-                }
             }
         });
     }
@@ -119,13 +119,25 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
     }
 
     private boolean writeStringToDatabase(String input, int gametype) {
-        Database database = new Database(this);
         database.insertPhrase(input, gametype);
         return true;
     }
 
     private boolean isValidPhrase(String input, int gameType) {
-        return input.length() >= minCharNum[gameType];
+
+        if (input.length() < minCharNum[gameType]) {
+            Toast.makeText(getApplicationContext(),
+                    "Input is too short for game type.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (database.containsPhrase(input)) {
+            Toast.makeText(getApplicationContext(),
+                    "Input is too short for game type.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
     public class MyAdapter extends ArrayAdapter<String> {
@@ -155,11 +167,11 @@ public class AddWordsActivity extends AppCompatActivity implements OnItemSelecte
 
             // Set the second sub text
             TextView sub_text = (TextView) mySpinner.findViewById(R.id.spinner_sub);
-            sub_text.setText(maxCharsString + maxCharNum[position]);
+            sub_text.setText(maxCharsString + " " + maxCharNum[position]);
 
             // Set the third sub text
             TextView min_sub_text = (TextView) mySpinner.findViewById(R.id.min_spinner_sub);
-            min_sub_text.setText("Min characters: " + minCharNum[position]);
+            min_sub_text.setText("Min characters needed: " + minCharNum[position]);
 
             return mySpinner;
         }
