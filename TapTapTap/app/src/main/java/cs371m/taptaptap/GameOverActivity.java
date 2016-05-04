@@ -20,8 +20,6 @@ public class GameOverActivity extends AppCompatActivity {
     TextView statsView;
 
     private int score;
-    private int mistakes;
-    private String time;
     private int gameType;
     private String phrase;
 
@@ -41,31 +39,35 @@ public class GameOverActivity extends AppCompatActivity {
         statsView = (TextView) findViewById(R.id.game_over_text_view);
 
         score = intent.getIntExtra("score", -1);
-        mistakes = intent.getIntExtra("mistakes", -1);
         gameType = intent.getIntExtra("game type", -1);
+        phrase = intent.getStringExtra(PHRASE_EXTRA);
+
+        int mistakes = intent.getIntExtra("mistakes", -1);
         int seconds = intent.getIntExtra("seconds", -1);
         int minutes = intent.getIntExtra("minutes", -1);
         int numWordsTotal = intent.getIntExtra("numWordsTot", -1);
         int numWordsCorrect = intent.getIntExtra("numWordsCor", -1);
+        int numWordsIncorrect = intent.getIntExtra("numWordsIncor", -1);
 
         double timeInMins = ((double)seconds)/60.0 + ((double)minutes);
         double gwam = Math.round(numWordsTotal/timeInMins);
-        double cgwam = Math.round(numWordsCorrect/timeInMins);
+        double cgwam = Math.round(numWordsCorrect / timeInMins);
+
         score = (int)Math.round(score*cgwam);
-        phrase = getIntent().getStringExtra(PHRASE_EXTRA);
 
         if (phrase == null)
             Log.d(TAG, "phrase is null or length is zero");
         else if (phrase.length() == 0)
             Log.d(TAG, "length is zero");
 
-        time = "" + minutes + ":";
+        String time = "" + minutes + ":";
 
         if (seconds < 10)
             time += "0";
         time += seconds;
 
-        statsView.setText("Final Score: " + score + "\nTotal Mistakes: " + mistakes + "\nTotal Time: " + time
+        statsView.setText("Final Score: " + score + "\nTotal Time: " + time + "\nCorrect Words: " + numWordsCorrect
+                + "\nIncorrect Words: " + numWordsIncorrect + "\nTotal Mistakes: " + mistakes
                 + "\nGWAM (Total): " + gwam + "\nGWAM (Correct): " + cgwam);
 
         Database database = new Database(this);

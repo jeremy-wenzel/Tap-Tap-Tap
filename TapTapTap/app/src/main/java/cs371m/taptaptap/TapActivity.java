@@ -330,11 +330,21 @@ public class TapActivity extends AppCompatActivity {
      */
     public void gameOver() {
         int correctWords = 0;
-        for (int i = 0; i < wordList.size(); i++) {
-            if (wordList.get(i).isCorrect()) {
+        int incorrectWords = 0;
+        for (int i = 0; i < wordList.size(); ++i) {
+            if ( capitalize ) {
+                WordNode curWordNode = wordList.get(i);
+                if ( curWordNode.getUserWord().toLowerCase().equals(curWordNode.getCorrectWord().toLowerCase()) )
+                    correctWords++;
+                else
+                    incorrectWords++;
+            }
+            else if (wordList.get(i).isCorrect()) {
                 score.add_word_score(wordList.get(i).getCorrectWord().length());
                 correctWords++;
             }
+            else
+                incorrectWords++;
         }
 
         SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
@@ -350,6 +360,7 @@ public class TapActivity extends AppCompatActivity {
         intent.putExtra("minutes", minutes);
         intent.putExtra("numWordsTot", numWordsTotal);
         intent.putExtra("numWordsCor", correctWords);
+        intent.putExtra("numWordsIncor", incorrectWords);
         intent.putExtra(PHRASE_EXTRA, mPhrase);
         startActivity(intent);
         finish();
