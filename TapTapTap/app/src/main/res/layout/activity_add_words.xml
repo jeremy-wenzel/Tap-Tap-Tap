@@ -17,6 +17,7 @@
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:weightSum="1">
+
         <TextView
             android:id="@+id/add_words_text_view"
             android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package cs371m.taptaptap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -17,6 +18,9 @@ public class AboutActivity extends AppCompatActivity {
         catch (NullPointerException e) {
             e.printStackTrace();
         }
+
+        TextView textView = (TextView) findViewById(R.id.about_section);
+        textView.setText(getString(R.string.about_desc));
     }
 
     @Override
