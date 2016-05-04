@@ -21,11 +21,11 @@ public class AboutActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        TextView textView = (TextView) findViewById(R.id.about_section);
-        textView.setMovementMethod(new ScrollingMovementMethod());
-        textView.setText(getString(R.string.about_desc));
-        textView.setTextSize(19.0f);
-        textView.setTextColor(Color.BLACK);
+        TextView aboutView = (TextView) findViewById(R.id.about_section);
+        aboutView.setMovementMethod(new ScrollingMovementMethod());
+        aboutView.setText(getString(R.string.about_desc));
+        aboutView.setTextSize(19.0f);
+        aboutView.setTextColor(Color.BLACK);
     }
 
     @Override

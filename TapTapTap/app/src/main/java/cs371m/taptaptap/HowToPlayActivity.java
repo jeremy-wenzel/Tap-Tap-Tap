@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ public class HowToPlayActivity extends AppCompatActivity {
         }
 
         TextView howToView = (TextView) findViewById(R.id.how_to_play_text);
+        howToView.setMovementMethod(new ScrollingMovementMethod());
         howToView.setTextSize(24.0f);
         howToView.setTextColor(Color.BLACK);
     }
