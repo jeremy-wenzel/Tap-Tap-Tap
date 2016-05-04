@@ -7,7 +7,7 @@
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
     android:paddingTop="24dp"
-    android:background="@drawable/main_menu"
+    android:background="@drawable/main_menu_landscape"
     tools:context="cs371m.taptaptap.MainLandingActivity">
 
     <LinearLayout
@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         android:weightSum="1"
         android:id="@+id/linearLayout"
-        android:gravity="center">
+        android:gravity="right">
 
         <LinearLayout
             android:orientation="vertical"
