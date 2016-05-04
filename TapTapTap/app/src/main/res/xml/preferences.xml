@@ -4,21 +4,9 @@
     <CheckBoxPreference
         android:id="@+id/sound"
         android:key="sound"
-        android:title="sound"
+        android:title="Sound"
         android:defaultValue="true"
         android:summary="Turn the sound on or off"/>
-
-    <CheckBoxPreference
-        android:key="swype"
-        android:title="@string/swype"
-        android:defaultValue="true"
-        android:summary="Trun on or off the swype functionality"/>
-
-    <CheckBoxPreference
-        android:key="word_prediction"
-        android:title="@string/word_prediction"
-        android:defaultValue="true"
-        android:summary="Turn the word prediction functionality on or off"/>
 
     <CheckBoxPreference
         android:id="@+id/capitalization"
