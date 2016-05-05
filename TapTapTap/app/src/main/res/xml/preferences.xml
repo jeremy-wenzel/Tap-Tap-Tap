@@ -15,12 +15,6 @@
         android:defaultValue="true"
         android:summary="Capitalize the first letter of the phrase"/>
 
-    <CheckBoxPreference
-        android:key="show_keyboard"
-        android:title="@string/show_keyboard_immediately"
-        android:defaultValue="true"
-        android:summary="Show the keyboard immediately when starting a game"/>
-
     <ListPreference
         android:key="text_size"
         android:title="Text Size"
