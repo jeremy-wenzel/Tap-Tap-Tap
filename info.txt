@@ -1,5 +1,5 @@
 a)
-Rafik Razik (ror279), Jeremy Wenzel(jhw866) & Frank Cerasoli(ftc244)
+Rafik Rizik (ror279), Jeremy Wenzel(jhw866) & Frank Cerasoli(ftc244)
 
 b)
 This app does not have any special requirements. Only a desire to improve one's typing skills.
@@ -20,6 +20,7 @@ c)
 * ScoreSystem class for managing the score.
 * Changed background
 * Better landscape layout support
+* About page
 
 d)
 * User accounts
