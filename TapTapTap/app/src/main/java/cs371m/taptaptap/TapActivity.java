@@ -48,7 +48,6 @@ public class TapActivity extends AppCompatActivity {
     protected TextView scoreView;
     protected TextView paragraphView;
     protected TextView timerView;
-    protected TextView capView;
     protected EditText inputField;
 
     private Intent intent;
@@ -84,22 +83,11 @@ public class TapActivity extends AppCompatActivity {
         // Setup views
         scoreView = (TextView) findViewById(R.id.score_view);
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
-        capView = (TextView) findViewById(R.id.cap_view);
         timerView = (TextView) findViewById(R.id.timer_view);
         inputField = (EditText) findViewById(R.id.input_view);
 
         scoreView.setTextColor(Color.BLACK);
-        capView.setTextColor(Color.BLACK);
         timerView.setTextColor(Color.BLACK);
-
-        String capReq = "Capitalization: ";
-
-        if ( !capitalize )
-            capReq += "OFF";
-        else
-            capReq += "ON";
-
-        capView.setText(capReq);
 
         // Lock in Orientation
         String orientationPref = mPrefs.getString("orientation_pref",
@@ -305,19 +293,16 @@ public class TapActivity extends AppCompatActivity {
         if (textSize.equals("Small")) {
             scoreView.setTextSize(textSizeSmall);
             timerView.setTextSize(textSizeSmall);
-            capView.setTextSize(textSizeSmall);
             paragraphView.setTextSize(textSizeSmall);
         }
         else if (textSize.equals("Medium")) {
             scoreView.setTextSize(textSizeMedium);
             timerView.setTextSize(textSizeMedium);
-            capView.setTextSize(textSizeMedium);
             paragraphView.setTextSize(textSizeMedium);
         }
         else if (textSize.equals("Large")) {
             scoreView.setTextSize(textSizeLarge);
             timerView.setTextSize(textSizeLarge);
-            capView.setTextSize(textSizeLarge);
             paragraphView.setTextSize(textSizeLarge);
         }
         else {
