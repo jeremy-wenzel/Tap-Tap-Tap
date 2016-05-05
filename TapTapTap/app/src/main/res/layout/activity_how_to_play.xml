@@ -17,6 +17,6 @@
         android:maxLines = "999"
         android:scrollbars = "vertical"
         android:textColor="#FFFFFF"
-        android:text="@string/how_to_play_text"/>
+        android:text="@string/how_to_play_text" />
 
 </RelativeLayout>
