@@ -92,9 +92,9 @@ public class TapActivity extends AppCompatActivity {
         capView.setTextColor(Color.BLACK);
         timerView.setTextColor(Color.BLACK);
 
-        String capReq = "Capitalization Requirement: ";
+        String capReq = "Capitalization: ";
 
-        if ( capitalize )
+        if ( !capitalize )
             capReq += "OFF";
         else
             capReq += "ON";
@@ -305,16 +305,19 @@ public class TapActivity extends AppCompatActivity {
         if (textSize.equals("Small")) {
             scoreView.setTextSize(textSizeSmall);
             timerView.setTextSize(textSizeSmall);
+            capView.setTextSize(textSizeSmall);
             paragraphView.setTextSize(textSizeSmall);
         }
         else if (textSize.equals("Medium")) {
             scoreView.setTextSize(textSizeMedium);
             timerView.setTextSize(textSizeMedium);
+            capView.setTextSize(textSizeMedium);
             paragraphView.setTextSize(textSizeMedium);
         }
         else if (textSize.equals("Large")) {
             scoreView.setTextSize(textSizeLarge);
             timerView.setTextSize(textSizeLarge);
+            capView.setTextSize(textSizeLarge);
             paragraphView.setTextSize(textSizeLarge);
         }
         else {

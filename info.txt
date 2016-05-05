@@ -11,8 +11,6 @@ c)
 * Functioning menu system.
 * WordNode list structure for organizing user input.
 * Settings menu.
-
-d)
 * Database with varying paragraphs words and sentences.
 * Same database for scoring high scores.
 * Timing the typing and displaying the Gross Words typed Per Minute (GWAM).
@@ -20,14 +18,18 @@ d)
 * Intro message box with simple instructions
 * WordColorer class for formatting the colored words properly
 * ScoreSystem class for managing the score.
+* Changed background
+* Better landscape layout support
+
+d)
+* User accounts
+* Online multiplayer and global leaderboard
 
 e)
 * Ability for user to delete all words from the database
 * Abiliity for a user to delete individual words from dictionaries
 * Ability for user to add words to dictionary
-* Changed background
 * Added an About section that details the purpose of the app and about the team.
-* Better landscape layout support
 * Added text size choice for users
 * Added sound to the main menu
 
