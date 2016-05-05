@@ -48,6 +48,7 @@ public class TapActivity extends AppCompatActivity {
     protected TextView scoreView;
     protected TextView paragraphView;
     protected TextView timerView;
+    protected TextView capView;
     protected EditText inputField;
 
     private Intent intent;
@@ -83,11 +84,22 @@ public class TapActivity extends AppCompatActivity {
         // Setup views
         scoreView = (TextView) findViewById(R.id.score_view);
         paragraphView = (TextView) findViewById(R.id.paragraph_view);
-        inputField = (EditText) findViewById(R.id.input_view);
+        capView = (TextView) findViewById(R.id.cap_view);
         timerView = (TextView) findViewById(R.id.timer_view);
+        inputField = (EditText) findViewById(R.id.input_view);
 
         scoreView.setTextColor(Color.BLACK);
+        capView.setTextColor(Color.BLACK);
         timerView.setTextColor(Color.BLACK);
+
+        String capReq = "Capitalization Requirement: ";
+
+        if ( capitalize )
+            capReq += "OFF";
+        else
+            capReq += "ON";
+
+        capView.setText(capReq);
 
         // Lock in Orientation
         String orientationPref = mPrefs.getString("orientation_pref",

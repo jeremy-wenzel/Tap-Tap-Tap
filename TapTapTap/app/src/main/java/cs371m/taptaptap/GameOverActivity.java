@@ -50,6 +50,9 @@ public class GameOverActivity extends AppCompatActivity {
         int numWordsIncorrect = intent.getIntExtra("numWordsIncor", -1);
 
         double timeInMins = ((double)seconds)/60.0 + ((double)minutes);
+        if ( timeInMins == 0 )
+            timeInMins = 1;
+
         double gwam = Math.round(numWordsTotal/timeInMins);
         double cgwam = Math.round(numWordsCorrect / timeInMins);
 
@@ -110,6 +113,7 @@ public class GameOverActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        finish();
     }
 
     @Override
