@@ -22,7 +22,6 @@
             android:layout_height="wrap_content"
             android:text="Stats stuff goes here"
             android:textColor="#FFFFFF"
-            android:textSize="24dp"
             android:textAlignment="center"
             android:layout_weight="0.50" />
 
