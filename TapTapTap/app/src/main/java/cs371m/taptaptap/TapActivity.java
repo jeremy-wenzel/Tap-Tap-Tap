@@ -183,6 +183,7 @@ public class TapActivity extends AppCompatActivity {
                         if ( capitalize ) {
                             corWrd = corWrd.toLowerCase();
                             usrWrd = usrWrd.toLowerCase();
+                            str = str.toLowerCase();
                         }
 
                         if (sLen < uLen) {
